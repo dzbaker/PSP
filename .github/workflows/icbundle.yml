@@ -48,7 +48,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           rev_num=$(git rev-list v1.6.0-rc4.. --count)
-          changelog_entry=$'Changelog\\n\\n## Development Build: v1.6.0-rc4+dev'${rev_num}
+          changelog_entry=$'Changelog\\n\\n# Development Build: v1.6.0-rc4+dev'${rev_num}
           prs=$(echo ${{ inputs.pr_nums }} | tr "," "\n")
           see_entry=$'\-\ See:'
           for pr in $prs
@@ -58,8 +58,7 @@ jobs:
             see_entry="${see_entry}"$' <https://github.com/nasa/cFE/pull/'${pr}$'>'
           done
           changelog_entry="${changelog_entry}\n${see_entry}\n"
-          echo "s|Changelog|$changelog_entry|"
-          sed -ir "s|Changelog|$changelog_entry|" CHANGELOG.md
+          sed -ir "s|# Changelog|$changelog_entry|" CHANGELOG.md
           
           buildnumber_entry=$'#define CFE_PSP_IMPL_BUILD_NUMBER   '${rev_num}
           sed -ir "s|define CFE_PSP_IMPL_BUILD_NUMBER.*|$buildnumber_entry|" fsw/mcp750-vxworks/inc/psp_version.h
