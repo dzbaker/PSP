@@ -1,5 +1,11 @@
 # Changelog
 
+## Development Build: v1.6.0-rc4+dev4
+- 'Create asdf'
+- 'Test2'
+- See: <https://github.com/nasa/cFE/pull/1> <https://github.com/nasa/cFE/pull/2>
+
+
 ## Development Build: v1.6.0-rc4+dev72
 - adds generic driver interface and Linux sysmon module
 - See <https://github.com/nasa/PSP/pull/386>
@@ -15,7 +21,13 @@
 - See <https://github.com/nasa/PSP/pull/365> and <https://github.com/nasa/PSP/pull/368>
 
 ## Development Build: v1.6.0-rc4+dev55
-- Create Changelog File
+- Create Changelog
+
+## Development Build: v1.6.0-rc4+dev4
+- 'Create asdf'
+- 'Test2'
+- See: <https://github.com/nasa/cFE/pull/1> <https://github.com/nasa/cFE/pull/2>
+ File
 - Remove unnecessary parentheses around return values.
 - Remove 'return;' from last line of void function.
 - See <https://github.com/nasa/PSP/pull/361>, <https://github.com/nasa/PSP/pull/358>, and <https://github.com/nasa/PSP/pull/360>
