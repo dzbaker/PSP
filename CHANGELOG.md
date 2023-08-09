@@ -1,5 +1,10 @@
 # Changelog
 
+# Development Build: v1.6.0-rc4+dev9
+- 'Create test'
+- See: <https://github.com/nasa/cFE/pull/6>
+
+
 ## Development Build: v1.6.0-rc4+dev76
 - Create Workflow for IC Bundle Generation
 - See <https://github.com/nasa/PSP/pull/391>
