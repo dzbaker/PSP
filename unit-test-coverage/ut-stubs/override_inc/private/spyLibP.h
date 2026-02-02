@@ -26,8 +26,8 @@
 /* ----------------------------------------- */
 /* mappings for declarations in spyLibP.h */
 /* ----------------------------------------- */
-#define spyReportCommon    PCS_spyReportCommon
-#define spyClkStartCommon  PCS_spyClkStartCommon
-#define spyClkStopCommon   PCS_spyClkStopCommon
+#define spyReportCommon   PCS_spyReportCommon
+#define spyClkStartCommon PCS_spyClkStartCommon
+#define spyClkStopCommon  PCS_spyClkStopCommon
 
 #endif

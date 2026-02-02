@@ -31,8 +31,8 @@ void UT_DefaultHandler_PCS_rtems_status_text(void *UserObj, UT_EntryKey_t FuncKe
 
     UT_Stub_GetInt32StatusCode(Context, &Status);
 
-    if (Status >= 0 &&
-        UT_Stub_CopyToLocal(UT_KEY(PCS_rtems_status_text), &ReturnCode, sizeof(ReturnCode)) == sizeof(ReturnCode))
+    if (Status >= 0
+        && UT_Stub_CopyToLocal(UT_KEY(PCS_rtems_status_text), &ReturnCode, sizeof(ReturnCode)) == sizeof(ReturnCode))
     {
         UT_Stub_SetReturnValue(FuncKey, ReturnCode);
     }

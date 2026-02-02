@@ -19,7 +19,7 @@
 /******************************************************************************
 ** File:  cfe_psp_memory.c
 **
-**      VxWorks 7 RTP / POSIX implementation 
+**      VxWorks 7 RTP / POSIX implementation
 **
 ** Purpose:
 **   cFE PSP Memory related functions. This is the implementation of the cFE
@@ -81,10 +81,10 @@
 ** This allows more than one copy of the cFS to run on VxWorks (in RTPs) by using
 ** a different cfs id such as "cfs2"
 */
-#define CFE_PSP_SHM_DIR        "/shm/"
-#define CFE_PSP_CDS_SHM_FILE   ".cdsfile"
-#define CFE_PSP_RST_SHM_FILE   ".resetfile"
-#define CFE_PSP_USR_SHM_FILE   ".reservedfile"
+#define CFE_PSP_SHM_DIR      "/shm/"
+#define CFE_PSP_CDS_SHM_FILE ".cdsfile"
+#define CFE_PSP_RST_SHM_FILE ".resetfile"
+#define CFE_PSP_USR_SHM_FILE ".reservedfile"
 
 /*
  * Define the PSP-supported capacities to be the maximum allowed,
@@ -119,7 +119,7 @@ void CFE_PSP_InitUserReservedArea(void);
 extern unsigned int _init;
 extern unsigned int _fini;
 
-/* 
+/*
 ** Need to access the command line paramter data for cfsid
 */
 extern CFE_PSP_CommandData_t CommandData;
@@ -132,7 +132,7 @@ extern CFE_PSP_CommandData_t CommandData;
 ** Pointer to the vxWorks USER_RESERVED_MEMORY area
 ** The sizes of each memory area is defined in os_processor.h for this architecture.
 */
-CFE_PSP_ReservedMemoryMap_t CFE_PSP_ReservedMemoryMap = {0};
+CFE_PSP_ReservedMemoryMap_t CFE_PSP_ReservedMemoryMap = { 0 };
 
 /*
 *********************************************************************************
@@ -159,14 +159,14 @@ void CFE_PSP_InitCDS(void)
     char shm_name[CFE_PSP_SHM_NAME_LENGTH];
 
     memset(shm_name, 0, CFE_PSP_SHM_NAME_LENGTH);
-    strncpy(shm_name, CFE_PSP_SHM_DIR, CFE_PSP_SHM_NAME_LENGTH -1); 
+    strncpy(shm_name, CFE_PSP_SHM_DIR, CFE_PSP_SHM_NAME_LENGTH - 1);
     strncat(shm_name, CommandData.CfsId, strlen(CommandData.CfsId));
     strncat(shm_name, CFE_PSP_CDS_SHM_FILE, strlen(CFE_PSP_CDS_SHM_FILE));
 
-    /* 
+    /*
     ** Try to open an existing shared memory segment.
     ** If it fails, create a new one
-    */  
+    */
     shm_fd = shm_open(shm_name, O_RDWR, 0666);
     if (shm_fd != -1)
     {
@@ -179,25 +179,26 @@ void CFE_PSP_InitCDS(void)
         shm_fd = shm_open(shm_name, O_CREAT | O_RDWR, 0666);
         if (shm_fd == -1)
         {
-           perror("CFE_PSP - cannot create new shared memory segment");
-           CFE_PSP_Panic(CFE_PSP_ERROR);
+            perror("CFE_PSP - cannot create new shared memory segment");
+            CFE_PSP_Panic(CFE_PSP_ERROR);
         }
-    
+
         ftruncate(shm_fd, CFE_PSP_CDS_SIZE);
     }
 
-    /* 
+    /*
     ** Map the shared memory object
     */
-    CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr = mmap(0, CFE_PSP_CDS_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
-    if ( CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr == MAP_FAILED)
+    CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr =
+        mmap(0, CFE_PSP_CDS_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
+    if (CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr == MAP_FAILED)
     {
         perror("CFE_PSP - Cannot map CDS Shared memory Segment");
         CFE_PSP_Panic(CFE_PSP_ERROR);
     }
     else
     {
-       OS_printf("CFE_PSP: mmap CDS shared memory segment, size = %d\n", CFE_PSP_CDS_SIZE);
+        OS_printf("CFE_PSP: mmap CDS shared memory segment, size = %d\n", CFE_PSP_CDS_SIZE);
     }
 
     CFE_PSP_ReservedMemoryMap.CDSMemory.BlockSize = CFE_PSP_CDS_SIZE;
@@ -220,7 +221,7 @@ void CFE_PSP_DeleteCDS(void)
     char shm_name[CFE_PSP_SHM_NAME_LENGTH];
 
     memset(shm_name, 0, CFE_PSP_SHM_NAME_LENGTH);
-    strncpy(shm_name, CFE_PSP_SHM_DIR, CFE_PSP_SHM_NAME_LENGTH -1);
+    strncpy(shm_name, CFE_PSP_SHM_DIR, CFE_PSP_SHM_NAME_LENGTH - 1);
     strncat(shm_name, CommandData.CfsId, strlen(CommandData.CfsId));
     strncat(shm_name, CFE_PSP_CDS_SHM_FILE, strlen(CFE_PSP_CDS_SHM_FILE));
 
@@ -270,7 +271,7 @@ int32 CFE_PSP_WriteToCDS(const void *PtrToDataToWrite, uint32 CDSOffset, uint32 
     {
         if ((CDSOffset < CFE_PSP_CDS_SIZE) && ((CDSOffset + NumBytes) <= CFE_PSP_CDS_SIZE))
         {
-            CopyPtr = CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr;
+            CopyPtr  = CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr;
             CopyPtr += CDSOffset;
             memcpy(CopyPtr, (char *)PtrToDataToWrite, NumBytes);
 
@@ -305,7 +306,7 @@ int32 CFE_PSP_ReadFromCDS(void *PtrToDataToRead, uint32 CDSOffset, uint32 NumByt
     {
         if ((CDSOffset < CFE_PSP_CDS_SIZE) && ((CDSOffset + NumBytes) <= CFE_PSP_CDS_SIZE))
         {
-            CopyPtr = CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr;
+            CopyPtr  = CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr;
             CopyPtr += CDSOffset;
             memcpy((char *)PtrToDataToRead, CopyPtr, NumBytes);
 
@@ -341,7 +342,6 @@ int32 CFE_PSP_ReadFromCDS(void *PtrToDataToRead, uint32 CDSOffset, uint32 NumByt
 */
 void CFE_PSP_InitResetArea(void)
 {
-    
     size_t                                    total_size;
     size_t                                    reset_offset;
     size_t                                    align_mask;
@@ -351,7 +351,7 @@ void CFE_PSP_InitResetArea(void)
     int                                       shm_fd;
 
     memset(shm_name, 0, CFE_PSP_SHM_NAME_LENGTH);
-    strncpy(shm_name, CFE_PSP_SHM_DIR, CFE_PSP_SHM_NAME_LENGTH -1); 
+    strncpy(shm_name, CFE_PSP_SHM_DIR, CFE_PSP_SHM_NAME_LENGTH - 1);
     strncat(shm_name, CommandData.CfsId, strlen(CommandData.CfsId));
     strncat(shm_name, CFE_PSP_RST_SHM_FILE, strlen(CFE_PSP_RST_SHM_FILE));
 
@@ -361,17 +361,17 @@ void CFE_PSP_InitResetArea(void)
      * reside in this shared memory segment so it will be preserved on a processor
      * reset.
      */
-    align_mask   = 4096 - 1; /* align blocks to whole memory pages */
-    total_size   = sizeof(CFE_PSP_VxWorksReservedAreaFixedLayout_t);
-    total_size   = (total_size + align_mask) & ~align_mask;
-    reset_offset = total_size;
-    total_size += CFE_PSP_RESET_AREA_SIZE;
-    total_size = (total_size + align_mask) & ~align_mask;
+    align_mask    = 4096 - 1; /* align blocks to whole memory pages */
+    total_size    = sizeof(CFE_PSP_VxWorksReservedAreaFixedLayout_t);
+    total_size    = (total_size + align_mask) & ~align_mask;
+    reset_offset  = total_size;
+    total_size   += CFE_PSP_RESET_AREA_SIZE;
+    total_size    = (total_size + align_mask) & ~align_mask;
 
-    /* 
+    /*
     ** Try to open an existing shared memory segment.
     ** If it fails, create a new one
-    */  
+    */
     shm_fd = shm_open(shm_name, O_RDWR, 0666);
     if (shm_fd != -1)
     {
@@ -384,29 +384,29 @@ void CFE_PSP_InitResetArea(void)
         shm_fd = shm_open(shm_name, O_CREAT | O_RDWR, 0666);
         if (shm_fd == -1)
         {
-           perror("CFE_PSP - cannot create new shared memory segment");
-           CFE_PSP_Panic(CFE_PSP_ERROR);
+            perror("CFE_PSP - cannot create new shared memory segment");
+            CFE_PSP_Panic(CFE_PSP_ERROR);
         }
 
         ftruncate(shm_fd, total_size);
-    } 
+    }
 
-    /* 
+    /*
     ** Map the shared memory object
     */
     block_addr = (cpuaddr)mmap(0, total_size, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
-    if ( block_addr == (cpuaddr)MAP_FAILED)
+    if (block_addr == (cpuaddr)MAP_FAILED)
     {
         perror("CFE_PSP - Cannot map RST Shared memory Segment");
         CFE_PSP_Panic(CFE_PSP_ERROR);
     }
     else
     {
-       OS_printf("CFE_PSP: mmap RST shared memory segment, size = %zu\n", total_size);
+        OS_printf("CFE_PSP: mmap RST shared memory segment, size = %zu\n", total_size);
     }
-    
-    FixedBlocksPtr = (CFE_PSP_VxWorksReservedAreaFixedLayout_t *)block_addr;
-    block_addr += reset_offset;
+
+    FixedBlocksPtr  = (CFE_PSP_VxWorksReservedAreaFixedLayout_t *)block_addr;
+    block_addr     += reset_offset;
 
     CFE_PSP_ReservedMemoryMap.BootPtr             = &FixedBlocksPtr->BootRecord;
     CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr = &FixedBlocksPtr->ExceptionStorage;
@@ -432,7 +432,7 @@ void CFE_PSP_DeleteResetArea(void)
     char shm_name[CFE_PSP_SHM_NAME_LENGTH];
 
     memset(shm_name, 0, CFE_PSP_SHM_NAME_LENGTH);
-    strncpy(shm_name, CFE_PSP_SHM_DIR, CFE_PSP_SHM_NAME_LENGTH -1);
+    strncpy(shm_name, CFE_PSP_SHM_DIR, CFE_PSP_SHM_NAME_LENGTH - 1);
     strncat(shm_name, CommandData.CfsId, strlen(CommandData.CfsId));
     strncat(shm_name, CFE_PSP_RST_SHM_FILE, strlen(CFE_PSP_RST_SHM_FILE));
 
@@ -488,14 +488,14 @@ void CFE_PSP_InitUserReservedArea(void)
     char shm_name[CFE_PSP_SHM_NAME_LENGTH];
 
     memset(shm_name, 0, CFE_PSP_SHM_NAME_LENGTH);
-    strncpy(shm_name, CFE_PSP_SHM_DIR, CFE_PSP_SHM_NAME_LENGTH -1); 
+    strncpy(shm_name, CFE_PSP_SHM_DIR, CFE_PSP_SHM_NAME_LENGTH - 1);
     strncat(shm_name, CommandData.CfsId, strlen(CommandData.CfsId));
     strncat(shm_name, CFE_PSP_USR_SHM_FILE, strlen(CFE_PSP_USR_SHM_FILE));
 
-    /* 
+    /*
     ** Try to open an existing shared memory segment.
     ** If it fails, create a new one
-    */  
+    */
     shm_fd = shm_open(shm_name, O_RDWR, 0666);
     if (shm_fd != -1)
     {
@@ -507,18 +507,19 @@ void CFE_PSP_InitUserReservedArea(void)
         shm_fd = shm_open(shm_name, O_CREAT | O_RDWR, 0666);
         if (shm_fd == -1)
         {
-           perror("CFE_PSP - cannot create new shared memory segment");
-           CFE_PSP_Panic(CFE_PSP_ERROR);
+            perror("CFE_PSP - cannot create new shared memory segment");
+            CFE_PSP_Panic(CFE_PSP_ERROR);
         }
 
         ftruncate(shm_fd, CFE_PSP_USER_RESERVED_SIZE);
     }
 
-    /* 
+    /*
     ** Map the shared memory object
     */
-    CFE_PSP_ReservedMemoryMap.UserReservedMemory.BlockPtr = mmap(0, CFE_PSP_USER_RESERVED_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
-    if ( CFE_PSP_ReservedMemoryMap.UserReservedMemory.BlockPtr == MAP_FAILED)
+    CFE_PSP_ReservedMemoryMap.UserReservedMemory.BlockPtr =
+        mmap(0, CFE_PSP_USER_RESERVED_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
+    if (CFE_PSP_ReservedMemoryMap.UserReservedMemory.BlockPtr == MAP_FAILED)
     {
         perror("CFE_PSP - Cannot map USR Shared memory Segment");
         CFE_PSP_Panic(CFE_PSP_ERROR);
@@ -526,11 +527,10 @@ void CFE_PSP_InitUserReservedArea(void)
     }
     else
     {
-       OS_printf("CFE_PSP: mmap USR shared memory segment, size = %d\n", CFE_PSP_USER_RESERVED_SIZE);
+        OS_printf("CFE_PSP: mmap USR shared memory segment, size = %d\n", CFE_PSP_USER_RESERVED_SIZE);
     }
     CFE_PSP_ReservedMemoryMap.UserReservedMemory.BlockSize = CFE_PSP_USER_RESERVED_SIZE;
     close(shm_fd);
-
 }
 
 /******************************************************************************
@@ -549,7 +549,7 @@ void CFE_PSP_DeleteUserReservedArea(void)
     char shm_name[CFE_PSP_SHM_NAME_LENGTH];
 
     memset(shm_name, 0, CFE_PSP_SHM_NAME_LENGTH);
-    strncpy(shm_name, CFE_PSP_SHM_DIR, CFE_PSP_SHM_NAME_LENGTH -1); 
+    strncpy(shm_name, CFE_PSP_SHM_DIR, CFE_PSP_SHM_NAME_LENGTH - 1);
     strncat(shm_name, CommandData.CfsId, strlen(CommandData.CfsId));
     strncat(shm_name, CFE_PSP_USR_SHM_FILE, strlen(CFE_PSP_USR_SHM_FILE));
 
@@ -689,7 +689,8 @@ int32 CFE_PSP_InitProcessorReservedMemory(uint32 RestartType)
         memset(CFE_PSP_ReservedMemoryMap.UserReservedMemory.BlockPtr, 0, CFE_PSP_USER_RESERVED_SIZE);
 
         memset(CFE_PSP_ReservedMemoryMap.BootPtr, 0, sizeof(*CFE_PSP_ReservedMemoryMap.BootPtr));
-        memset(CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr, 0,
+        memset(CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr,
+               0,
                sizeof(*CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr));
 
         /*

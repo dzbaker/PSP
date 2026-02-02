@@ -98,7 +98,7 @@ void CFE_PSP_ExceptionSigHandler(int signo, siginfo_t *si, void *ctxt)
         NumAddrs             = backtrace(Buffer->context_info.bt_addrs, CFE_PSP_MAX_EXCEPTION_BACKTRACE_SIZE);
         Buffer->context_size = offsetof(CFE_PSP_Exception_ContextDataEntry_t, bt_addrs[NumAddrs]);
         /* pthread_self() is signal-safe per POSIX.1-2013 */
-        Buffer->sys_task_id = pthread_self();
+        Buffer->sys_task_id  = pthread_self();
         CFE_PSP_Exception_WriteComplete();
     }
 
@@ -302,7 +302,10 @@ int32 CFE_PSP_ExceptionGetSummary_Impl(const CFE_PSP_Exception_LogData_t *Buffer
             default:
                 ComputedReason = "Unknown SIGFPE";
         }
-        (void)snprintf(ReasonBuf, ReasonSize, "%s at ip 0x%lx", ComputedReason,
+        (void)snprintf(ReasonBuf,
+                       ReasonSize,
+                       "%s at ip 0x%lx",
+                       ComputedReason,
                        (unsigned long)Buffer->context_info.si.si_addr);
     }
     else if (Buffer->context_info.si.si_signo == SIGINT)

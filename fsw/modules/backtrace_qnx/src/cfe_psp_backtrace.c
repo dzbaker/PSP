@@ -61,8 +61,12 @@ void CFE_PSP_Backtrace_Init(void)
     /* Initialize backtrace accessor */
     if (bt_init_accessor(&CFE_PSP_BacktraceAcc, BT_SELF) == -1)
     {
-        OS_printf("CFE_PSP: %s:%i could not initialize backtrace: %s (%i)%s\n", __func__, __LINE__,
-            "bt_init_accessor", errno, strerror(errno));
+        OS_printf("CFE_PSP: %s:%i could not initialize backtrace: %s (%i)%s\n",
+                  __func__,
+                  __LINE__,
+                  "bt_init_accessor",
+                  errno,
+                  strerror(errno));
         abort(); /* abort() is preferable to exit(EXIT_FAILURE), as it may create a core file for debug */
     }
 }
@@ -74,12 +78,17 @@ void CFE_PSP_Backtrace_Init(void)
  */
 int32 CFE_PSP_Backtrace(CFE_PSP_BacktraceEntry_t *Entry, void *ContextPtr, int32 MaxEntries)
 {
-   int32 NumAddrs;
+    int32 NumAddrs;
 
-   NumAddrs = bt_get_backtrace(&CFE_PSP_BacktraceAcc, Entry, MaxEntries);
+    NumAddrs = bt_get_backtrace(&CFE_PSP_BacktraceAcc, Entry, MaxEntries);
 
-   PSP_DEBUG("CFE_PSP: %s:%i collecting backtrace [ NumAddrs: %i Info: %s (%i) %s ]\n", __func__, __LINE__,
-      NumAddrs, "bt_init_accessor/bt_get_backtrace", errno, strerror(errno));
+    PSP_DEBUG("CFE_PSP: %s:%i collecting backtrace [ NumAddrs: %i Info: %s (%i) %s ]\n",
+              __func__,
+              __LINE__,
+              NumAddrs,
+              "bt_init_accessor/bt_get_backtrace",
+              errno,
+              strerror(errno));
 
-   return NumAddrs;
+    return NumAddrs;
 }

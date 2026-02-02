@@ -22,7 +22,7 @@
 
 #include "PCS_rtems.h"
 
-size_t PCS_Thread_Get_name(const PCS_Thread_Control *the_thread, char *buffer, size_t buffer_size);
+size_t                PCS_Thread_Get_name(const PCS_Thread_Control *the_thread, char *buffer, size_t buffer_size);
 PCS_Timestamp_Control PCS_Thread_Get_CPU_time_used_after_last_reset(PCS_Thread_Control *the_thread);
 
 #endif

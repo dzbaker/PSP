@@ -91,7 +91,8 @@ void CFE_PSP_Exception_Reset(void);
  *
  * \returns CFE_PSP_SUCCESS on success
  */
-int32 CFE_PSP_ExceptionGetSummary_Impl(const struct CFE_PSP_Exception_LogData *Buffer, char *ReasonBuf,
-                                       uint32 ReasonSize);
+int32 CFE_PSP_ExceptionGetSummary_Impl(const struct CFE_PSP_Exception_LogData *Buffer,
+                                       char                                   *ReasonBuf,
+                                       uint32                                  ReasonSize);
 
 #endif /* CFE_PSP_EXCEPTIONSTORAGE_API_H_ */

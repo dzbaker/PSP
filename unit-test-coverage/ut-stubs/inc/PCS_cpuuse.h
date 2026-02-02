@@ -20,6 +20,6 @@
 
 #include "PCS_rtems.h"
 
-void PCS_rtems_cpu_usage_reset( void );
+void PCS_rtems_cpu_usage_reset(void);
 
 #endif

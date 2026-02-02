@@ -37,7 +37,7 @@ typedef struct PCS_FILE PCS_FILE;
 /* ----------------------------------------- */
 
 extern int       PCS_fclose(PCS_FILE *stream);
-extern char *    PCS_fgets(char *s, int n, PCS_FILE *stream);
+extern char     *PCS_fgets(char *s, int n, PCS_FILE *stream);
 extern PCS_FILE *PCS_fopen(const char *filename, const char *modes);
 extern int       PCS_fputs(const char *s, PCS_FILE *stream);
 extern int       PCS_remove(const char *filename);

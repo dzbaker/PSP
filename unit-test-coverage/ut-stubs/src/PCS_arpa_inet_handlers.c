@@ -44,7 +44,7 @@ void UT_DefaultHandler_PCS_inet_ntoa(void *UserObj, UT_EntryKey_t FuncKey, const
 {
     /* char *PCS_inet_ntoa(struct PCS_in_addr in) */
     static char Buf[MAX_NTOA_LEN] = "";
-    char *      pBuf              = Buf;
+    char       *pBuf              = Buf;
 
     if (!UT_Stub_GetInt32StatusCode(Context, NULL))
     {

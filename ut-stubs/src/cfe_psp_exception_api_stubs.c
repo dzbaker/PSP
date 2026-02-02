@@ -35,7 +35,6 @@ void UT_DefaultHandler_CFE_PSP_Exception_GetSummary(void *, UT_EntryKey_t, const
  */
 void CFE_PSP_AttachExceptions(void)
 {
-
     UT_GenStub_Execute(CFE_PSP_AttachExceptions, Basic, NULL);
 }
 
@@ -97,6 +96,5 @@ int32 CFE_PSP_Exception_GetSummary(uint32 *ContextLogId, osal_id_t *TaskId, char
  */
 void CFE_PSP_SetDefaultExceptionEnvironment(void)
 {
-
     UT_GenStub_Execute(CFE_PSP_SetDefaultExceptionEnvironment, Basic, NULL);
 }

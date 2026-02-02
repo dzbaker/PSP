@@ -78,9 +78,9 @@ int CFE_PSP_WatchdogFd = ERROR;
  * hard CPU lockups. When supporting a specific platform, be sure to use
  * its hardware watchdog capabilities. If there are no hardware watchdog
  * capabilities, then this virtual watchdog implementation is a good option.
- * 
- * Additionally, be sure to set VIRT_WDT_NO_REBOOT component to FALSE to 
- * enable reboot capabilities. This can be found in workbench by either 
+ *
+ * Additionally, be sure to set VIRT_WDT_NO_REBOOT component to FALSE to
+ * enable reboot capabilities. This can be found in workbench by either
  * searching for it in kernel config or by navigating to
  * VIP -> Harware -> Watchdog -> Virtual Timer Watchdog
  */
@@ -93,18 +93,18 @@ int CFE_PSP_WatchdogFd = ERROR;
  *-----------------------------------------------------------------*/
 void CFE_PSP_WatchdogInit(void)
 {
-    DEV_HDR *WatchdogHeader;
-    STATUS Status;
+    DEV_HDR             *WatchdogHeader;
+    STATUS               Status;
     struct watchdog_info WatchdogInfo;
-    int WatchdogOptions;
-
+    int                  WatchdogOptions;
 
     /* check to see if the virtual watchdog device has been installed. This is
      * done automatically when VIP is configured with DRV_VIRTUAL_TIMER_WATCHDOG */
     WatchdogHeader = iosDevFindExact("/watchdog/0");
     if (WatchdogHeader == NULL)
     {
-        printf("failed to initialize watchdog driver. Be sure to add DRV_VIRTUAL_TIMER_WATCHDOG component to VxWorks VIP\n");
+        printf("failed to initialize watchdog driver. Be sure to add DRV_VIRTUAL_TIMER_WATCHDOG component to VxWorks "
+               "VIP\n");
         return;
     }
 
@@ -120,13 +120,14 @@ void CFE_PSP_WatchdogInit(void)
         return;
     }
 
-    /* According to the WindRiver docs on the virtual watchdog timer, the 
-     * watchdog is activated when the file is opened. The default timeout 
+    /* According to the WindRiver docs on the virtual watchdog timer, the
+     * watchdog is activated when the file is opened. The default timeout
      * is 60 seconds. Thus, to avoid having the timer expire from just
      * calling CFE_PSP_WatchdogInit(), we disable the watchdog here */
     WatchdogOptions = WDIOS_DISABLECARD;
-    Status = ioctl(CFE_PSP_WatchdogFd, WDIOC_SETOPTIONS, &WatchdogOptions);
-    if (Status != OK) {
+    Status          = ioctl(CFE_PSP_WatchdogFd, WDIOC_SETOPTIONS, &WatchdogOptions);
+    if (Status != OK)
+    {
         printf("failed to initialize watchdog\n");
         close(CFE_PSP_WatchdogFd);
     }
@@ -141,7 +142,10 @@ void CFE_PSP_WatchdogInit(void)
     }
     else
     {
-        printf("initialized watchdog with name: %s version: %u flags: %u\n", WatchdogInfo.name, WatchdogInfo.version, WatchdogInfo.flags);
+        printf("initialized watchdog with name: %s version: %u flags: %u\n",
+               WatchdogInfo.name,
+               WatchdogInfo.version,
+               WatchdogInfo.flags);
     }
 }
 
@@ -154,17 +158,19 @@ void CFE_PSP_WatchdogInit(void)
 void CFE_PSP_WatchdogEnable(void)
 {
     STATUS Status;
-    int WatchdogOptions;
+    int    WatchdogOptions;
 
-    if (CFE_PSP_WatchdogFd < 0) {
+    if (CFE_PSP_WatchdogFd < 0)
+    {
         printf("failed to initialize watchdog beforehand\n");
         return;
     }
 
     /* See vxbVirtualTimerWatchdog WindRiver docs for more detail */
     WatchdogOptions = WDIOS_ENABLECARD;
-    Status = ioctl(CFE_PSP_WatchdogFd, WDIOC_SETOPTIONS, &WatchdogOptions);
-    if (Status != OK) {
+    Status          = ioctl(CFE_PSP_WatchdogFd, WDIOC_SETOPTIONS, &WatchdogOptions);
+    if (Status != OK)
+    {
         printf("failed to enable watchdog\n");
         close(CFE_PSP_WatchdogFd);
     }
@@ -179,16 +185,18 @@ void CFE_PSP_WatchdogEnable(void)
 void CFE_PSP_WatchdogDisable(void)
 {
     STATUS Status;
-    int WatchdogOptions;
+    int    WatchdogOptions;
 
-    if (CFE_PSP_WatchdogFd < 0) {
+    if (CFE_PSP_WatchdogFd < 0)
+    {
         printf("failed to initialize watchdog beforehand\n");
         return;
     }
 
     WatchdogOptions = WDIOS_DISABLECARD;
-    Status = ioctl(CFE_PSP_WatchdogFd, WDIOC_SETOPTIONS, &WatchdogOptions);
-    if (Status != OK) {
+    Status          = ioctl(CFE_PSP_WatchdogFd, WDIOC_SETOPTIONS, &WatchdogOptions);
+    if (Status != OK)
+    {
         printf("failed to disable watchdog\n");
         close(CFE_PSP_WatchdogFd);
     }
@@ -203,14 +211,16 @@ void CFE_PSP_WatchdogDisable(void)
 void CFE_PSP_WatchdogService(void)
 {
     STATUS Status;
-    
-    if (CFE_PSP_WatchdogFd < 0) {
+
+    if (CFE_PSP_WatchdogFd < 0)
+    {
         printf("failed to initialize watchdog beforehand\n");
         return;
     }
 
     Status = ioctl(CFE_PSP_WatchdogFd, WDIOC_KEEPALIVE, 0);
-    if (Status != OK) {
+    if (Status != OK)
+    {
         printf("failed to service watchdog\n");
         close(CFE_PSP_WatchdogFd);
     }
@@ -227,14 +237,16 @@ uint32 CFE_PSP_WatchdogGet(void)
     STATUS Status;
     uint32 WatchdogValue;
 
-    if (CFE_PSP_WatchdogFd < 0) {
+    if (CFE_PSP_WatchdogFd < 0)
+    {
         printf("failed to initialize watchdog beforehand\n");
         return 0;
     }
 
     WatchdogValue = 0;
-    Status = ioctl(CFE_PSP_WatchdogFd, WDIOC_GETTIMEOUT, &WatchdogValue);
-    if (Status != OK) {
+    Status        = ioctl(CFE_PSP_WatchdogFd, WDIOC_GETTIMEOUT, &WatchdogValue);
+    if (Status != OK)
+    {
         printf("failed to get watchdog timeout\n");
         close(CFE_PSP_WatchdogFd);
     }
@@ -254,13 +266,15 @@ void CFE_PSP_WatchdogSet(uint32 WatchdogValue)
 {
     STATUS Status;
 
-    if (CFE_PSP_WatchdogFd < 0) {
+    if (CFE_PSP_WatchdogFd < 0)
+    {
         printf("failed to initialize watchdog beforehand\n");
         return;
     }
 
     Status = ioctl(CFE_PSP_WatchdogFd, WDIOC_SETTIMEOUT, &WatchdogValue);
-    if (Status != OK) {
+    if (Status != OK)
+    {
         printf("failed to set watchdog timeout\n");
         close(CFE_PSP_WatchdogFd);
     }

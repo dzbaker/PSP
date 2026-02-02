@@ -132,13 +132,15 @@ static const char *optString = "R:S:C:I:N:h";
 /*
 ** getopts_long long form argument table
 */
-static const struct option longOpts[] = {{"reset", required_argument, NULL, 'R'},
-                                         {"subtype", required_argument, NULL, 'S'},
-                                         {"cpuid", required_argument, NULL, 'C'},
-                                         {"scid", required_argument, NULL, 'I'},
-                                         {"cpuname", required_argument, NULL, 'N'},
-                                         {"help", no_argument, NULL, 'h'},
-                                         {NULL, no_argument, NULL, 0}};
+static const struct option longOpts[] = {
+    { "reset",   required_argument, NULL, 'R' },
+    { "subtype", required_argument, NULL, 'S' },
+    { "cpuid",   required_argument, NULL, 'C' },
+    { "scid",    required_argument, NULL, 'I' },
+    { "cpuname", required_argument, NULL, 'N' },
+    { "help",    no_argument,       NULL, 'h' },
+    { NULL,      no_argument,       NULL, 0   }
+};
 
 /******************************************************************************
 **
@@ -268,8 +270,8 @@ void OS_Application_Startup(void)
                 strncpy(CommandData.ResetType, optarg, CFE_PSP_RESET_NAME_LENGTH - 1);
                 CommandData.ResetType[CFE_PSP_RESET_NAME_LENGTH - 1] = 0;
 
-                if ((strncmp(CommandData.ResetType, "PO", CFE_PSP_RESET_NAME_LENGTH) != 0) &&
-                    (strncmp(CommandData.ResetType, "PR", CFE_PSP_RESET_NAME_LENGTH) != 0))
+                if ((strncmp(CommandData.ResetType, "PO", CFE_PSP_RESET_NAME_LENGTH) != 0)
+                    && (strncmp(CommandData.ResetType, "PR", CFE_PSP_RESET_NAME_LENGTH) != 0))
                 {
                     printf("\nERROR: Invalid Reset Type: %s\n\n", CommandData.ResetType);
                     CommandData.GotResetType = 0;
@@ -409,8 +411,8 @@ void OS_Application_Startup(void)
     reset_type = 0;
     if (!CommandData.GotResetType)
     {
-        if (CFE_PSP_ReservedMemoryMap.BootPtr->ValidityFlag == CFE_PSP_BOOTRECORD_VALID ||
-            CFE_PSP_ReservedMemoryMap.BootPtr->ValidityFlag == CFE_PSP_BOOTRECORD_INVALID)
+        if (CFE_PSP_ReservedMemoryMap.BootPtr->ValidityFlag == CFE_PSP_BOOTRECORD_VALID
+            || CFE_PSP_ReservedMemoryMap.BootPtr->ValidityFlag == CFE_PSP_BOOTRECORD_INVALID)
         {
             reset_type = CFE_PSP_ReservedMemoryMap.BootPtr->NextResetType;
         }
@@ -488,8 +490,8 @@ void OS_Application_Run(void)
         /* go idle and wait for an event */
         ret = sigwait(&sigset, &sig);
 
-        if (ret == 0 && !CFE_PSP_IdleTaskState.ShutdownReq && sig == CFE_PSP_EXCEPTION_EVENT_SIGNAL &&
-            GLOBAL_CFE_CONFIGDATA.SystemNotify != NULL)
+        if (ret == 0 && !CFE_PSP_IdleTaskState.ShutdownReq && sig == CFE_PSP_EXCEPTION_EVENT_SIGNAL
+            && GLOBAL_CFE_CONFIGDATA.SystemNotify != NULL)
         {
             /* notify the CFE of the event */
             GLOBAL_CFE_CONFIGDATA.SystemNotify();

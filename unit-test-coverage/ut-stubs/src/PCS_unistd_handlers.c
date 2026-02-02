@@ -50,7 +50,7 @@
 void UT_DefaultHandler_PCS_gethostname(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context)
 {
     /* int PCS_gethostname(char *name, size_t len) */
-    char * name = UT_Hook_GetArgValueByName(Context, "name", char *);
+    char  *name = UT_Hook_GetArgValueByName(Context, "name", char *);
     size_t len  = UT_Hook_GetArgValueByName(Context, "len", size_t);
     int32  Status;
 
@@ -66,7 +66,7 @@ void UT_DefaultHandler_PCS_gethostname(void *UserObj, UT_EntryKey_t FuncKey, con
 void UT_DefaultHandler_PCS_read(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context)
 {
     /* PCS_ssize_t PCS_read(int fd, void *buf, size_t nbytes) */
-    void *      buf    = UT_Hook_GetArgValueByName(Context, "buf", void *);
+    void       *buf    = UT_Hook_GetArgValueByName(Context, "buf", void *);
     size_t      nbytes = UT_Hook_GetArgValueByName(Context, "nbytes", size_t);
     int32       Status;
     size_t      CopySize;

@@ -73,7 +73,6 @@ extern CFE_PSP_MemoryBlock_t PcRtems_ReservedMemBlock;
  *-----------------------------------------------------------------*/
 void CFE_PSP_Restart(uint32 resetType)
 {
-
     CFE_PSP_DeleteProcessorReservedMemory();
 
     /*

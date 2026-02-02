@@ -41,7 +41,7 @@
 
 static CFE_PSP_ReservedMemoryBootRecord_t UT_BOOTREC;
 
-static const CFE_PSP_ReservedMemoryBootRecord_t UT_DEFAULT_BOOTREC = {0};
+static const CFE_PSP_ReservedMemoryBootRecord_t UT_DEFAULT_BOOTREC = { 0 };
 
 void UT_BootRecAdaptor_InitDefault(void)
 {

@@ -24,12 +24,12 @@
 #include "PCS_taskLib.h"
 #include "PCS_errnoLib.h"
 
-static PCS_WIND_TCB PCS_LOCAL_TASK = {0};
+static PCS_WIND_TCB PCS_LOCAL_TASK = { 0 };
 
 void UT_DefaultHandler_PCS_taskPriorityGet(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context)
 {
     /* PCS_STATUS PCS_taskPriorityGet(PCS_TASK_ID tid, int *pPriority) */
-    int * pPriority = UT_Hook_GetArgValueByName(Context, "pPriority", int *);
+    int  *pPriority = UT_Hook_GetArgValueByName(Context, "pPriority", int *);
     int32 iStatus;
 
     UT_Stub_GetInt32StatusCode(Context, &iStatus);
@@ -44,7 +44,7 @@ void UT_DefaultHandler_PCS_taskName(void *UserObj, UT_EntryKey_t FuncKey, const 
     /* const char *PCS_taskName(PCS_TASK_ID task_id) */
 
     const char *retval;
-    void *      bufptr;
+    void       *bufptr;
     size_t      bufsz;
     int32       status;
 

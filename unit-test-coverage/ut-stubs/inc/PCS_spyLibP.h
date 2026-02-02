@@ -38,5 +38,4 @@ void PCS_spyReportCommon(PCS_FUNCPTR print);
 void PCS_spyClkStopCommon(void);
 int  PCS_spyClkStartCommon(int intsPerSec, PCS_FUNCPTR print);
 
-
 #endif

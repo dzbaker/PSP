@@ -68,8 +68,8 @@ void ModuleTest_ResetState(void)
 int32 UTHOOK_vxTimeBaseGet(void *UserObj, int32 StubRetcode, uint32 CallCount, const UT_StubContext_t *Context)
 {
     PSP_VxWorks_TimeBaseVal_t *val = UserObj;
-    uint32 *                   u   = UT_Hook_GetArgValueByName(Context, "u", uint32 *);
-    uint32 *                   l   = UT_Hook_GetArgValueByName(Context, "l", uint32 *);
+    uint32                    *u   = UT_Hook_GetArgValueByName(Context, "u", uint32 *);
+    uint32                    *l   = UT_Hook_GetArgValueByName(Context, "l", uint32 *);
 
     *u = val->u;
     *l = val->l;
@@ -160,7 +160,8 @@ void Test_Reducible_1(void)
     CFE_PSP_GetTime(&OsTime);
 
     TestTime = OS_TimeGetTotalMicroseconds(OsTime);
-    UtAssert_True(TestTime == 10376293541461622, "CFE_PSP_GetTime() Microseconds (%lld) == 10376293541461622",
+    UtAssert_True(TestTime == 10376293541461622,
+                  "CFE_PSP_GetTime() Microseconds (%lld) == 10376293541461622",
                   (long long)TestTime);
 }
 
@@ -191,7 +192,8 @@ void Test_Reducible_2(void)
     CFE_PSP_GetTime(&OsTime);
 
     TestTime = OS_TimeGetTotalMicroseconds(OsTime);
-    UtAssert_True(TestTime == 276701161105643274, "CFE_PSP_GetTime() Microseconds(%lld) == 276701161105643274",
+    UtAssert_True(TestTime == 276701161105643274,
+                  "CFE_PSP_GetTime() Microseconds(%lld) == 276701161105643274",
                   (long long)TestTime);
 }
 
@@ -332,28 +334,28 @@ typedef struct linux_sysmon_state
  * Local Function Prototypes
  ********************************************************************/
 
-static void *  linux_sysmon_Task(void *arg);
+static void   *linux_sysmon_Task(void *arg);
 static int32_t linux_sysmon_Start(linux_sysmon_cpuload_state_t *state);
 static int32_t linux_sysmon_Stop(linux_sysmon_cpuload_state_t *state);
 static void    linux_sysmon_Init(uint32_t local_module_id);
 
 /* Function that starts up linux_sysmon driver. */
-static int32_t linux_sysmon_DevCmd(uint32_t CommandCode, uint16_t SubsystemId, uint16_t SubchannelId,
-                                   CFE_PSP_IODriver_Arg_t Arg);
+static int32_t
+linux_sysmon_DevCmd(uint32_t CommandCode, uint16_t SubsystemId, uint16_t SubchannelId, CFE_PSP_IODriver_Arg_t Arg);
 
 /********************************************************************
  * Global Data
  ********************************************************************/
 
 /* linux_sysmon device command that is called by iodriver to start up linux_sysmon */
-CFE_PSP_IODriver_API_t linux_sysmon_DevApi = {.DeviceCommand = linux_sysmon_DevCmd};
+CFE_PSP_IODriver_API_t linux_sysmon_DevApi = { .DeviceCommand = linux_sysmon_DevCmd };
 
 CFE_PSP_MODULE_DECLARE_IODEVICEDRIVER(linux_sysmon);
 
 static linux_sysmon_state_t linux_sysmon_global;
 
-static const char *linux_sysmon_subsystem_names[]  = {"aggregate", "per-cpu", NULL};
-static const char *linux_sysmon_subchannel_names[] = {"cpu-load", NULL};
+static const char *linux_sysmon_subsystem_names[]  = { "aggregate", "per-cpu", NULL };
+static const char *linux_sysmon_subchannel_names[] = { "cpu-load", NULL };
 
 /***********************************************************************
  * Global Functions
@@ -369,7 +371,7 @@ void linux_sysmon_Init(uint32_t local_module_id)
 void linux_sysmon_read_cpuuse_line(const char *line_data, unsigned int *cpu_num, unsigned long *run_time)
 {
     unsigned long value;
-    const char *  val_end;
+    const char   *val_end;
     int           val_count;
 
     /* each "cpu" line contains the cpu number followed by 9 values */
@@ -413,7 +415,7 @@ void linux_sysmon_update_schedstat(linux_sysmon_cpuload_state_t *state, int elap
     char          line_data[256];
     size_t        line_size;
     ssize_t       line_rdsz;
-    char *        eol_p;
+    char         *eol_p;
 
     linux_sysmon_cpuload_core_t *core_p;
 
@@ -433,7 +435,7 @@ void linux_sysmon_update_schedstat(linux_sysmon_cpuload_state_t *state, int elap
         }
 
         /* check for newline char */
-        eol_p = memchr(&line_data[line_size], '\n', line_rdsz);
+        eol_p      = memchr(&line_data[line_size], '\n', line_rdsz);
         line_size += line_rdsz;
 
         while (eol_p != NULL)
@@ -475,10 +477,12 @@ void linux_sysmon_update_schedstat(linux_sysmon_cpuload_state_t *state, int elap
                     }
                     else
                     {
-                        core_p->avg_load = (0x1000 * cpu_time_ms) / elapsed_ms;
+                        core_p->avg_load  = (0x1000 * cpu_time_ms) / elapsed_ms;
                         core_p->avg_load |= (core_p->avg_load << 12); /* Expand from 12->24 bit */
                     }
-                    LINUX_SYSMON_DEBUG("CFE_PSP(linux_sysmon): CPU%u time_ms=%u ms, load=%06x\n", cpu_num, cpu_time_ms,
+                    LINUX_SYSMON_DEBUG("CFE_PSP(linux_sysmon): CPU%u time_ms=%u ms, load=%06x\n",
+                                       cpu_num,
+                                       cpu_time_ms,
                                        (unsigned int)core_p->avg_load);
                 }
             }
@@ -819,8 +823,8 @@ int32_t linux_sysmon_cpu_load_dispatch(uint32_t CommandCode, uint16_t Subchannel
  * \returns Status code
  * \retval #CFE_PSP_SUCCESS if successful
  */
-int32_t linux_sysmon_DevCmd(uint32_t CommandCode, uint16_t SubsystemId, uint16_t SubchannelId,
-                            CFE_PSP_IODriver_Arg_t Arg)
+int32_t
+linux_sysmon_DevCmd(uint32_t CommandCode, uint16_t SubsystemId, uint16_t SubchannelId, CFE_PSP_IODriver_Arg_t Arg)
 {
     int32_t StatusCode;
 

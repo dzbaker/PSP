@@ -57,7 +57,7 @@
  *-----------------------------------------------------------------*/
 int32 CFE_PSP_InitSSR(uint32 bus, uint32 device, char *DeviceName)
 {
-    int32    ReturnCode = CFE_PSP_SUCCESS;
+    int32 ReturnCode = CFE_PSP_SUCCESS;
 
     return ReturnCode;
 }

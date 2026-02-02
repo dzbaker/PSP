@@ -58,7 +58,7 @@
 #include "cfe_psp_config.h"
 #include "cfe_psp_memory.h"
 
-#define CFE_PSP_KEY_FILE_NAME_LENGTH   40
+#define CFE_PSP_KEY_FILE_NAME_LENGTH 40
 
 char CdsKeyFileName[CFE_PSP_KEY_FILE_NAME_LENGTH];
 char ResetKeyFileName[CFE_PSP_KEY_FILE_NAME_LENGTH];
@@ -76,7 +76,7 @@ char ReservedKeyFileName[CFE_PSP_KEY_FILE_NAME_LENGTH];
 
 /*
  * Define the PSP-supported capacities to be the maximum allowed,
-*/
+ */
 #define CFE_PSP_CDS_SIZE           (GLOBAL_CONFIGDATA.CfeConfig->CdsSize)
 #define CFE_PSP_RESET_AREA_SIZE    (GLOBAL_CONFIGDATA.CfeConfig->ResetAreaSize)
 #define CFE_PSP_USER_RESERVED_SIZE (GLOBAL_CONFIGDATA.CfeConfig->UserReservedSize)
@@ -95,7 +95,6 @@ void CFE_PSP_InitResetArea(void);
 void CFE_PSP_InitVolatileDiskMem(void);
 void CFE_PSP_InitUserReservedArea(void);
 void CFE_PSP_InitKeyFileNames(char *CpuName, uint32 CpuId);
-
 
 /*
 **  External Declarations
@@ -153,7 +152,8 @@ void CFE_PSP_InitCDS(void)
     /*
     ** attach to the segment to get a pointer to it:
     */
-    CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr = mmap(NULL,CFE_PSP_CDS_SIZE, (PROT_READ | PROT_WRITE), MAP_SHARED, CDSShmId, 0);
+    CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr =
+        mmap(NULL, CFE_PSP_CDS_SIZE, (PROT_READ | PROT_WRITE), MAP_SHARED, CDSShmId, 0);
     if (CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr == MAP_FAILED)
     {
         perror("CFE_PSP - Cannot mmap to CDS Shared memory Segment");
@@ -176,20 +176,20 @@ void CFE_PSP_InitCDS(void)
 */
 void CFE_PSP_DeleteCDS(void)
 {
-    int             ReturnCode = 0;
+    int ReturnCode = 0;
 
-    /* Unmapped and unlink shared memory segment */ 
+    /* Unmapped and unlink shared memory segment */
     ReturnCode = munmap(CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr, CFE_PSP_CDS_SIZE);
     if (ReturnCode == 0)
     {
         ReturnCode = shm_unlink(CFE_PSP_CDS_KEY_FILE);
-        if(ReturnCode == 0)
+        if (ReturnCode == 0)
         {
-           OS_printf("User CDS Area Shared memory segment removed\n");
+            OS_printf("User CDS Area Shared memory segment removed\n");
         }
         else
         {
-           OS_printf("Error Removing User CDS Area Shared memory Segment.\n");
+            OS_printf("Error Removing User CDS Area Shared memory Segment.\n");
         }
     }
     else
@@ -240,7 +240,7 @@ int32 CFE_PSP_WriteToCDS(const void *PtrToDataToWrite, uint32 CDSOffset, uint32 
     {
         if ((CDSOffset < CFE_PSP_CDS_SIZE) && ((CDSOffset + NumBytes) <= CFE_PSP_CDS_SIZE))
         {
-            CopyPtr = CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr;
+            CopyPtr  = CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr;
             CopyPtr += CDSOffset;
             memcpy(CopyPtr, (char *)PtrToDataToWrite, NumBytes);
 
@@ -275,7 +275,7 @@ int32 CFE_PSP_ReadFromCDS(void *PtrToDataToRead, uint32 CDSOffset, uint32 NumByt
     {
         if ((CDSOffset < CFE_PSP_CDS_SIZE) && ((CDSOffset + NumBytes) <= CFE_PSP_CDS_SIZE))
         {
-            CopyPtr = CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr;
+            CopyPtr  = CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr;
             CopyPtr += CDSOffset;
             memcpy((char *)PtrToDataToRead, CopyPtr, NumBytes);
 
@@ -311,10 +311,10 @@ int32 CFE_PSP_ReadFromCDS(void *PtrToDataToRead, uint32 CDSOffset, uint32 NumByt
 */
 void CFE_PSP_InitResetArea(void)
 {
-    size_t                                  total_size;
-    size_t                                  reset_offset;
-    size_t                                  align_mask;
-    cpuaddr                                 block_addr;
+    size_t                                total_size;
+    size_t                                reset_offset;
+    size_t                                align_mask;
+    cpuaddr                               block_addr;
     CFE_PSP_QnxReservedAreaFixedLayout_t *FixedBlocksPtr;
 
     /*
@@ -323,12 +323,12 @@ void CFE_PSP_InitResetArea(void)
      * reside in this shared memory segment so it will be preserved on a processor
      * reset.
      */
-    align_mask   = sysconf(_SC_PAGESIZE) - 1; /* align blocks to whole memory pages */
-    total_size   = sizeof(CFE_PSP_QnxReservedAreaFixedLayout_t);
-    total_size   = (total_size + align_mask) & ~align_mask;
-    reset_offset = total_size;
-    total_size += CFE_PSP_RESET_AREA_SIZE;
-    total_size = (total_size + align_mask) & ~align_mask;
+    align_mask    = sysconf(_SC_PAGESIZE) - 1; /* align blocks to whole memory pages */
+    total_size    = sizeof(CFE_PSP_QnxReservedAreaFixedLayout_t);
+    total_size    = (total_size + align_mask) & ~align_mask;
+    reset_offset  = total_size;
+    total_size   += CFE_PSP_RESET_AREA_SIZE;
+    total_size    = (total_size + align_mask) & ~align_mask;
 
     /*
     ** connect to (and possibly create) the segment:
@@ -343,15 +343,15 @@ void CFE_PSP_InitResetArea(void)
     ** attach to the segment to get a pointer to it:
     */
     ftruncate(ResetAreaShmId, total_size);
-    block_addr = (cpuaddr)mmap(NULL,total_size, (PROT_READ | PROT_WRITE), MAP_SHARED, ResetAreaShmId, 0);
+    block_addr = (cpuaddr)mmap(NULL, total_size, (PROT_READ | PROT_WRITE), MAP_SHARED, ResetAreaShmId, 0);
     if (block_addr == (cpuaddr)(-1))
     {
         perror("CFE_PSP - Cannot mmap to Reset Area Shared memory Segment");
         CFE_PSP_Panic(CFE_PSP_ERROR);
     }
 
-    FixedBlocksPtr = (CFE_PSP_QnxReservedAreaFixedLayout_t *)block_addr;
-    block_addr += reset_offset;
+    FixedBlocksPtr  = (CFE_PSP_QnxReservedAreaFixedLayout_t *)block_addr;
+    block_addr     += reset_offset;
 
     CFE_PSP_ReservedMemoryMap.BootPtr             = &FixedBlocksPtr->BootRecord;
     CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr = &FixedBlocksPtr->ExceptionStorage;
@@ -373,7 +373,7 @@ void CFE_PSP_InitResetArea(void)
 */
 void CFE_PSP_DeleteResetArea(void)
 {
-    int             ReturnCode = 0;
+    int ReturnCode = 0;
 
     /* Unmapped and unlink shared memory segment */
     ReturnCode = munmap(CFE_PSP_ReservedMemoryMap.ResetMemory.BlockPtr, CFE_PSP_RESET_AREA_SIZE);
@@ -381,13 +381,13 @@ void CFE_PSP_DeleteResetArea(void)
     if (ReturnCode == 0)
     {
         ReturnCode = shm_unlink(CFE_PSP_RESET_KEY_FILE);
-        if(ReturnCode == 0)
+        if (ReturnCode == 0)
         {
-           OS_printf("User Reset Area Shared memory segment removed\n");
+            OS_printf("User Reset Area Shared memory segment removed\n");
         }
         else
         {
-           OS_printf("Error Removing User Reset Area Shared memory Segment.\n");
+            OS_printf("Error Removing User Reset Area Shared memory Segment.\n");
         }
     }
     else
@@ -437,9 +437,14 @@ void CFE_PSP_InitKeyFileNames(char *CpuName, uint32 CpuId)
     ** Construct the key file name:
     ** The name will consist of "/<cpuName.CpuId>.key_file_name"
     */
-    snprintf(CdsKeyFileName,      sizeof(CdsKeyFileName),      "/%s.%d.%s", CpuName, CpuId, CFE_PSP_CDS_KEY_FILE_NAME_EXT);
-    snprintf(ResetKeyFileName,    sizeof(ResetKeyFileName),    "/%s.%d.%s", CpuName, CpuId, CFE_PSP_RESET_KEY_FILE_NAME_EXT);
-    snprintf(ReservedKeyFileName, sizeof(ReservedKeyFileName), "/%s.%d.%s", CpuName, CpuId, CFE_PSP_RESERVED_KEY_FILE_NAME_EXT);
+    snprintf(CdsKeyFileName, sizeof(CdsKeyFileName), "/%s.%d.%s", CpuName, CpuId, CFE_PSP_CDS_KEY_FILE_NAME_EXT);
+    snprintf(ResetKeyFileName, sizeof(ResetKeyFileName), "/%s.%d.%s", CpuName, CpuId, CFE_PSP_RESET_KEY_FILE_NAME_EXT);
+    snprintf(ReservedKeyFileName,
+             sizeof(ReservedKeyFileName),
+             "/%s.%d.%s",
+             CpuName,
+             CpuId,
+             CFE_PSP_RESERVED_KEY_FILE_NAME_EXT);
 }
 
 /******************************************************************************
@@ -469,8 +474,8 @@ void CFE_PSP_InitUserReservedArea(void)
     ** attach to the segment to get a pointer to it:
     */
     ftruncate(UserShmId, CFE_PSP_USER_RESERVED_SIZE);
-    CFE_PSP_ReservedMemoryMap.UserReservedMemory.BlockPtr = mmap(NULL, CFE_PSP_USER_RESERVED_SIZE,
-      (PROT_READ | PROT_WRITE), MAP_SHARED, UserShmId, 0);
+    CFE_PSP_ReservedMemoryMap.UserReservedMemory.BlockPtr =
+        mmap(NULL, CFE_PSP_USER_RESERVED_SIZE, (PROT_READ | PROT_WRITE), MAP_SHARED, UserShmId, 0);
     if (CFE_PSP_ReservedMemoryMap.UserReservedMemory.BlockPtr == (void *)(-1))
     {
         perror("CFE_PSP - Cannot mmap to User Reserved Area Shared memory Segment");
@@ -493,7 +498,7 @@ void CFE_PSP_InitUserReservedArea(void)
 */
 void CFE_PSP_DeleteUserReservedArea(void)
 {
-    int             ReturnCode = 0;
+    int ReturnCode = 0;
 
     /* Unmapped and unlink shared memory segment */
     ReturnCode = munmap(CFE_PSP_ReservedMemoryMap.UserReservedMemory.BlockPtr, CFE_PSP_USER_RESERVED_SIZE);
@@ -501,13 +506,13 @@ void CFE_PSP_DeleteUserReservedArea(void)
     if (ReturnCode == 0)
     {
         ReturnCode = shm_unlink(CFE_PSP_RESERVED_KEY_FILE);
-        if(ReturnCode == 0)
+        if (ReturnCode == 0)
         {
-           OS_printf("User Reserved Area Shared memory segment removed\n");
+            OS_printf("User Reserved Area Shared memory segment removed\n");
         }
         else
         {
-           OS_printf("Error Removing User Reserved Area Shared memory Segment.\n");
+            OS_printf("Error Removing User Reserved Area Shared memory Segment.\n");
         }
     }
     else
@@ -661,7 +666,8 @@ int32 CFE_PSP_InitProcessorReservedMemory(uint32 RestartType)
         memset(CFE_PSP_ReservedMemoryMap.UserReservedMemory.BlockPtr, 0, CFE_PSP_USER_RESERVED_SIZE);
 
         memset(CFE_PSP_ReservedMemoryMap.BootPtr, 0, sizeof(*CFE_PSP_ReservedMemoryMap.BootPtr));
-        memset(CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr, 0,
+        memset(CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr,
+               0,
                sizeof(*CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr));
 
         /*

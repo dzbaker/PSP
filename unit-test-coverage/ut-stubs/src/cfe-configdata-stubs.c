@@ -27,7 +27,7 @@
 
 #include "PCS_cfe_configdata.h"
 
-CFE_StaticModuleLoadEntry_t CFE_PSP_BASE_MODULE_LIST[] = {{NULL}};
+CFE_StaticModuleLoadEntry_t CFE_PSP_BASE_MODULE_LIST[] = { { NULL } };
 
 Target_CfeConfigData GLOBAL_CFE_CONFIGDATA = {
 
@@ -44,18 +44,19 @@ Target_CfeConfigData GLOBAL_CFE_CONFIGDATA = {
     /**
      * Notification function. Called from PSP after async event handling.
      */
-    .SystemNotify = PCS_SystemNotify};
+    .SystemNotify = PCS_SystemNotify
+};
 
-Target_ConfigData GLOBAL_CONFIGDATA = {.MissionVersion       = PCS_CONFIG_MISSIONVERSION,
-                                       .CfeVersion           = PCS_CONFIG_CFEVERSION,
-                                       .OsalVersion          = PCS_CONFIG_OSALVERSION,
-                                       .Config               = PCS_CONFIG_CONFIGSTR,
-                                       .Date                 = PCS_CONFIG_DATESTR,
-                                       .User                 = PCS_CONFIG_USERSTR,
-                                       .Default_CpuName      = PCS_CONFIG_CPUNAME,
-                                       .Default_CpuId        = PCS_CONFIG_CPUNUMBER,
-                                       .Default_SpacecraftId = PCS_CONFIG_SPACECRAFT,
-                                       .CfeConfig            = &GLOBAL_CFE_CONFIGDATA};
+Target_ConfigData GLOBAL_CONFIGDATA = { .MissionVersion       = PCS_CONFIG_MISSIONVERSION,
+                                        .CfeVersion           = PCS_CONFIG_CFEVERSION,
+                                        .OsalVersion          = PCS_CONFIG_OSALVERSION,
+                                        .Config               = PCS_CONFIG_CONFIGSTR,
+                                        .Date                 = PCS_CONFIG_DATESTR,
+                                        .User                 = PCS_CONFIG_USERSTR,
+                                        .Default_CpuName      = PCS_CONFIG_CPUNAME,
+                                        .Default_CpuId        = PCS_CONFIG_CPUNUMBER,
+                                        .Default_SpacecraftId = PCS_CONFIG_SPACECRAFT,
+                                        .CfeConfig            = &GLOBAL_CFE_CONFIGDATA };
 
 /**
  * Stub for the main system entry function implemented in CFE ES

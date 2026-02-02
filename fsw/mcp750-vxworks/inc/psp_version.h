@@ -30,14 +30,14 @@
 #define CFE_PSP_IMPL_BUILD_NUMBER   0
 #define CFE_PSP_IMPL_BUILD_BASELINE "v7.0.0"
 #define CFE_PSP_BUILD_DEV_CYCLE     "v7.0.0" /**< @brief Development: Release name for current development cycle */
-#define CFE_PSP_BUILD_CODENAME      "Draco" /**< @brief: Development: Code name for the current build */
+#define CFE_PSP_BUILD_CODENAME      "Draco"  /**< @brief: Development: Code name for the current build */
 
 /*
  * Version Macros, see \ref cfsversions for definitions.
  */
-#define CFE_PSP_IMPL_MAJOR_VERSION 7  /*!< @brief Major version number */
-#define CFE_PSP_IMPL_MINOR_VERSION 0  /*!< @brief Minor version number */
-#define CFE_PSP_IMPL_REVISION      0  /*!< @brief Revision version number. Value of 0 indicates a development version.*/
+#define CFE_PSP_IMPL_MAJOR_VERSION 7 /*!< @brief Major version number */
+#define CFE_PSP_IMPL_MINOR_VERSION 0 /*!< @brief Minor version number */
+#define CFE_PSP_IMPL_REVISION      0 /*!< @brief Revision version number. Value of 0 indicates a development version.*/
 
 /**
  * @brief Last official release.
@@ -68,9 +68,9 @@
 
 /**
  * @brief Max Version String length.
- * 
+ *
  * Maximum length that a tblCRCTool version string can be.
- * 
+ *
  */
 #define CFE_PSP_CFG_MAX_VERSION_STR_LEN 256
 

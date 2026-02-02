@@ -120,9 +120,9 @@ typedef pthread_t CFE_PSP_Exception_SysTaskId_t;
  */
 typedef struct
 {
-    struct timespec          event_time;
-    siginfo_t                si;
-    int32                    ValidAddrs;
+    struct timespec event_time;
+    siginfo_t       si;
+    int32           ValidAddrs;
 
     /*
     ** This is a variably-filled array based on the number of entries
@@ -134,7 +134,7 @@ typedef struct
 /*
 ** This define sets the default core affinity for the core cFE tasks.
 */
-#if defined (OS_CORE_AFFINITY)
+#if defined(OS_CORE_AFFINITY)
 #define CFE_PSP_DEFAULT_CORE_AFFINITY OS_CORE_AFFINITY
 #else
 #define CFE_PSP_DEFAULT_CORE_AFFINITY (0)

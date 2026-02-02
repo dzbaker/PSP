@@ -38,7 +38,7 @@
  * in nanoseconds, and then further dividing by the OSAL OS_time_t tick
  * resolution will convert to an OS_time_t compatible value.
  *
- * This needs to be set to the correct timebase for the BSP 
+ * This needs to be set to the correct timebase for the BSP
  *
  * Note this is distinct from the VxWorks system timer tick which runs,
  * confusingly, at 60Hz or a ~16.67ms period.

@@ -53,8 +53,8 @@ void UT_DefaultHandler_PCS_moduleInfoGet(void *UserObj, UT_EntryKey_t FuncKey, c
 
     UT_Stub_GetInt32StatusCode(Context, &Status);
 
-    if (Status >= 0 &&
-        UT_Stub_CopyToLocal(UT_KEY(PCS_moduleInfoGet), pModuleInfo, sizeof(*pModuleInfo)) < sizeof(*pModuleInfo))
+    if (Status >= 0
+        && UT_Stub_CopyToLocal(UT_KEY(PCS_moduleInfoGet), pModuleInfo, sizeof(*pModuleInfo)) < sizeof(*pModuleInfo))
     {
         memset(pModuleInfo, 0, sizeof(*pModuleInfo));
     }

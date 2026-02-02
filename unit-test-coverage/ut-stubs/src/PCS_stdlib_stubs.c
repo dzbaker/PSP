@@ -36,7 +36,6 @@ void UT_DefaultHandler_PCS_strtoul(void *, UT_EntryKey_t, const UT_StubContext_t
  */
 void PCS_abort(void)
 {
-
     UT_GenStub_Execute(PCS_abort, Basic, NULL);
 }
 

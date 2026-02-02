@@ -164,10 +164,16 @@ void eeprom_mmap_file_Init(uint32 PspModuleId)
         /*
         ** Install the 2nd memory range as the mapped file ( EEPROM )
         */
-        Status = CFE_PSP_MemRangeSet(1, CFE_PSP_MEM_EEPROM, eeprom_address, eeprom_size, CFE_PSP_MEM_SIZE_DWORD,
+        Status = CFE_PSP_MemRangeSet(1,
+                                     CFE_PSP_MEM_EEPROM,
+                                     eeprom_address,
+                                     eeprom_size,
+                                     CFE_PSP_MEM_SIZE_DWORD,
                                      CFE_PSP_MEM_ATTR_READWRITE);
         OS_printf("CFE_PSP: EEPROM Range (2) created: Start Address = %08lX, Size = %08X Status = %d\n",
-                  (unsigned long)eeprom_address, (unsigned int)eeprom_size, (int)Status);
+                  (unsigned long)eeprom_address,
+                  (unsigned int)eeprom_size,
+                  (int)Status);
     }
     else
     {

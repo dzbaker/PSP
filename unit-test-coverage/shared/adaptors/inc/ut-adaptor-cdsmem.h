@@ -43,7 +43,7 @@
 void   UT_CdsMemAdaptor_Init(void *mem_ptr, size_t mem_size);
 void   UT_CdsMemAdaptor_CopyOut(void *dst, size_t num_bytes);
 void   UT_CdsMemAdaptor_SetOffset(size_t offset, uint8 val);
-void * UT_CdsMemAdaptor_GetAddress(void);
+void  *UT_CdsMemAdaptor_GetAddress(void);
 size_t UT_CdsMemAdaptor_GetSize(void);
 
 #endif

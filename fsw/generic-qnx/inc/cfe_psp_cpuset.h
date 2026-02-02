@@ -32,15 +32,15 @@
  * operating system (struct _thread_runmask) to set the runmask and inherit mask.
  *
  * Applications should not directly access fields within this structure,
- * as the pointer configuration may change based on the number of processors in 
+ * as the pointer configuration may change based on the number of processors in
  * the running system.
  */
 typedef struct
 {
-    int32    size;          /**< The size of the QNX run/inherit mask */
-    uint32   *runmask;      /**< The QNX run mask pointer */
-    uint32   *inherit_mask; /**< The QNX inherit mask pointer */
-    uint32   mask_data[8];  /**< The QNX run mask and inherit mask storage (supports maximum of 128 processors) */
+    int32   size;         /**< The size of the QNX run/inherit mask */
+    uint32 *runmask;      /**< The QNX run mask pointer */
+    uint32 *inherit_mask; /**< The QNX inherit mask pointer */
+    uint32  mask_data[8]; /**< The QNX run mask and inherit mask storage (supports maximum of 128 processors) */
 } CFE_PSP_cpuset_t;
 
 /*-------------------------------------------------------------------------------------*/
@@ -58,11 +58,11 @@ static inline void CFE_PSP_CpusetZero(CFE_PSP_cpuset_t *cpuset)
     memset(cpuset, 0x0, sizeof(CFE_PSP_cpuset_t));
 
     /* Set size of run mask and inherit mask */
-    cpuset->size  = mask_size;
+    cpuset->size = mask_size;
 
     /* Set run mask and inherit mask pointers */
-    cpuset->runmask       = &cpuset->mask_data[0];
-    cpuset->inherit_mask  = &cpuset->mask_data[mask_size];
+    cpuset->runmask      = &cpuset->mask_data[0];
+    cpuset->inherit_mask = &cpuset->mask_data[mask_size];
 
     /*  Verify that cpuset has enought storage for cpus in system */
     if (((sizeof(uint32) * 3) + (sizeof(uint32) * mask_size * 2)) > sizeof(CFE_PSP_cpuset_t))

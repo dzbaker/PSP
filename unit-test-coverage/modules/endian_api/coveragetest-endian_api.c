@@ -275,7 +275,7 @@ void Test_CFE_PSP_HtoBE16(void)
 {
     uint16       host_16bits;
     uint16       result;
-    const uint16 test_values[] = {0x1234, 0x5678, 0x9ABC, 0xDEF0};
+    const uint16 test_values[] = { 0x1234, 0x5678, 0x9ABC, 0xDEF0 };
     uint16       i;
 
     UT_SetHandlerFunction(UT_KEY(PCS_htobe16), UT_Handler_PCS_htobe16, NULL);
@@ -298,7 +298,7 @@ void Test_CFE_PSP_HtoBE16(void)
 void Test_CFE_PSP_HtoLE16(void)
 {
     uint16       host_16bits;
-    const uint16 test_values[] = {0x1234, 0x5678, 0x9ABC, 0xDEF0};
+    const uint16 test_values[] = { 0x1234, 0x5678, 0x9ABC, 0xDEF0 };
     uint16       result;
     uint16       i;
 
@@ -322,7 +322,7 @@ void Test_CFE_PSP_HtoLE16(void)
 void Test_CFE_PSP_BE16toH(void)
 {
     uint16       big_endian_16bits;
-    const uint16 test_values[] = {0x1234, 0x5678, 0x9ABC, 0xDEF0};
+    const uint16 test_values[] = { 0x1234, 0x5678, 0x9ABC, 0xDEF0 };
     uint16       result;
     uint16       i;
 
@@ -346,7 +346,7 @@ void Test_CFE_PSP_BE16toH(void)
 void Test_CFE_PSP_LE16toH(void)
 {
     uint16       little_endian_16bits;
-    const uint16 test_values[] = {0x1234, 0x5678, 0x9ABC, 0xDEF0};
+    const uint16 test_values[] = { 0x1234, 0x5678, 0x9ABC, 0xDEF0 };
     uint16       result;
     uint16       i;
 
@@ -370,7 +370,7 @@ void Test_CFE_PSP_LE16toH(void)
 void Test_CFE_PSP_HtoBE32(void)
 {
     uint32       host_32bits;
-    const uint32 test_values[] = {0x12345678, 0x9ABCDEF0, 0x3456789A, 0xBCDEF012};
+    const uint32 test_values[] = { 0x12345678, 0x9ABCDEF0, 0x3456789A, 0xBCDEF012 };
     uint32       result;
     uint16       i;
 
@@ -394,7 +394,7 @@ void Test_CFE_PSP_HtoBE32(void)
 void Test_CFE_PSP_HtoLE32(void)
 {
     uint32       host_32bits;
-    const uint32 test_values[] = {0x12345678, 0x9ABCDEF0, 0x3456789A, 0xBCDEF012};
+    const uint32 test_values[] = { 0x12345678, 0x9ABCDEF0, 0x3456789A, 0xBCDEF012 };
     uint32       result;
     uint16       i;
 
@@ -418,7 +418,7 @@ void Test_CFE_PSP_HtoLE32(void)
 void Test_CFE_PSP_BE32toH(void)
 {
     uint32       big_endian_32bits;
-    const uint32 test_values[] = {0x12345678, 0x9ABCDEF0, 0x3456789A, 0xBCDEF012};
+    const uint32 test_values[] = { 0x12345678, 0x9ABCDEF0, 0x3456789A, 0xBCDEF012 };
     uint32       result;
     uint16       i;
 
@@ -442,7 +442,7 @@ void Test_CFE_PSP_BE32toH(void)
 void Test_CFE_PSP_LE32toH(void)
 {
     uint32       little_endian_32bits;
-    const uint32 test_values[] = {0x12345678, 0x9ABCDEF0, 0x3456789A, 0xBCDEF012};
+    const uint32 test_values[] = { 0x12345678, 0x9ABCDEF0, 0x3456789A, 0xBCDEF012 };
     uint32       result;
     uint16       i;
 
@@ -466,7 +466,7 @@ void Test_CFE_PSP_LE32toH(void)
 void Test_CFE_PSP_HtoBE64(void)
 {
     uint64       host_64bits;
-    const uint64 test_values[] = {0x123456789ABCDEF0, 0x56789ABCDEF01234, 0x9ABCDEF012345678, 0xDEF0123456789ABC};
+    const uint64 test_values[] = { 0x123456789ABCDEF0, 0x56789ABCDEF01234, 0x9ABCDEF012345678, 0xDEF0123456789ABC };
     uint64       result;
     uint16       i;
 
@@ -490,7 +490,7 @@ void Test_CFE_PSP_HtoBE64(void)
 void Test_CFE_PSP_HtoLE64(void)
 {
     uint64       host_64bits;
-    const uint64 test_values[] = {0x123456789ABCDEF0, 0x56789ABCDEF01234, 0x9ABCDEF012345678, 0xDEF0123456789ABC};
+    const uint64 test_values[] = { 0x123456789ABCDEF0, 0x56789ABCDEF01234, 0x9ABCDEF012345678, 0xDEF0123456789ABC };
     uint64       result;
     uint16       i;
 
@@ -514,7 +514,7 @@ void Test_CFE_PSP_HtoLE64(void)
 void Test_CFE_PSP_BE64toH(void)
 {
     uint64       big_endian_64bits;
-    const uint64 test_values[] = {0x123456789ABCDEF0, 0x56789ABCDEF01234, 0x9ABCDEF012345678, 0xDEF0123456789ABC};
+    const uint64 test_values[] = { 0x123456789ABCDEF0, 0x56789ABCDEF01234, 0x9ABCDEF012345678, 0xDEF0123456789ABC };
     uint64       result;
     uint16       i;
 
@@ -538,7 +538,7 @@ void Test_CFE_PSP_BE64toH(void)
 void Test_CFE_PSP_LE64toH(void)
 {
     uint64       little_endian_64bits;
-    const uint64 test_values[] = {0x123456789ABCDEF0, 0x56789ABCDEF01234, 0x9ABCDEF012345678, 0xDEF0123456789ABC};
+    const uint64 test_values[] = { 0x123456789ABCDEF0, 0x56789ABCDEF01234, 0x9ABCDEF012345678, 0xDEF0123456789ABC };
     uint64       result;
     uint16       i;
 

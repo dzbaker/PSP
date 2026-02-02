@@ -43,7 +43,7 @@
 void UT_DefaultHandler_CFE_PSP_MemCpy(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context)
 {
     /* CFE_PSP_MemCpy(void *dest, const void *src, uint32 n) */
-    void *      dest = UT_Hook_GetArgValueByName(Context, "dest", void *);
+    void       *dest = UT_Hook_GetArgValueByName(Context, "dest", void *);
     const void *src  = UT_Hook_GetArgValueByName(Context, "src", const void *);
     uint32      n    = UT_Hook_GetArgValueByName(Context, "n", uint32);
     int32       Status;
@@ -63,7 +63,7 @@ void UT_DefaultHandler_CFE_PSP_MemCpy(void *UserObj, UT_EntryKey_t FuncKey, cons
 void UT_DefaultHandler_CFE_PSP_MemSet(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context)
 {
     /* int32 CFE_PSP_MemSet(void *dest, uint8 value, uint32 n) */
-    void * dest  = UT_Hook_GetArgValueByName(Context, "dest", void *);
+    void  *dest  = UT_Hook_GetArgValueByName(Context, "dest", void *);
     uint8  value = UT_Hook_GetArgValueByName(Context, "value", uint8);
     uint32 n     = UT_Hook_GetArgValueByName(Context, "n", uint32);
     int32  Status;

@@ -43,8 +43,8 @@ void UT_DefaultHandler_CFE_PSP_GetVersionString(void *UserObj, UT_EntryKey_t Fun
 {
     /* const char *CFE_PSP_GetVersionString(void) */
     static const char DEFAULT[] = "UT";
-    void *            Buffer;
-    const char *      RetVal;
+    void             *Buffer;
+    const char       *RetVal;
 
     UT_GetDataBuffer(UT_KEY(CFE_PSP_GetVersionString), &Buffer, NULL, NULL);
     if (Buffer == NULL)
@@ -63,8 +63,8 @@ void UT_DefaultHandler_CFE_PSP_GetVersionCodeName(void *UserObj, UT_EntryKey_t F
 {
     /* const char *CFE_PSP_GetVersionCodeName(void) */
     static const char DEFAULT[] = "UT";
-    void *            Buffer;
-    const char *      RetVal;
+    void             *Buffer;
+    const char       *RetVal;
 
     UT_GetDataBuffer(UT_KEY(CFE_PSP_GetVersionCodeName), &Buffer, NULL, NULL);
     if (Buffer == NULL)

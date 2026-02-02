@@ -45,9 +45,9 @@ static struct rtems_bsdnet_ifconfig netdriver_config = {
 };
 
 struct rtems_bsdnet_config rtems_bsdnet_config = {
-    .ifconfig = &netdriver_config, .bootp = rtems_bsdnet_do_dhcp_failsafe, /* fill if DHCP is used*/
+    .ifconfig = &netdriver_config,
+    .bootp    = rtems_bsdnet_do_dhcp_failsafe, /* fill if DHCP is used*/
 };
-
 
 CFE_PSP_MODULE_DECLARE_SIMPLE(network_pc686_rtems);
 
@@ -68,5 +68,4 @@ void network_pc686_rtems_Init(uint32 PspModuleId)
     {
         printf("Network init not successful: %s / %s (continuing)\n", rtems_status_text(status), strerror(errno));
     }
-
 }

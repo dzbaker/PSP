@@ -49,7 +49,6 @@ int PCS_spyClkStartCommon(int intsPerSec, PCS_FUNCPTR print)
  */
 void PCS_spyClkStopCommon(void)
 {
-
     UT_GenStub_Execute(PCS_spyClkStopCommon, Basic, NULL);
 }
 

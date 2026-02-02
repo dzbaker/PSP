@@ -43,7 +43,7 @@
 void   UT_UserMemAdaptor_Init(void *mem_ptr, size_t mem_size);
 void   UT_UserMemAdaptor_CopyOut(void *dst, size_t num_bytes);
 void   UT_UserMemAdaptor_SetOffset(size_t offset, uint8 val);
-void * UT_UserMemAdaptor_GetAddress(void);
+void  *UT_UserMemAdaptor_GetAddress(void);
 size_t UT_UserMemAdaptor_GetSize(void);
 
 #endif
