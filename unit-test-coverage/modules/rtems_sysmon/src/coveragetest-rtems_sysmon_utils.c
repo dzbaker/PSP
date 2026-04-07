@@ -55,8 +55,8 @@ void UT_ThreadGetName_Hook(void *UserObj, int32 StubRetcode, uint32 CallCount, c
 {
     int i;
 
-    char * Name = UT_Hook_GetArgValueByName(Context, "buffer", char *);
-    UT_ThreadGetNameData_t * Data = (UT_ThreadGetNameData_t *) UserObj;
+    char                   *Name = UT_Hook_GetArgValueByName(Context, "buffer", char *);
+    UT_ThreadGetNameData_t *Data = (UT_ThreadGetNameData_t *)UserObj;
 
     for (i = 0; i < Data->Size; i++)
     {
@@ -66,16 +66,15 @@ void UT_ThreadGetName_Hook(void *UserObj, int32 StubRetcode, uint32 CallCount, c
 
 void UT_TimestampDivide_Hook(void *UserObj, int32 StubRetcode, uint32 CallCount, const UT_StubContext_t *Context)
 {
+    UT_TimeDivideData_t *TimeDivideData = (UT_TimeDivideData_t *)UserObj;
 
-    UT_TimeDivideData_t * TimeDivideData = (UT_TimeDivideData_t *) UserObj;
+    uint32_t *IntValue          = UT_Hook_GetArgValueByName(Context, "_ival_percentage", uint32_t *);
+    uint32_t *FraValue          = UT_Hook_GetArgValueByName(Context, "_fval_percentage", uint32_t *);
+    int64_t  *IdleUptimeElapsed = UT_Hook_GetArgValueByName(Context, "_lhs", int64_t *);
+    int64_t  *TotalElapsed      = UT_Hook_GetArgValueByName(Context, "_rhs", int64_t *);
 
-    uint32_t * IntValue = UT_Hook_GetArgValueByName(Context, "_ival_percentage", uint32_t *);
-    uint32_t * FraValue = UT_Hook_GetArgValueByName(Context, "_fval_percentage", uint32_t *);
-    int64_t *  IdleUptimeElapsed = UT_Hook_GetArgValueByName(Context, "_lhs", int64_t *);
-    int64_t *  TotalElapsed = UT_Hook_GetArgValueByName(Context, "_rhs", int64_t *);
-
-    *IntValue = TimeDivideData->IntValue;
-    *FraValue = TimeDivideData->FraValue;
+    *IntValue          = TimeDivideData->IntValue;
+    *FraValue          = TimeDivideData->FraValue;
     *IdleUptimeElapsed = TimeDivideData->IdleUptimeElapsed;
-    *TotalElapsed = TimeDivideData->TotalElapsed;
+    *TotalElapsed      = TimeDivideData->TotalElapsed;
 }

@@ -22,7 +22,6 @@
 
 #include "PCS_rtems.h"
 
-void PCS_TOD_Get_uptime (PCS_Timestamp_Control *time);
-
+void PCS_TOD_Get_uptime(PCS_Timestamp_Control *time);
 
 #endif

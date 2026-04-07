@@ -77,25 +77,25 @@
 /** \{ */
 
 /** @brief Reset caused by power having been removed and restored */
-#define CFE_PSP_RST_SUBTYPE_POWER_CYCLE 1
+#define CFE_PSP_RST_SUBTYPE_POWER_CYCLE        1
 /** @brief Reset caused by reset button on the board */
-#define CFE_PSP_RST_SUBTYPE_PUSH_BUTTON 2
+#define CFE_PSP_RST_SUBTYPE_PUSH_BUTTON        2
 /** @brief Reset was caused by a reset line having been stimulated by a hardware special command */
 #define CFE_PSP_RST_SUBTYPE_HW_SPECIAL_COMMAND 3
 /** @brief Reset was caused by a watchdog timer expiring */
-#define CFE_PSP_RST_SUBTYPE_HW_WATCHDOG 4
+#define CFE_PSP_RST_SUBTYPE_HW_WATCHDOG        4
 /** @brief Reset was caused by cFE ES processing a @link #CFE_ES_RESTART_CC Reset Command @endlink */
-#define CFE_PSP_RST_SUBTYPE_RESET_COMMAND 5
+#define CFE_PSP_RST_SUBTYPE_RESET_COMMAND      5
 /** @brief Reset was caused by a Processor Exception */
-#define CFE_PSP_RST_SUBTYPE_EXCEPTION 6
+#define CFE_PSP_RST_SUBTYPE_EXCEPTION          6
 /** @brief Reset was caused in an unknown manner */
-#define CFE_PSP_RST_SUBTYPE_UNDEFINED_RESET 7
+#define CFE_PSP_RST_SUBTYPE_UNDEFINED_RESET    7
 /** @brief Reset was caused by a JTAG or BDM connection */
-#define CFE_PSP_RST_SUBTYPE_HWDEBUG_RESET 8
+#define CFE_PSP_RST_SUBTYPE_HWDEBUG_RESET      8
 /** @brief Reset reverted to a cFE POWERON due to a boot bank switch */
-#define CFE_PSP_RST_SUBTYPE_BANKSWITCH_RESET 9
+#define CFE_PSP_RST_SUBTYPE_BANKSWITCH_RESET   9
 /** @brief Placeholder to indicate 1+ the maximum value that the PSP will ever use. */
-#define CFE_PSP_RST_SUBTYPE_MAX 10
+#define CFE_PSP_RST_SUBTYPE_MAX                10
 /** \} */
 
 /******************************************************************************

@@ -160,9 +160,23 @@ PCS_TASK_ID PCS_taskIdSelf(void)
  * Generated stub function for PCS_taskInit()
  * ----------------------------------------------------
  */
-PCS_STATUS PCS_taskInit(PCS_WIND_TCB *pTcb, char *name, int priority, int options, char *pStackBase, int stackSize,
-                        PCS_FUNCPTR entryPt, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7,
-                        int arg8, int arg9, int arg10)
+PCS_STATUS PCS_taskInit(PCS_WIND_TCB *pTcb,
+                        char         *name,
+                        int           priority,
+                        int           options,
+                        char         *pStackBase,
+                        int           stackSize,
+                        PCS_FUNCPTR   entryPt,
+                        int           arg1,
+                        int           arg2,
+                        int           arg3,
+                        int           arg4,
+                        int           arg5,
+                        int           arg6,
+                        int           arg7,
+                        int           arg8,
+                        int           arg9,
+                        int           arg10)
 {
     UT_GenStub_SetupReturnBuffer(PCS_taskInit, PCS_STATUS);
 
@@ -308,8 +322,21 @@ PCS_STATUS PCS_taskResume(PCS_TASK_ID tid)
  * Generated stub function for PCS_taskSpawn()
  * ----------------------------------------------------
  */
-PCS_TASK_ID PCS_taskSpawn(char *name, int priority, int options, int stackSize, PCS_FUNCPTR entryPt, int arg1, int arg2,
-                          int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10)
+PCS_TASK_ID PCS_taskSpawn(char       *name,
+                          int         priority,
+                          int         options,
+                          int         stackSize,
+                          PCS_FUNCPTR entryPt,
+                          int         arg1,
+                          int         arg2,
+                          int         arg3,
+                          int         arg4,
+                          int         arg5,
+                          int         arg6,
+                          int         arg7,
+                          int         arg8,
+                          int         arg9,
+                          int         arg10)
 {
     UT_GenStub_SetupReturnBuffer(PCS_taskSpawn, PCS_TASK_ID);
 

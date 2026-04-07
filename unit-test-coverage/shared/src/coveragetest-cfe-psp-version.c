@@ -61,7 +61,7 @@ void Test_CFE_PSP_GetVersionNumber(void)
     /* Test Case For:
      * void CFE_PSP_GetVersionNumber(uint8 VersionNumbers[4])
      */
-    uint8 VersionNumbers[4] = {0, 0, 0, 0};
+    uint8 VersionNumbers[4] = { 0, 0, 0, 0 };
 
     UtAssert_VOIDCALL(CFE_PSP_GetVersionNumber(VersionNumbers));
 

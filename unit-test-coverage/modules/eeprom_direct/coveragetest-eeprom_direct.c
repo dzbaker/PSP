@@ -90,7 +90,7 @@ void Test_CFE_PSP_EepromWrite32_AddressMisaligned(void)
     /* Arrange */
     cpuaddr UtAddress;
 
-    UtAddress = (cpuaddr)&UT_RAM_BLOCK.u32[1];
+    UtAddress  = (cpuaddr)&UT_RAM_BLOCK.u32[1];
     UtAddress += 1;
 
     /* Act */
@@ -105,7 +105,7 @@ void Test_CFE_PSP_EepromWrite16_AddressMisaligned(void)
     /* Arrange */
     cpuaddr UtAddress;
 
-    UtAddress = (cpuaddr)&UT_RAM_BLOCK.u16[4];
+    UtAddress  = (cpuaddr)&UT_RAM_BLOCK.u16[4];
     UtAddress += 1;
 
     /* Act */
@@ -131,7 +131,7 @@ void Test_CFE_PSP_EepromWrite16_WriteHighBitOrder(void)
     /* Arrange */
     cpuaddr UtAddress;
 
-    UtAddress = (cpuaddr)&UT_RAM_BLOCK.u16[8];
+    UtAddress  = (cpuaddr)&UT_RAM_BLOCK.u16[8];
     UtAddress += 2;
 
     /* Act */
@@ -163,7 +163,7 @@ void Test_CFE_PSP_EepromWrite8_WriteHighBitOrder(void)
     /* Arrange */
     cpuaddr UtAddress;
 
-    UtAddress = (cpuaddr)&UT_RAM_BLOCK.u8[24];
+    UtAddress  = (cpuaddr)&UT_RAM_BLOCK.u8[24];
     UtAddress += 3;
 
     /* Act */

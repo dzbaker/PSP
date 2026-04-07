@@ -37,10 +37,9 @@
 #include <errno.h>
 
 /* Global unwind variables */
-unw_cursor_t Cursor;
-unw_context_t Context;
+unw_cursor_t    Cursor;
+unw_context_t   Context;
 unw_proc_info_t Info;
-
 
 CFE_PSP_MODULE_DECLARE_SIMPLE(backtrace_libunwind);
 
@@ -71,44 +70,49 @@ void CFE_PSP_Backtrace_Init(void)
  */
 int32 CFE_PSP_Backtrace(CFE_PSP_BacktraceEntry_t *Entry, void *ContextPtr, int32 MaxEntries)
 {
-   int32 NumAddrs = 0;
+    int32 NumAddrs = 0;
 
-   if (Entry != NULL)
-   {
-       /* Init the unwind context */
-       Context = *(unw_context_t *)ContextPtr;
+    if (Entry != NULL)
+    {
+        /* Init the unwind context */
+        Context = *(unw_context_t *)ContextPtr;
 
-       /* Init unwind cursor for local execution context */
-       unw_init_local(&Cursor, &Context);
+        /* Init unwind cursor for local execution context */
+        unw_init_local(&Cursor, &Context);
 
-       /* loop through stack frame */
-       while ((MaxEntries > 0) && (unw_step(&Cursor) > 0))
-       {
-           /* Get instruction pointer (IP) and stack pointer (SP) registers */
-           Entry->RegIp = Entry->RegSp = 0xDEADBEEF;
-           unw_get_reg(&Cursor, UNW_REG_IP, &Entry->RegIp);
-           unw_get_reg(&Cursor, UNW_REG_SP, &Entry->RegSp);
+        /* loop through stack frame */
+        while ((MaxEntries > 0) && (unw_step(&Cursor) > 0))
+        {
+            /* Get instruction pointer (IP) and stack pointer (SP) registers */
+            Entry->RegIp = Entry->RegSp = 0xDEADBEEF;
+            unw_get_reg(&Cursor, UNW_REG_IP, &Entry->RegIp);
+            unw_get_reg(&Cursor, UNW_REG_SP, &Entry->RegSp);
 
-           /* Get symbol name and offset */
-           if (unw_get_proc_name(&Cursor, Entry->SymName, CFE_PSP_BACKTRACE_SYM_NAME_LEN, &Entry->SymOffset) != 0)
-           {
-               strncpy(Entry->SymName, "<unknown>", CFE_PSP_BACKTRACE_SYM_NAME_LEN);
-               Entry->SymOffset = 0;
-           }
-           else
-           {
-               Entry->SymName[CFE_PSP_BACKTRACE_SYM_NAME_LEN - 1] = '\0';
-           }
+            /* Get symbol name and offset */
+            if (unw_get_proc_name(&Cursor, Entry->SymName, CFE_PSP_BACKTRACE_SYM_NAME_LEN, &Entry->SymOffset) != 0)
+            {
+                strncpy(Entry->SymName, "<unknown>", CFE_PSP_BACKTRACE_SYM_NAME_LEN);
+                Entry->SymOffset = 0;
+            }
+            else
+            {
+                Entry->SymName[CFE_PSP_BACKTRACE_SYM_NAME_LEN - 1] = '\0';
+            }
 
-           /* Display bracktrace info */
-           PSP_DEBUG("CFE_PSP_Backtrace: [%02u] SP: 0x%lx PC: 0x%lx (%s+0x%lx)\n", NumAddrs, Entry->RegSp, Entry->RegIp, Entry->SymName, Entry->SymOffset);
+            /* Display bracktrace info */
+            PSP_DEBUG("CFE_PSP_Backtrace: [%02u] SP: 0x%lx PC: 0x%lx (%s+0x%lx)\n",
+                      NumAddrs,
+                      Entry->RegSp,
+                      Entry->RegIp,
+                      Entry->SymName,
+                      Entry->SymOffset);
 
-           /* update entry pointer and counters */
-           NumAddrs++;
-           Entry++;
-           MaxEntries--;
-       }
-   }
+            /* update entry pointer and counters */
+            NumAddrs++;
+            Entry++;
+            MaxEntries--;
+        }
+    }
 
-   return NumAddrs;
+    return NumAddrs;
 }

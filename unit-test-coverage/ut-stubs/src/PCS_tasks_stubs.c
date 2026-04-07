@@ -30,9 +30,12 @@
  * Generated stub function for PCS_rtems_task_create()
  * ----------------------------------------------------
  */
-PCS_rtems_status_code PCS_rtems_task_create(PCS_rtems_name name, PCS_rtems_task_priority initial_priority,
-                                            size_t stack_size, PCS_rtems_mode initial_modes,
-                                            PCS_rtems_attribute attribute_set, PCS_rtems_id *id)
+PCS_rtems_status_code PCS_rtems_task_create(PCS_rtems_name          name,
+                                            PCS_rtems_task_priority initial_priority,
+                                            size_t                  stack_size,
+                                            PCS_rtems_mode          initial_modes,
+                                            PCS_rtems_attribute     attribute_set,
+                                            PCS_rtems_id           *id)
 {
     UT_GenStub_SetupReturnBuffer(PCS_rtems_task_create, PCS_rtems_status_code);
 
@@ -82,8 +85,8 @@ void PCS_rtems_task_iterate(PCS_rtems_task_visitor visitor, void *arg)
  * Generated stub function for PCS_rtems_task_start()
  * ----------------------------------------------------
  */
-PCS_rtems_status_code PCS_rtems_task_start(PCS_rtems_id id, PCS_rtems_task_entry entry_point,
-                                           PCS_rtems_task_argument argument)
+PCS_rtems_status_code
+PCS_rtems_task_start(PCS_rtems_id id, PCS_rtems_task_entry entry_point, PCS_rtems_task_argument argument)
 {
     UT_GenStub_SetupReturnBuffer(PCS_rtems_task_start, PCS_rtems_status_code);
 

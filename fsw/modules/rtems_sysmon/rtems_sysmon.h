@@ -29,9 +29,9 @@
  * Local Defines
  ********************************************************************/
 #ifdef OS_MAXIMUM_PROCESSORS
-    #define RTEMS_SYSMON_MAX_CPUS  OS_MAXIMUM_PROCESSORS
+#define RTEMS_SYSMON_MAX_CPUS OS_MAXIMUM_PROCESSORS
 #else
-    #define RTEMS_SYSMON_MAX_CPUS  1
+#define RTEMS_SYSMON_MAX_CPUS 1
 #endif
 
 #define RTEMS_SYSMON_AGGREGATE_SUBSYS   0
@@ -48,15 +48,14 @@
 #define RTEMS_SYSMON_DEBUG(...)
 #endif
 
-
 /********************************************************************
  * Local Type Definitions
  ********************************************************************/
 typedef struct rtems_sysmon_cpuload_core
 {
     CFE_PSP_IODriver_AdcCode_t avg_load;
-    Timestamp_Control last_run_time;
-    Timestamp_Control idle_last_uptime;
+    Timestamp_Control          last_run_time;
+    Timestamp_Control          idle_last_uptime;
 
 } rtems_sysmon_cpuload_core_t;
 
@@ -68,7 +67,7 @@ typedef struct rtems_sysmon_cpuload_state
     rtems_id   task_id;
     rtems_name task_name;
 
-    uint8_t    poll_core_no;
+    uint8_t                     poll_core_no;
     rtems_sysmon_cpuload_core_t per_core[RTEMS_SYSMON_MAX_CPUS];
 
 } rtems_sysmon_cpuload_state_t;
@@ -79,13 +78,12 @@ typedef struct rtems_sysmon_state
     rtems_sysmon_cpuload_state_t cpu_load;
 } rtems_sysmon_state_t;
 
-
 /********************************************************************
  * Local Function Prototypes
  ********************************************************************/
 rtems_task rtems_sysmon_Task(rtems_task_argument arg);
-void rtems_sysmon_update_stat(rtems_sysmon_cpuload_state_t *state);
-bool rtems_cpu_usage_visitor(Thread_Control *the_thread, void *arg);
+void       rtems_sysmon_update_stat(rtems_sysmon_cpuload_state_t *state);
+bool       rtems_cpu_usage_visitor(Thread_Control *the_thread, void *arg);
 
 int32_t rtems_sysmon_Start(rtems_sysmon_cpuload_state_t *state);
 int32_t rtems_sysmon_Stop(rtems_sysmon_cpuload_state_t *state);
@@ -94,8 +92,7 @@ int32_t rtems_sysmon_aggregate_dispatch(uint32_t CommandCode, uint16_t Subchanne
 int32_t rtems_sysmon_calc_aggregate_cpu(rtems_sysmon_cpuload_state_t *state, CFE_PSP_IODriver_AdcCode_t *Val);
 
 /* Function that starts up rtems_sysmon driver. */
-int32_t rtems_sysmon_DevCmd(uint32_t CommandCode, uint16_t SubsystemId, uint16_t SubchannelId,
-                            CFE_PSP_IODriver_Arg_t Arg);
-
+int32_t
+rtems_sysmon_DevCmd(uint32_t CommandCode, uint16_t SubsystemId, uint16_t SubchannelId, CFE_PSP_IODriver_Arg_t Arg);
 
 #endif /* RTEMS_SYSMON_H_ */

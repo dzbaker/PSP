@@ -22,8 +22,12 @@
 
 #include "PCS_rtems.h"
 
-void PCS_Timestamp_Subtract (const PCS_Timestamp_Control *_start, const PCS_Timestamp_Control *_end, PCS_Timestamp_Control *_result);
-void PCS_Timestamp_Divide (const PCS_Timestamp_Control *_lhs, const PCS_Timestamp_Control *_rhs, uint32_t *_ival_percentage, uint32_t *_fval_percentage);
-
+void PCS_Timestamp_Subtract(const PCS_Timestamp_Control *_start,
+                            const PCS_Timestamp_Control *_end,
+                            PCS_Timestamp_Control       *_result);
+void PCS_Timestamp_Divide(const PCS_Timestamp_Control *_lhs,
+                          const PCS_Timestamp_Control *_rhs,
+                          uint32_t                    *_ival_percentage,
+                          uint32_t                    *_fval_percentage);
 
 #endif

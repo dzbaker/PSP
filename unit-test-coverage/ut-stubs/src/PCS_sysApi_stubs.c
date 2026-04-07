@@ -92,7 +92,6 @@ PCS_SP0_BOARD_GENERATION_TYPE PCS_sysGetBoardGeneration(bool talkative)
  */
 void PCS_sysPulseFpgaWdt(void)
 {
-
     UT_GenStub_Execute(PCS_sysPulseFpgaWdt, Basic, NULL);
 }
 

@@ -71,7 +71,7 @@ void CFE_PSP_ExceptionSigHandler(int signo, siginfo_t *si, void *ctxt)
     CFE_PSP_Exception_LogData_t *Buffer;
     int32                        NumAddrs;
 
-     /*
+    /*
      * Note that the time between CFE_PSP_Exception_GetNextContextBuffer()
      * and CFE_PSP_Exception_WriteComplete() is sensitive in that it is
      * accessing a global.
@@ -97,7 +97,7 @@ void CFE_PSP_ExceptionSigHandler(int signo, siginfo_t *si, void *ctxt)
          */
         clock_gettime(CLOCK_MONOTONIC, &Buffer->context_info.event_time);
         memcpy(&Buffer->context_info.si, si, sizeof(Buffer->context_info.si));
-        
+
         /* Collect QNX backtrace info */
         NumAddrs = CFE_PSP_Backtrace(Buffer->context_info.Addrs, ctxt, CFE_PSP_MAX_EXCEPTION_BACKTRACE_SIZE);
         Buffer->context_info.ValidAddrs = NumAddrs;
@@ -302,7 +302,10 @@ int32 CFE_PSP_ExceptionGetSummary_Impl(const CFE_PSP_Exception_LogData_t *Buffer
             default:
                 ComputedReason = "Unknown SIGFPE";
         }
-        (void)snprintf(ReasonBuf, ReasonSize, "%s at ip 0x%lx", ComputedReason,
+        (void)snprintf(ReasonBuf,
+                       ReasonSize,
+                       "%s at ip 0x%lx",
+                       ComputedReason,
                        (unsigned long)Buffer->context_info.si.si_addr);
     }
     else if (Buffer->context_info.si.si_signo == SIGINT)

@@ -75,7 +75,6 @@ void CFE_PSP_Restart(uint32 resetType)
  */
 void CFE_PSP_WatchdogDisable(void)
 {
-
     UT_GenStub_Execute(CFE_PSP_WatchdogDisable, Basic, NULL);
 }
 
@@ -86,7 +85,6 @@ void CFE_PSP_WatchdogDisable(void)
  */
 void CFE_PSP_WatchdogEnable(void)
 {
-
     UT_GenStub_Execute(CFE_PSP_WatchdogEnable, Basic, NULL);
 }
 
@@ -111,7 +109,6 @@ uint32 CFE_PSP_WatchdogGet(void)
  */
 void CFE_PSP_WatchdogInit(void)
 {
-
     UT_GenStub_Execute(CFE_PSP_WatchdogInit, Basic, NULL);
 }
 
@@ -122,7 +119,6 @@ void CFE_PSP_WatchdogInit(void)
  */
 void CFE_PSP_WatchdogService(void)
 {
-
     UT_GenStub_Execute(CFE_PSP_WatchdogService, Basic, NULL);
 }
 

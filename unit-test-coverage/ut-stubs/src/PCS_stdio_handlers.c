@@ -39,7 +39,7 @@ void UT_DefaultHandler_PCS_fgets(void *UserObj, UT_EntryKey_t FuncKey, const UT_
 
     int32  Status;
     uint32 CopySize;
-    void * DataBufferPtr;
+    void  *DataBufferPtr;
 
     Status = 0;
     UT_GetDataBuffer(FuncKey, &DataBufferPtr, NULL, NULL);
@@ -89,8 +89,8 @@ void UT_DefaultHandler_PCS_fgets(void *UserObj, UT_EntryKey_t FuncKey, const UT_
 void UT_DefaultHandler_PCS_fopen(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context)
 {
     /* PCS_FILE *PCS_fopen(const char *filename, const char *modes) */
-    PCS_FILE *      retval;
-    static PCS_FILE FOPEN_FP = {0};
+    PCS_FILE       *retval;
+    static PCS_FILE FOPEN_FP = { 0 };
 
     if (!UT_Stub_GetInt32StatusCode(Context, NULL))
     {
@@ -99,11 +99,13 @@ void UT_DefaultHandler_PCS_fopen(void *UserObj, UT_EntryKey_t FuncKey, const UT_
     }
 }
 
-void UT_DefaultHandler_PCS_snprintf(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context,
-                                    va_list ArgList)
+void UT_DefaultHandler_PCS_snprintf(void                   *UserObj,
+                                    UT_EntryKey_t           FuncKey,
+                                    const UT_StubContext_t *Context,
+                                    va_list                 ArgList)
 {
     /* int PCS_snprintf(char *s, size_t maxlen, const char *format, ...) */
-    char *      s      = UT_Hook_GetArgValueByName(Context, "s", char *);
+    char       *s      = UT_Hook_GetArgValueByName(Context, "s", char *);
     size_t      maxlen = UT_Hook_GetArgValueByName(Context, "maxlen", size_t);
     const char *format = UT_Hook_GetArgValueByName(Context, "format", const char *);
     int32       status;
@@ -129,7 +131,7 @@ void UT_DefaultHandler_PCS_snprintf(void *UserObj, UT_EntryKey_t FuncKey, const 
 void UT_DefaultHandler_PCS_vsnprintf(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context)
 {
     /* int PCS_vsnprintf(char *s, size_t maxlen, const char *format, PCS_va_list arg) */
-    char *      s      = UT_Hook_GetArgValueByName(Context, "s", char *);
+    char       *s      = UT_Hook_GetArgValueByName(Context, "s", char *);
     size_t      maxlen = UT_Hook_GetArgValueByName(Context, "maxlen", size_t);
     const char *format = UT_Hook_GetArgValueByName(Context, "format", const char *);
 
@@ -144,7 +146,7 @@ void UT_DefaultHandler_PCS_vsnprintf(void *UserObj, UT_EntryKey_t FuncKey, const
     }
 }
 
-static PCS_FILE LOCAL_FP[3] = {{10}, {11}, {12}};
+static PCS_FILE LOCAL_FP[3] = { { 10 }, { 11 }, { 12 } };
 
 PCS_FILE *PCS_stdin  = &LOCAL_FP[0];
 PCS_FILE *PCS_stdout = &LOCAL_FP[1];

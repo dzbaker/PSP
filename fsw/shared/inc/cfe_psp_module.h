@@ -85,7 +85,7 @@ typedef const struct
     uint32                   OperationFlags;
     CFE_PSP_ModuleInitFunc_t Init;
     /* More API calls may be added for other module types */
-    const void *ExtendedApi;
+    const void              *ExtendedApi;
 } CFE_PSP_ModuleApi_t;
 
 /**

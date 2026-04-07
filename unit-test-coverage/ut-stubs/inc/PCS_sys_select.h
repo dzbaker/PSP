@@ -68,8 +68,8 @@ typedef struct
 /* prototypes normally declared in sys/select.h */
 /* ----------------------------------------- */
 
-extern int  PCS_select(int nfds, PCS_fd_set *readfds, PCS_fd_set *writefds, PCS_fd_set *exceptfds,
-                       struct PCS_timeval *timeout);
+extern int
+PCS_select(int nfds, PCS_fd_set *readfds, PCS_fd_set *writefds, PCS_fd_set *exceptfds, struct PCS_timeval *timeout);
 extern void PCS_FD_SET(int fd, PCS_fd_set *set);
 extern int  PCS_FD_ISSET(int fd, PCS_fd_set *set);
 extern void PCS_FD_CLR(int fd, PCS_fd_set *set);

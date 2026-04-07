@@ -55,7 +55,7 @@ typedef struct
 */
 typedef struct
 {
-    void * BlockPtr;
+    void  *BlockPtr;
     size_t BlockSize;
 } CFE_PSP_MemoryBlock_t;
 
@@ -65,7 +65,7 @@ typedef struct
 typedef struct
 {
     CFE_PSP_ReservedMemoryBootRecord_t *BootPtr;
-    CFE_PSP_ExceptionStorage_t *        ExceptionStoragePtr;
+    CFE_PSP_ExceptionStorage_t         *ExceptionStoragePtr;
 
     CFE_PSP_MemoryBlock_t ResetMemory;
     CFE_PSP_MemoryBlock_t VolatileDiskMemory;

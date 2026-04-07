@@ -120,8 +120,12 @@ int32 CFE_PSP_GetVolatileDiskMem(cpuaddr *PtrToVolDisk, uint32 *SizeOfVolDisk)
  * Generated stub function for CFE_PSP_MemRangeGet()
  * ----------------------------------------------------
  */
-int32 CFE_PSP_MemRangeGet(uint32 RangeNum, uint32 *MemoryType, cpuaddr *StartAddr, size_t *Size, size_t *WordSize,
-                          uint32 *Attributes)
+int32 CFE_PSP_MemRangeGet(uint32   RangeNum,
+                          uint32  *MemoryType,
+                          cpuaddr *StartAddr,
+                          size_t  *Size,
+                          size_t  *WordSize,
+                          uint32  *Attributes)
 {
     UT_GenStub_SetupReturnBuffer(CFE_PSP_MemRangeGet, int32);
 
@@ -142,8 +146,12 @@ int32 CFE_PSP_MemRangeGet(uint32 RangeNum, uint32 *MemoryType, cpuaddr *StartAdd
  * Generated stub function for CFE_PSP_MemRangeSet()
  * ----------------------------------------------------
  */
-int32 CFE_PSP_MemRangeSet(uint32 RangeNum, uint32 MemoryType, cpuaddr StartAddr, size_t Size, size_t WordSize,
-                          uint32 Attributes)
+int32 CFE_PSP_MemRangeSet(uint32  RangeNum,
+                          uint32  MemoryType,
+                          cpuaddr StartAddr,
+                          size_t  Size,
+                          size_t  WordSize,
+                          uint32  Attributes)
 {
     UT_GenStub_SetupReturnBuffer(CFE_PSP_MemRangeSet, int32);
 

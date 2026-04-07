@@ -22,15 +22,18 @@
 
 #include "PCS_rtems.h"
 
-typedef bool( * PCS_rtems_task_visitor) (PCS_rtems_tcb *tcb, void *arg);
-typedef PCS_rtems_task( * PCS_rtems_task_entry) (PCS_rtems_task_argument);
+typedef bool (*PCS_rtems_task_visitor)(PCS_rtems_tcb *tcb, void *arg);
+typedef PCS_rtems_task (*PCS_rtems_task_entry)(PCS_rtems_task_argument);
 
-void PCS_rtems_task_iterate (PCS_rtems_task_visitor visitor, void *arg);
-PCS_rtems_status_code PCS_rtems_task_delete (PCS_rtems_id id);
-PCS_rtems_status_code PCS_rtems_task_create (PCS_rtems_name name, PCS_rtems_task_priority initial_priority, size_t stack_size, 
-                                             PCS_rtems_mode initial_modes, PCS_rtems_attribute attribute_set, PCS_rtems_id *id);
-PCS_rtems_status_code PCS_rtems_task_start (PCS_rtems_id id, PCS_rtems_task_entry entry_point, PCS_rtems_task_argument argument);
-
-
+void                  PCS_rtems_task_iterate(PCS_rtems_task_visitor visitor, void *arg);
+PCS_rtems_status_code PCS_rtems_task_delete(PCS_rtems_id id);
+PCS_rtems_status_code PCS_rtems_task_create(PCS_rtems_name          name,
+                                            PCS_rtems_task_priority initial_priority,
+                                            size_t                  stack_size,
+                                            PCS_rtems_mode          initial_modes,
+                                            PCS_rtems_attribute     attribute_set,
+                                            PCS_rtems_id           *id);
+PCS_rtems_status_code
+PCS_rtems_task_start(PCS_rtems_id id, PCS_rtems_task_entry entry_point, PCS_rtems_task_argument argument);
 
 #endif

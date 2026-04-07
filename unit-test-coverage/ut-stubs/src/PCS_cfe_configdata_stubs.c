@@ -32,7 +32,6 @@
  */
 void PCS_System1HzISR(void)
 {
-
     UT_GenStub_Execute(PCS_System1HzISR, Basic, NULL);
 }
 
@@ -58,6 +57,5 @@ void PCS_SystemMain(uint32_t StartType, uint32_t StartSubtype, uint32_t ModeId, 
  */
 void PCS_SystemNotify(void)
 {
-
     UT_GenStub_Execute(PCS_SystemNotify, Basic, NULL);
 }

@@ -30,8 +30,9 @@
  * Generated stub function for CFE_PSP_ExceptionGetSummary_Impl()
  * ----------------------------------------------------
  */
-int32 CFE_PSP_ExceptionGetSummary_Impl(const struct CFE_PSP_Exception_LogData *Buffer, char *ReasonBuf,
-                                       uint32 ReasonSize)
+int32 CFE_PSP_ExceptionGetSummary_Impl(const struct CFE_PSP_Exception_LogData *Buffer,
+                                       char                                   *ReasonBuf,
+                                       uint32                                  ReasonSize)
 {
     UT_GenStub_SetupReturnBuffer(CFE_PSP_ExceptionGetSummary_Impl, int32);
 
@@ -81,7 +82,6 @@ struct CFE_PSP_Exception_LogData *CFE_PSP_Exception_GetNextContextBuffer(void)
  */
 void CFE_PSP_Exception_Reset(void)
 {
-
     UT_GenStub_Execute(CFE_PSP_Exception_Reset, Basic, NULL);
 }
 
@@ -92,6 +92,5 @@ void CFE_PSP_Exception_Reset(void)
  */
 void CFE_PSP_Exception_WriteComplete(void)
 {
-
     UT_GenStub_Execute(CFE_PSP_Exception_WriteComplete, Basic, NULL);
 }

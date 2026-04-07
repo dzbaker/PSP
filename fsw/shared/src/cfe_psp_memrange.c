@@ -138,8 +138,12 @@ uint32 CFE_PSP_MemRanges(void)
  * See description in header file for argument/return detail
  *
  *-----------------------------------------------------------------*/
-int32 CFE_PSP_MemRangeSet(uint32 RangeNum, uint32 MemoryType, cpuaddr StartAddr, size_t Size, size_t WordSize,
-                          uint32 Attributes)
+int32 CFE_PSP_MemRangeSet(uint32  RangeNum,
+                          uint32  MemoryType,
+                          cpuaddr StartAddr,
+                          size_t  Size,
+                          size_t  WordSize,
+                          uint32  Attributes)
 {
     CFE_PSP_MemTable_t *SysMemPtr;
 
@@ -153,14 +157,14 @@ int32 CFE_PSP_MemRangeSet(uint32 RangeNum, uint32 MemoryType, cpuaddr StartAddr,
         return CFE_PSP_INVALID_MEM_TYPE;
     }
 
-    if ((WordSize != CFE_PSP_MEM_SIZE_BYTE) && (WordSize != CFE_PSP_MEM_SIZE_WORD) &&
-        (WordSize != CFE_PSP_MEM_SIZE_DWORD))
+    if ((WordSize != CFE_PSP_MEM_SIZE_BYTE) && (WordSize != CFE_PSP_MEM_SIZE_WORD)
+        && (WordSize != CFE_PSP_MEM_SIZE_DWORD))
     {
         return CFE_PSP_INVALID_MEM_WORDSIZE;
     }
 
-    if ((Attributes != CFE_PSP_MEM_ATTR_READ) && (Attributes != CFE_PSP_MEM_ATTR_WRITE) &&
-        (Attributes != CFE_PSP_MEM_ATTR_READWRITE))
+    if ((Attributes != CFE_PSP_MEM_ATTR_READ) && (Attributes != CFE_PSP_MEM_ATTR_WRITE)
+        && (Attributes != CFE_PSP_MEM_ATTR_READWRITE))
     {
         return CFE_PSP_INVALID_MEM_ATTR;
     }
@@ -185,8 +189,12 @@ int32 CFE_PSP_MemRangeSet(uint32 RangeNum, uint32 MemoryType, cpuaddr StartAddr,
  * See description in header file for argument/return detail
  *
  *-----------------------------------------------------------------*/
-int32 CFE_PSP_MemRangeGet(uint32 RangeNum, uint32 *MemoryType, cpuaddr *StartAddr, size_t *Size, size_t *WordSize,
-                          uint32 *Attributes)
+int32 CFE_PSP_MemRangeGet(uint32   RangeNum,
+                          uint32  *MemoryType,
+                          cpuaddr *StartAddr,
+                          size_t  *Size,
+                          size_t  *WordSize,
+                          uint32  *Attributes)
 {
     CFE_PSP_MemTable_t *SysMemPtr;
 

@@ -31,17 +31,17 @@
  * Generated stub function for CFE_PSP_Backtrace()
  * ----------------------------------------------------
  */
-int32 CFE_PSP_Backtrace(CFE_PSP_BacktraceEntry_t *Entry, void *ContextPtr,
-                        int32 MaxEntries) {
-  UT_GenStub_SetupReturnBuffer(CFE_PSP_Backtrace, int32);
+int32 CFE_PSP_Backtrace(CFE_PSP_BacktraceEntry_t *Entry, void *ContextPtr, int32 MaxEntries)
+{
+    UT_GenStub_SetupReturnBuffer(CFE_PSP_Backtrace, int32);
 
-  UT_GenStub_AddParam(CFE_PSP_Backtrace, CFE_PSP_BacktraceEntry_t *, Entry);
-  UT_GenStub_AddParam(CFE_PSP_Backtrace, void *, ContextPtr);
-  UT_GenStub_AddParam(CFE_PSP_Backtrace, int32, MaxEntries);
+    UT_GenStub_AddParam(CFE_PSP_Backtrace, CFE_PSP_BacktraceEntry_t *, Entry);
+    UT_GenStub_AddParam(CFE_PSP_Backtrace, void *, ContextPtr);
+    UT_GenStub_AddParam(CFE_PSP_Backtrace, int32, MaxEntries);
 
-  UT_GenStub_Execute(CFE_PSP_Backtrace, Basic, NULL);
+    UT_GenStub_Execute(CFE_PSP_Backtrace, Basic, NULL);
 
-  return UT_GenStub_GetReturnValue(CFE_PSP_Backtrace, int32);
+    return UT_GenStub_GetReturnValue(CFE_PSP_Backtrace, int32);
 }
 
 /*
@@ -49,7 +49,7 @@ int32 CFE_PSP_Backtrace(CFE_PSP_BacktraceEntry_t *Entry, void *ContextPtr,
  * Generated stub function for CFE_PSP_Backtrace_Init()
  * ----------------------------------------------------
  */
-void CFE_PSP_Backtrace_Init(void) {
-
-  UT_GenStub_Execute(CFE_PSP_Backtrace_Init, Basic, NULL);
+void CFE_PSP_Backtrace_Init(void)
+{
+    UT_GenStub_Execute(CFE_PSP_Backtrace_Init, Basic, NULL);
 }

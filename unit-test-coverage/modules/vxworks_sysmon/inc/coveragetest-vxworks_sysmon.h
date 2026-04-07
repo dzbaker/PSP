@@ -47,7 +47,7 @@
 #include "iodriver_impl.h"
 #include "vxworks_sysmon.h"
 
-void  UT_TaskDelay_Hook(void *UserObj);
+void UT_TaskDelay_Hook(void *UserObj);
 
 void Test_Init_Nominal(void);
 void Test_Entry_Nominal(void);

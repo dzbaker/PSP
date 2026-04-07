@@ -115,7 +115,7 @@ typedef struct
 */
 void CFE_PSP_DisplayUsage(char *Name);
 void CFE_PSP_ProcessArgumentDefaults(CFE_PSP_CommandData_t *CommandDataDefault);
-int pthread_setname_np(pthread_t tid, const char* newname);
+int  pthread_setname_np(pthread_t tid, const char *newname);
 void CFE_PSP_InitKeyFileNames(char *CpuName, uint32 CpuId);
 
 /*
@@ -137,13 +137,15 @@ static const char *optString = "R:S:C:I:N:h";
 /*
 ** getopts_long long form argument table
 */
-static const struct option longOpts[] = {{"reset", required_argument, NULL, 'R'},
-                                         {"subtype", required_argument, NULL, 'S'},
-                                         {"cpuid", required_argument, NULL, 'C'},
-                                         {"scid", required_argument, NULL, 'I'},
-                                         {"cpuname", required_argument, NULL, 'N'},
-                                         {"help", no_argument, NULL, 'h'},
-                                         {NULL, no_argument, NULL, 0}};
+static const struct option longOpts[] = {
+    { "reset",   required_argument, NULL, 'R' },
+    { "subtype", required_argument, NULL, 'S' },
+    { "cpuid",   required_argument, NULL, 'C' },
+    { "scid",    required_argument, NULL, 'I' },
+    { "cpuname", required_argument, NULL, 'N' },
+    { "help",    no_argument,       NULL, 'h' },
+    { NULL,      no_argument,       NULL, 0   }
+};
 
 /******************************************************************************
 **
@@ -189,10 +191,10 @@ int32 CFE_PSP_OS_EventHandler(OS_Event_t event, osal_id_t object_id, void *data)
                  */
                 if (strncmp(taskname, "CFE_", 4) == 0)
                 {
-                   /* Set the runmask and inherit mask for each processor that the current
-                    * thread can run on. */
-                   CFE_PSP_CpusetSetCore(&runmask, CFE_PSP_DEFAULT_CORE_AFFINITY);
-                   ThreadCtl(_NTO_TCTL_RUNMASK_GET_AND_SET_INHERIT, &runmask);
+                    /* Set the runmask and inherit mask for each processor that the current
+                     * thread can run on. */
+                    CFE_PSP_CpusetSetCore(&runmask, CFE_PSP_DEFAULT_CORE_AFFINITY);
+                    ThreadCtl(_NTO_TCTL_RUNMASK_GET_AND_SET_INHERIT, &runmask);
                 }
 
                 /*
@@ -205,7 +207,7 @@ int32 CFE_PSP_OS_EventHandler(OS_Event_t event, osal_id_t object_id, void *data)
                 {
                     taskname[CFE_PSP_KERNEL_NAME_LENGTH_MAX - 1] = 0;
                 }
-                
+
                 /* Set thread name using non-posix function provided by QNX OS extension. */
                 pthread_setname_np(pthread_self(), taskname);
             }
@@ -261,8 +263,8 @@ void OS_Application_Startup(void)
                 strncpy(CommandData.ResetType, optarg, CFE_PSP_RESET_NAME_LENGTH - 1);
                 CommandData.ResetType[CFE_PSP_RESET_NAME_LENGTH - 1] = 0;
 
-                if ((strncmp(CommandData.ResetType, "PO", CFE_PSP_RESET_NAME_LENGTH) != 0) &&
-                    (strncmp(CommandData.ResetType, "PR", CFE_PSP_RESET_NAME_LENGTH) != 0))
+                if ((strncmp(CommandData.ResetType, "PO", CFE_PSP_RESET_NAME_LENGTH) != 0)
+                    && (strncmp(CommandData.ResetType, "PR", CFE_PSP_RESET_NAME_LENGTH) != 0))
                 {
                     printf("\nERROR: Invalid Reset Type: %s\n\n", CommandData.ResetType);
                     CommandData.GotResetType = 0;
@@ -406,8 +408,8 @@ void OS_Application_Startup(void)
     reset_type = 0;
     if (!CommandData.GotResetType)
     {
-        if (CFE_PSP_ReservedMemoryMap.BootPtr->ValidityFlag == CFE_PSP_BOOTRECORD_VALID ||
-            CFE_PSP_ReservedMemoryMap.BootPtr->ValidityFlag == CFE_PSP_BOOTRECORD_INVALID)
+        if (CFE_PSP_ReservedMemoryMap.BootPtr->ValidityFlag == CFE_PSP_BOOTRECORD_VALID
+            || CFE_PSP_ReservedMemoryMap.BootPtr->ValidityFlag == CFE_PSP_BOOTRECORD_INVALID)
         {
             reset_type = CFE_PSP_ReservedMemoryMap.BootPtr->NextResetType;
         }
@@ -485,8 +487,8 @@ void OS_Application_Run(void)
         /* go idle and wait for an event */
         ret = sigwait(&sigset, &sig);
 
-        if (ret == 0 && !CFE_PSP_IdleTaskState.ShutdownReq && sig == CFE_PSP_EXCEPTION_EVENT_SIGNAL &&
-            GLOBAL_CFE_CONFIGDATA.SystemNotify != NULL)
+        if (ret == 0 && !CFE_PSP_IdleTaskState.ShutdownReq && sig == CFE_PSP_EXCEPTION_EVENT_SIGNAL
+            && GLOBAL_CFE_CONFIGDATA.SystemNotify != NULL)
         {
             /* notify the CFE of the event */
             GLOBAL_CFE_CONFIGDATA.SystemNotify();

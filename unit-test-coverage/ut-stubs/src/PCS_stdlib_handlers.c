@@ -48,7 +48,7 @@ void UT_DefaultHandler_PCS_strtoul(void *UserObj, UT_EntryKey_t FuncKey, const U
 {
     /* unsigned long int PCS_strtoul(const char *nptr, char **endptr, int base) */
     const char *nptr   = UT_Hook_GetArgValueByName(Context, "nptr", const char *);
-    char **     endptr = UT_Hook_GetArgValueByName(Context, "endptr", char **);
+    char      **endptr = UT_Hook_GetArgValueByName(Context, "endptr", char **);
     int         base   = UT_Hook_GetArgValueByName(Context, "base", int);
 
     unsigned long Result;
@@ -67,14 +67,14 @@ void UT_DefaultHandler_PCS_malloc(void *UserObj, UT_EntryKey_t FuncKey, const UT
     size_t sz = UT_Hook_GetArgValueByName(Context, "sz", size_t);
 
     int32             Status;
-    void *            PoolPtr;
+    void             *PoolPtr;
     cpuaddr           PoolStart;
     cpuaddr           PoolEnd;
     cpuaddr           NextBlock;
     size_t            NextSize;
     size_t            PoolSize;
     uint32            CallCnt;
-    void *            BlockPtr;
+    void             *BlockPtr;
     struct MPOOL_REC *Rec;
 
     Rec      = NULL;
@@ -95,9 +95,9 @@ void UT_DefaultHandler_PCS_malloc(void *UserObj, UT_EntryKey_t FuncKey, const UT
          */
         if (PoolSize > (MPOOL_ALIGN * 2) && PoolStart < PoolEnd)
         {
-            Rec       = (struct MPOOL_REC *)PoolStart;
-            NextBlock = PoolStart + MPOOL_ALIGN;
-            PoolSize -= MPOOL_ALIGN;
+            Rec        = (struct MPOOL_REC *)PoolStart;
+            NextBlock  = PoolStart + MPOOL_ALIGN;
+            PoolSize  -= MPOOL_ALIGN;
             if (CallCnt == 1)
             {
                 Rec->Magic     = MPOOL_START_SIGNATURE;
@@ -128,10 +128,10 @@ void UT_DefaultHandler_PCS_malloc(void *UserObj, UT_EntryKey_t FuncKey, const UT
         }
         else
         {
-            NextSize  = (NextSize + MPOOL_ALIGN - 1) & ~((size_t)MPOOL_ALIGN - 1);
-            NextBlock = Rec->BlockAddr + MPOOL_ALIGN;
+            NextSize        = (NextSize + MPOOL_ALIGN - 1) & ~((size_t)MPOOL_ALIGN - 1);
+            NextBlock       = Rec->BlockAddr + MPOOL_ALIGN;
             Rec->BlockAddr += NextSize;
-            Rec->Size += NextSize;
+            Rec->Size      += NextSize;
 
             Rec            = (struct MPOOL_REC *)(NextBlock - sizeof(struct MPOOL_REC));
             Rec->BlockAddr = NextBlock;
@@ -152,7 +152,7 @@ void UT_DefaultHandler_PCS_free(void *UserObj, UT_EntryKey_t FuncKey, const UT_S
 
     int32             Status;
     cpuaddr           BlockAddr;
-    void *            PoolPtr;
+    void             *PoolPtr;
     size_t            PoolSize;
     struct MPOOL_REC *Rec;
 

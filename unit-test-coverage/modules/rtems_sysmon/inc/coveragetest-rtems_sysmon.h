@@ -55,5 +55,4 @@
  */
 #define ADD_TEST(test) UtTest_Add(test, ModuleTest_ResetState, NULL, #test)
 
-
 #endif

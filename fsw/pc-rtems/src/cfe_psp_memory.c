@@ -83,7 +83,7 @@ typedef struct
 /*
 ** Dynamic map of the reserved memory area
 */
-CFE_PSP_ReservedMemoryMap_t CFE_PSP_ReservedMemoryMap = {0};
+CFE_PSP_ReservedMemoryMap_t CFE_PSP_ReservedMemoryMap = { 0 };
 
 CFE_PSP_MemoryBlock_t PcRtems_ReservedMemBlock;
 
@@ -132,10 +132,10 @@ int32 CFE_PSP_WriteToCDS(const void *PtrToDataToWrite, uint32 CDSOffset, uint32 
     }
     else
     {
-        if ((CDSOffset < CFE_PSP_ReservedMemoryMap.CDSMemory.BlockSize) &&
-            ((CDSOffset + NumBytes) <= CFE_PSP_ReservedMemoryMap.CDSMemory.BlockSize))
+        if ((CDSOffset < CFE_PSP_ReservedMemoryMap.CDSMemory.BlockSize)
+            && ((CDSOffset + NumBytes) <= CFE_PSP_ReservedMemoryMap.CDSMemory.BlockSize))
         {
-            CopyPtr = CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr;
+            CopyPtr  = CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr;
             CopyPtr += CDSOffset;
             memcpy((char *)CopyPtr, (char *)PtrToDataToWrite, NumBytes);
 
@@ -168,10 +168,10 @@ int32 CFE_PSP_ReadFromCDS(void *PtrToDataToRead, uint32 CDSOffset, uint32 NumByt
     }
     else
     {
-        if ((CDSOffset < CFE_PSP_ReservedMemoryMap.CDSMemory.BlockSize) &&
-            ((CDSOffset + NumBytes) <= CFE_PSP_ReservedMemoryMap.CDSMemory.BlockSize))
+        if ((CDSOffset < CFE_PSP_ReservedMemoryMap.CDSMemory.BlockSize)
+            && ((CDSOffset + NumBytes) <= CFE_PSP_ReservedMemoryMap.CDSMemory.BlockSize))
         {
-            CopyPtr = CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr;
+            CopyPtr  = CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr;
             CopyPtr += CDSOffset;
             memcpy((char *)PtrToDataToRead, (char *)CopyPtr, NumBytes);
 
@@ -322,7 +322,7 @@ void CFE_PSP_SetupReservedMemoryMap(void)
     UserReservedSize = (UserReservedSize + CFE_PSP_MEMALIGN_MASK) & ~CFE_PSP_MEMALIGN_MASK;
 
     /*  Calculate the required size, adding padding so that each element is aligned */
-    RequiredSize = FixedSize;
+    RequiredSize  = FixedSize;
     RequiredSize += ResetSize;
     RequiredSize += VolatileDiskSize;
     RequiredSize += CDSSize;
@@ -341,31 +341,32 @@ void CFE_PSP_SetupReservedMemoryMap(void)
     PcRtems_ReservedMemBlock.BlockSize = RequiredSize;
     ReservedMemoryAddr                 = (cpuaddr)PcRtems_ReservedMemBlock.BlockPtr;
 
-    OS_printf("CFE_PSP: Allocated %u bytes for PSP reserved memory at: 0x%08lX\n", (unsigned int)RequiredSize,
+    OS_printf("CFE_PSP: Allocated %u bytes for PSP reserved memory at: 0x%08lX\n",
+              (unsigned int)RequiredSize,
               (unsigned long)ReservedMemoryAddr);
 
     FixedPtr = (CFE_PSP_RtemsReservedAreaFixedLayout_t *)ReservedMemoryAddr;
 
-    CFE_PSP_ReservedMemoryMap.BootPtr             = &FixedPtr->BootRecord;
-    CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr = &FixedPtr->ExceptionStorage;
-    ReservedMemoryAddr += FixedSize;
+    CFE_PSP_ReservedMemoryMap.BootPtr              = &FixedPtr->BootRecord;
+    CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr  = &FixedPtr->ExceptionStorage;
+    ReservedMemoryAddr                            += FixedSize;
 
-    CFE_PSP_ReservedMemoryMap.ResetMemory.BlockPtr  = (void *)ReservedMemoryAddr;
-    CFE_PSP_ReservedMemoryMap.ResetMemory.BlockSize = CFE_PSP_RESET_AREA_SIZE;
-    ReservedMemoryAddr += ResetSize;
+    CFE_PSP_ReservedMemoryMap.ResetMemory.BlockPtr   = (void *)ReservedMemoryAddr;
+    CFE_PSP_ReservedMemoryMap.ResetMemory.BlockSize  = CFE_PSP_RESET_AREA_SIZE;
+    ReservedMemoryAddr                              += ResetSize;
 
     CFE_PSP_ReservedMemoryMap.VolatileDiskMemory.BlockPtr = (void *)ReservedMemoryAddr;
     CFE_PSP_ReservedMemoryMap.VolatileDiskMemory.BlockSize =
         (CFE_PSP_RAM_DISK_SECTOR_SIZE * CFE_PSP_RAM_DISK_NUM_SECTORS);
     ReservedMemoryAddr += VolatileDiskSize;
 
-    CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr  = (void *)ReservedMemoryAddr;
-    CFE_PSP_ReservedMemoryMap.CDSMemory.BlockSize = CFE_PSP_CDS_SIZE;
-    ReservedMemoryAddr += CDSSize;
+    CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr   = (void *)ReservedMemoryAddr;
+    CFE_PSP_ReservedMemoryMap.CDSMemory.BlockSize  = CFE_PSP_CDS_SIZE;
+    ReservedMemoryAddr                            += CDSSize;
 
-    CFE_PSP_ReservedMemoryMap.UserReservedMemory.BlockPtr  = (void *)ReservedMemoryAddr;
-    CFE_PSP_ReservedMemoryMap.UserReservedMemory.BlockSize = CFE_PSP_USER_RESERVED_SIZE;
-    ReservedMemoryAddr += UserReservedSize;
+    CFE_PSP_ReservedMemoryMap.UserReservedMemory.BlockPtr   = (void *)ReservedMemoryAddr;
+    CFE_PSP_ReservedMemoryMap.UserReservedMemory.BlockSize  = CFE_PSP_USER_RESERVED_SIZE;
+    ReservedMemoryAddr                                     += UserReservedSize;
 
     /*
      * displaying the final address shows how much was actually used,

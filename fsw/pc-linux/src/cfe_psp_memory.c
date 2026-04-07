@@ -96,13 +96,13 @@ void CFE_PSP_InitUserReservedArea(void);
 #ifdef __riscv
 extern unsigned int _start;
 extern unsigned int __DATA_BEGIN__;
-#define CODE_START_ADDR ((cpuaddr)&_start)
-#define CODE_END_ADDR ((cpuaddr)&__DATA_BEGIN__)
+#define CODE_START_ADDR ((cpuaddr) & _start)
+#define CODE_END_ADDR   ((cpuaddr) & __DATA_BEGIN__)
 #else
 extern unsigned int _init;
 extern unsigned int _fini;
-#define CODE_START_ADDR ((cpuaddr)&_init)
-#define CODE_END_ADDR ((cpuaddr)&_fini)
+#define CODE_START_ADDR ((cpuaddr) & _init)
+#define CODE_END_ADDR   ((cpuaddr) & _fini)
 #endif
 
 /*
@@ -245,7 +245,7 @@ int32 CFE_PSP_WriteToCDS(const void *PtrToDataToWrite, uint32 CDSOffset, uint32 
     {
         if ((CDSOffset < CFE_PSP_CDS_SIZE) && ((CDSOffset + NumBytes) <= CFE_PSP_CDS_SIZE))
         {
-            CopyPtr = CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr;
+            CopyPtr  = CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr;
             CopyPtr += CDSOffset;
             memcpy(CopyPtr, (char *)PtrToDataToWrite, NumBytes);
 
@@ -280,7 +280,7 @@ int32 CFE_PSP_ReadFromCDS(void *PtrToDataToRead, uint32 CDSOffset, uint32 NumByt
     {
         if ((CDSOffset < CFE_PSP_CDS_SIZE) && ((CDSOffset + NumBytes) <= CFE_PSP_CDS_SIZE))
         {
-            CopyPtr = CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr;
+            CopyPtr  = CFE_PSP_ReservedMemoryMap.CDSMemory.BlockPtr;
             CopyPtr += CDSOffset;
             memcpy((char *)PtrToDataToRead, CopyPtr, NumBytes);
 
@@ -337,12 +337,12 @@ void CFE_PSP_InitResetArea(void)
      * reside in this shared memory segment so it will be preserved on a processor
      * reset.
      */
-    align_mask   = sysconf(_SC_PAGESIZE) - 1; /* align blocks to whole memory pages */
-    total_size   = sizeof(CFE_PSP_LinuxReservedAreaFixedLayout_t);
-    total_size   = (total_size + align_mask) & ~align_mask;
-    reset_offset = total_size;
-    total_size += CFE_PSP_RESET_AREA_SIZE;
-    total_size = (total_size + align_mask) & ~align_mask;
+    align_mask    = sysconf(_SC_PAGESIZE) - 1; /* align blocks to whole memory pages */
+    total_size    = sizeof(CFE_PSP_LinuxReservedAreaFixedLayout_t);
+    total_size    = (total_size + align_mask) & ~align_mask;
+    reset_offset  = total_size;
+    total_size   += CFE_PSP_RESET_AREA_SIZE;
+    total_size    = (total_size + align_mask) & ~align_mask;
 
     /*
     ** connect to (and possibly create) the segment:
@@ -363,8 +363,8 @@ void CFE_PSP_InitResetArea(void)
         CFE_PSP_Panic(CFE_PSP_ERROR);
     }
 
-    FixedBlocksPtr = (CFE_PSP_LinuxReservedAreaFixedLayout_t *)block_addr;
-    block_addr += reset_offset;
+    FixedBlocksPtr  = (CFE_PSP_LinuxReservedAreaFixedLayout_t *)block_addr;
+    block_addr     += reset_offset;
 
     CFE_PSP_ReservedMemoryMap.BootPtr             = &FixedBlocksPtr->BootRecord;
     CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr = &FixedBlocksPtr->ExceptionStorage;
@@ -653,7 +653,8 @@ int32 CFE_PSP_InitProcessorReservedMemory(uint32 RestartType)
         memset(CFE_PSP_ReservedMemoryMap.UserReservedMemory.BlockPtr, 0, CFE_PSP_USER_RESERVED_SIZE);
 
         memset(CFE_PSP_ReservedMemoryMap.BootPtr, 0, sizeof(*CFE_PSP_ReservedMemoryMap.BootPtr));
-        memset(CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr, 0,
+        memset(CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr,
+               0,
                sizeof(*CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr));
 
         /*

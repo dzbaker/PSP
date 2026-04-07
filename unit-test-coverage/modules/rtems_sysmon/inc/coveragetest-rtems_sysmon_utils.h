@@ -41,12 +41,12 @@
 #include "coveragetest-rtems_sysmon.h"
 #include "PCS_tasks.h"
 
-extern CFE_PSP_ModuleApi_t    CFE_PSP_rtems_sysmon_API;
-extern rtems_sysmon_state_t   rtems_sysmon_global;
+extern CFE_PSP_ModuleApi_t  CFE_PSP_rtems_sysmon_API;
+extern rtems_sysmon_state_t rtems_sysmon_global;
 
 typedef struct
 {
-    char Name[38];
+    char   Name[38];
     size_t Size;
 } UT_ThreadGetNameData_t;
 

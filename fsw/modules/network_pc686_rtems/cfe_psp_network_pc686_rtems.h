@@ -23,11 +23,11 @@
  *
  */
 
- #ifndef CFE_PSP_NETWORK_PC686_RTEMS_H
- #define CFE_PSP_NETWORK_PC686_RTEMS_H
+#ifndef CFE_PSP_NETWORK_PC686_RTEMS_H
+#define CFE_PSP_NETWORK_PC686_RTEMS_H
 
 /* Parameters needed for network initialization */
-static unsigned char ethernet_address[6] = {0x00, 0x04, 0x9F, 0x00, 0x27, 0x61};
+static unsigned char ethernet_address[6] = { 0x00, 0x04, 0x9F, 0x00, 0x27, 0x61 };
 static char          net_name_str[]      = "fxp1";
 static char          ip_addr_str[]       = "10.0.2.15";
 static char          ip_netmask_str[]    = "255.255.255.0";

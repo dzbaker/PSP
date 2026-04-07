@@ -26,6 +26,6 @@
 /* ----------------------------------------- */
 /* mappings for declarations in spyLib.h */
 /* ----------------------------------------- */
-#define spyLibInit     PCS_spyLibInit
+#define spyLibInit PCS_spyLibInit
 
 #endif

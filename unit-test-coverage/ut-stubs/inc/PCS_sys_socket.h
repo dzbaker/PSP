@@ -92,17 +92,17 @@ enum
 /* prototypes normally declared in sys/socket.h */
 /* ----------------------------------------- */
 
-extern int         PCS_accept(int fd, struct PCS_sockaddr *addr, PCS_socklen_t *addr_len);
-extern int         PCS_bind(int fd, const struct PCS_sockaddr *addr, PCS_socklen_t len);
-extern int         PCS_connect(int fd, const struct PCS_sockaddr *addr, PCS_socklen_t len);
-extern int         PCS_getsockopt(int fd, int level, int optname, void *optval, PCS_socklen_t *optlen);
-extern int         PCS_listen(int fd, int n);
-extern PCS_ssize_t PCS_recvfrom(int fd, void *buf, size_t n, int flags, struct PCS_sockaddr *addr,
-                                PCS_socklen_t *addr_len);
-extern PCS_ssize_t PCS_sendto(int fd, const void *buf, size_t n, int flags, const struct PCS_sockaddr *addr,
-                              PCS_socklen_t addr_len);
-extern int         PCS_setsockopt(int fd, int level, int optname, const void *optval, PCS_socklen_t optlen);
-extern int         PCS_shutdown(int fd, int how);
-extern int         PCS_socket(int domain, int type, int protocol);
+extern int PCS_accept(int fd, struct PCS_sockaddr *addr, PCS_socklen_t *addr_len);
+extern int PCS_bind(int fd, const struct PCS_sockaddr *addr, PCS_socklen_t len);
+extern int PCS_connect(int fd, const struct PCS_sockaddr *addr, PCS_socklen_t len);
+extern int PCS_getsockopt(int fd, int level, int optname, void *optval, PCS_socklen_t *optlen);
+extern int PCS_listen(int fd, int n);
+extern PCS_ssize_t
+PCS_recvfrom(int fd, void *buf, size_t n, int flags, struct PCS_sockaddr *addr, PCS_socklen_t *addr_len);
+extern PCS_ssize_t
+PCS_sendto(int fd, const void *buf, size_t n, int flags, const struct PCS_sockaddr *addr, PCS_socklen_t addr_len);
+extern int PCS_setsockopt(int fd, int level, int optname, const void *optval, PCS_socklen_t optlen);
+extern int PCS_shutdown(int fd, int how);
+extern int PCS_socket(int domain, int type, int protocol);
 
 #endif /* PCS_SYS_SOCKET_H */

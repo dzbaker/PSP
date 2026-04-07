@@ -74,8 +74,8 @@ uint16 PSP_ENDIAN_CONVERSION(HtoBE16)(uint16 host_16bits)
     while (i > 0)
     {
         --i;
-        Out.Octets[i] = ShiftReg & 0xFF;
-        ShiftReg >>= 8;
+        Out.Octets[i]   = ShiftReg & 0xFF;
+        ShiftReg      >>= 8;
     }
 
     return Out.Word;
@@ -93,8 +93,8 @@ uint16 PSP_ENDIAN_CONVERSION(HtoLE16)(uint16 host_16bits)
     i = 0;
     while (i < sizeof(Out))
     {
-        Out.Octets[i] = ShiftReg & 0xFF;
-        ShiftReg >>= 8;
+        Out.Octets[i]   = ShiftReg & 0xFF;
+        ShiftReg      >>= 8;
         ++i;
     }
 
@@ -114,7 +114,7 @@ uint16 PSP_ENDIAN_CONVERSION(BE16toH)(uint16 big_endian_16bits)
     while (i < sizeof(In))
     {
         ShiftReg <<= 8;
-        ShiftReg |= In.Octets[i];
+        ShiftReg  |= In.Octets[i];
         ++i;
     }
 
@@ -135,7 +135,7 @@ uint16 PSP_ENDIAN_CONVERSION(LE16toH)(uint16 little_endian_16bits)
     {
         --i;
         ShiftReg <<= 8;
-        ShiftReg |= In.Octets[i];
+        ShiftReg  |= In.Octets[i];
     }
 
     return ShiftReg;
@@ -154,8 +154,8 @@ uint32 PSP_ENDIAN_CONVERSION(HtoBE32)(uint32 host_32bits)
     while (i > 0)
     {
         --i;
-        Out.Octets[i] = ShiftReg & 0xFF;
-        ShiftReg >>= 8;
+        Out.Octets[i]   = ShiftReg & 0xFF;
+        ShiftReg      >>= 8;
     }
 
     return Out.Word;
@@ -173,8 +173,8 @@ uint32 PSP_ENDIAN_CONVERSION(HtoLE32)(uint32 host_32bits)
     i = 0;
     while (i < sizeof(Out))
     {
-        Out.Octets[i] = ShiftReg & 0xFF;
-        ShiftReg >>= 8;
+        Out.Octets[i]   = ShiftReg & 0xFF;
+        ShiftReg      >>= 8;
         ++i;
     }
 
@@ -194,7 +194,7 @@ uint32 PSP_ENDIAN_CONVERSION(BE32toH)(uint32 big_endian_32bits)
     while (i < sizeof(In))
     {
         ShiftReg <<= 8;
-        ShiftReg |= In.Octets[i];
+        ShiftReg  |= In.Octets[i];
         ++i;
     }
 
@@ -215,7 +215,7 @@ uint32 PSP_ENDIAN_CONVERSION(LE32toH)(uint32 little_endian_32bits)
     {
         --i;
         ShiftReg <<= 8;
-        ShiftReg |= In.Octets[i];
+        ShiftReg  |= In.Octets[i];
     }
 
     return ShiftReg;
@@ -234,8 +234,8 @@ uint64 PSP_ENDIAN_CONVERSION(HtoBE64)(uint64 host_64bits)
     while (i > 0)
     {
         --i;
-        Out.Octets[i] = ShiftReg & 0xFF;
-        ShiftReg >>= 8;
+        Out.Octets[i]   = ShiftReg & 0xFF;
+        ShiftReg      >>= 8;
     }
 
     return Out.Word;
@@ -253,8 +253,8 @@ uint64 PSP_ENDIAN_CONVERSION(HtoLE64)(uint64 host_64bits)
     i = 0;
     while (i < sizeof(Out))
     {
-        Out.Octets[i] = ShiftReg & 0xFF;
-        ShiftReg >>= 8;
+        Out.Octets[i]   = ShiftReg & 0xFF;
+        ShiftReg      >>= 8;
         ++i;
     }
 
@@ -274,7 +274,7 @@ uint64 PSP_ENDIAN_CONVERSION(BE64toH)(uint64 big_endian_64bits)
     while (i < sizeof(In))
     {
         ShiftReg <<= 8;
-        ShiftReg |= In.Octets[i];
+        ShiftReg  |= In.Octets[i];
         ++i;
     }
 
@@ -295,7 +295,7 @@ uint64 PSP_ENDIAN_CONVERSION(LE64toH)(uint64 little_endian_64bits)
     {
         --i;
         ShiftReg <<= 8;
-        ShiftReg |= In.Octets[i];
+        ShiftReg  |= In.Octets[i];
     }
 
     return ShiftReg;

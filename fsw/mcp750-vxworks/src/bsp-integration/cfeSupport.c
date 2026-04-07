@@ -85,7 +85,7 @@ int startCfeCore(char *cfevolume, char *cfepath)
     int       status;
     MODULE_ID moduleID;
     SYM_TYPE  symType;
-    char *    symValue;
+    char     *symValue;
     void (*cFEFuncPtr)(void);
     char cfeCorePath[64];
 

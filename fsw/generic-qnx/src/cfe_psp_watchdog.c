@@ -82,7 +82,9 @@ void CFE_PSP_WatchdogInit(void)
  * See description in header file for argument/return detail
  *
  *-----------------------------------------------------------------*/
-void CFE_PSP_WatchdogEnable(void) {}
+void CFE_PSP_WatchdogEnable(void)
+{
+}
 
 /*----------------------------------------------------------------
  *
@@ -90,7 +92,9 @@ void CFE_PSP_WatchdogEnable(void) {}
  * See description in header file for argument/return detail
  *
  *-----------------------------------------------------------------*/
-void CFE_PSP_WatchdogDisable(void) {}
+void CFE_PSP_WatchdogDisable(void)
+{
+}
 
 /*----------------------------------------------------------------
  *
@@ -98,7 +102,9 @@ void CFE_PSP_WatchdogDisable(void) {}
  * See description in header file for argument/return detail
  *
  *-----------------------------------------------------------------*/
-void CFE_PSP_WatchdogService(void) {}
+void CFE_PSP_WatchdogService(void)
+{
+}
 
 /*----------------------------------------------------------------
  *

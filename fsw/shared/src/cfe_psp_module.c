@@ -80,7 +80,7 @@ CFE_PSP_ModuleListGlobal_t CFE_PSP_MODULE_LIST_GLOBAL;
 void CFE_PSP_ModuleInitList(CFE_PSP_ModuleListWrapper_t *WrapPtr, uint32 BaseId, CFE_StaticModuleLoadEntry_t *ListPtr)
 {
     CFE_StaticModuleLoadEntry_t *Entry;
-    CFE_PSP_ModuleApi_t *        ApiPtr;
+    CFE_PSP_ModuleApi_t         *ApiPtr;
     uint32                       ModuleCount;
     uint32                       ModuleId;
 

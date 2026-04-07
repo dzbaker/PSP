@@ -144,8 +144,8 @@ PCS_ssize_t PCS_recvfrom(int fd, void *buf, size_t n, int flags, struct PCS_sock
  * Generated stub function for PCS_sendto()
  * ----------------------------------------------------
  */
-PCS_ssize_t PCS_sendto(int fd, const void *buf, size_t n, int flags, const struct PCS_sockaddr *addr,
-                       PCS_socklen_t addr_len)
+PCS_ssize_t
+PCS_sendto(int fd, const void *buf, size_t n, int flags, const struct PCS_sockaddr *addr, PCS_socklen_t addr_len)
 {
     UT_GenStub_SetupReturnBuffer(PCS_sendto, PCS_ssize_t);
 
