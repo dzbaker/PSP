@@ -7,7 +7,6 @@
 soft_timebase
 timebase_posix_clock
 eeprom_direct
-ram_direct
 port_direct
 iodriver
 # vxworks_sysmon

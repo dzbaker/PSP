@@ -3,7 +3,6 @@
 
 soft_timebase
 timebase_posix_clock
-ram_notimpl
 port_notimpl
 iodriver
 endian_api
