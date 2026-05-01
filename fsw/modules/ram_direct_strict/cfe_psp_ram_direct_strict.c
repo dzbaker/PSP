@@ -20,7 +20,7 @@
  * \file
  *
  * A PSP module to satisfy the "RAM" API on systems which
- * can access physical memory directly.
+ * can access physical memory directly with strict address validation.
  */
 
 #include "cfe_psp.h"
@@ -29,12 +29,12 @@
 /*
 ** global memory
 */
-CFE_PSP_MODULE_DECLARE_SIMPLE(ram_direct);
+CFE_PSP_MODULE_DECLARE_SIMPLE(ram_direct_strict);
 
-void ram_direct_Init(uint32 PspModuleId)
+void ram_direct_strict_Init(uint32 PspModuleId)
 {
     /* Inform the user that this module is in use */
-    printf("CFE_PSP: Using DIRECT memory mapped RAM implementation\n");
+    printf("CFE_PSP: Using STRICT DIRECT memory mapped RAM implementation\n");
 }
 
 /*----------------------------------------------------------------
@@ -45,6 +45,14 @@ void ram_direct_Init(uint32 PspModuleId)
  *-----------------------------------------------------------------*/
 int32 CFE_PSP_MemRead8(cpuaddr MemoryAddress, uint8 *ByteValue)
 {
+    int32 Status;
+
+    Status = CFE_PSP_MemValidateRange(MemoryAddress, CFE_PSP_MEM_SIZE_BYTE, CFE_PSP_MEM_ANY);
+    if (Status != CFE_PSP_SUCCESS)
+    {
+        return Status;
+    }
+
     (*ByteValue) = *((uint8 *)MemoryAddress);
 
     return CFE_PSP_SUCCESS;
@@ -58,6 +66,14 @@ int32 CFE_PSP_MemRead8(cpuaddr MemoryAddress, uint8 *ByteValue)
  *-----------------------------------------------------------------*/
 int32 CFE_PSP_MemWrite8(cpuaddr MemoryAddress, uint8 ByteValue)
 {
+    int32 Status;
+
+    Status = CFE_PSP_MemValidateRange(MemoryAddress, CFE_PSP_MEM_SIZE_BYTE, CFE_PSP_MEM_ANY);
+    if (Status != CFE_PSP_SUCCESS)
+    {
+        return Status;
+    }
+
     *((uint8 *)MemoryAddress) = ByteValue;
     return CFE_PSP_SUCCESS;
 }
@@ -70,6 +86,14 @@ int32 CFE_PSP_MemWrite8(cpuaddr MemoryAddress, uint8 ByteValue)
  *-----------------------------------------------------------------*/
 int32 CFE_PSP_MemRead16(cpuaddr MemoryAddress, uint16 *uint16Value)
 {
+    int32 Status;
+
+    Status = CFE_PSP_MemValidateRange(MemoryAddress, CFE_PSP_MEM_SIZE_WORD, CFE_PSP_MEM_ANY);
+    if (Status != CFE_PSP_SUCCESS)
+    {
+        return Status;
+    }
+
     /* check 16 bit alignment  , check the 1st lsb */
     if (MemoryAddress & 0x00000001)
     {
@@ -87,6 +111,14 @@ int32 CFE_PSP_MemRead16(cpuaddr MemoryAddress, uint16 *uint16Value)
  *-----------------------------------------------------------------*/
 int32 CFE_PSP_MemWrite16(cpuaddr MemoryAddress, uint16 uint16Value)
 {
+    int32 Status;
+
+    Status = CFE_PSP_MemValidateRange(MemoryAddress, CFE_PSP_MEM_SIZE_WORD, CFE_PSP_MEM_ANY);
+    if (Status != CFE_PSP_SUCCESS)
+    {
+        return Status;
+    }
+
     /* check 16 bit alignment  , check the 1st lsb */
     if (MemoryAddress & 0x00000001)
     {
@@ -104,6 +136,14 @@ int32 CFE_PSP_MemWrite16(cpuaddr MemoryAddress, uint16 uint16Value)
  *-----------------------------------------------------------------*/
 int32 CFE_PSP_MemRead32(cpuaddr MemoryAddress, uint32 *uint32Value)
 {
+    int32 Status;
+
+    Status = CFE_PSP_MemValidateRange(MemoryAddress, CFE_PSP_MEM_SIZE_DWORD, CFE_PSP_MEM_ANY);
+    if (Status != CFE_PSP_SUCCESS)
+    {
+        return Status;
+    }
+
     /* check 32 bit alignment  */
     if (MemoryAddress & 0x00000003)
     {
@@ -122,6 +162,14 @@ int32 CFE_PSP_MemRead32(cpuaddr MemoryAddress, uint32 *uint32Value)
  *-----------------------------------------------------------------*/
 int32 CFE_PSP_MemWrite32(cpuaddr MemoryAddress, uint32 uint32Value)
 {
+    int32 Status;
+
+    Status = CFE_PSP_MemValidateRange(MemoryAddress, CFE_PSP_MEM_SIZE_DWORD, CFE_PSP_MEM_ANY);
+    if (Status != CFE_PSP_SUCCESS)
+    {
+        return Status;
+    }
+
     /* check 32 bit alignment  */
     if (MemoryAddress & 0x00000003)
     {

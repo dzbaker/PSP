@@ -72,6 +72,7 @@ static void StubNoMut_Init(uint32 ModuleID)
 }
 
 static CFE_PSP_IODriver_API_t StubNoMut_DevApi = { .DeviceCommand = Stub_DeviceCommand };
+static CFE_PSP_IODriver_API_t Invalid_DevApi   = { .DeviceCommand = NULL };
 
 CFE_PSP_MODULE_DECLARE_IODEVICEDRIVER(StubNoMut);
 
@@ -157,6 +158,10 @@ void Test_CFE_PSP_IODriver_GetAPI(void)
      * CFE_PSP_IODriver_API_t *CFE_PSP_IODriver_GetAPI(uint32 PspModuleId)
      */
     CFE_PSP_IODriver_API_t *ApiPtr;
+
+    UT_SetHandlerFunction(UT_KEY(CFE_PSP_Module_GetAPIEntry),
+                          UtHandler_CFE_PSP_Module_GetAPIEntry,
+                          (void *)&Invalid_DevApi);
 
     /* Requesting a nonexistent module should return a default API */
     UtAssert_NOT_NULL(ApiPtr = CFE_PSP_IODriver_GetAPI(0));

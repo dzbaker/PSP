@@ -34,6 +34,50 @@ set(PSP_CONFIG_DEBUG_PRINTF                    FALSE
     CACHE BOOL "Controls inclusion of PSP_DEBUG statements in the code"
 )
 
+#
+# PSP_CONFIG_RAM_DIRECT_MODE
+# ----------------------------------
+#
+# Controls inclusion of PSP RAM_DIRECT module 
+#
+# If set FALSE, the PSP RAM_NOTIMPL module included.
+#
+# If set TRUE, the PSP RAM_DIRECT module included.
+#
+set(PSP_CONFIG_RAM_DIRECT_MODE                 FALSE
+    CACHE BOOL "Controls inclusion of PSP RAM_DIRECT module"
+)
+
+#
+# PSP_CONFIG_RAM_DEBUG_SCRATCHPAD
+# ----------------------------------
+#
+# Controls inclusion of the RAM scratchpad in a PSP module 
+#
+# If set FALSE, the RAM scratchpad is not included in a PSP module.
+#
+# If set TRUE, the RAM scratchpad is included in a PSP module.
+#
+set(PSP_CONFIG_RAM_DEBUG_SCRATCHPAD           FALSE
+    CACHE BOOL "Controls inclusion of PSP RAM scratchpad module"
+)
+
+#
+# PSP_CONFIG_RAM_DIRECT_STRICT_MODE
+# --------------------------------------------
+#
+# Restrict access to CFE_PSP_MemValidateRange() address ranges
+# within PSP RAM_DIRECT module
+#
+# If set FALSE, any addresses can be read or written.
+#
+# If set TRUE, only the CFE_PSP_MemValidateRange() address ranges
+# can be read or written.
+#
+set(PSP_CONFIG_RAM_DIRECT_STRICT_MODE          FALSE
+    CACHE BOOL "Restricts PSP RAM_DIRECT module access to CFE_PSP_MemValidateRange() address ranges"
+)
+
 #############################################
 # Resource Limits for the PSP
 #############################################
