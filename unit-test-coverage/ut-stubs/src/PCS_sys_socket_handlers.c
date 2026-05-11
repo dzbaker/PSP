@@ -27,7 +27,7 @@ void UT_DefaultHandler_PCS_recvfrom(void *UserObj, UT_EntryKey_t FuncKey, const 
 {
     /* PCS_ssize_t PCS_recvfrom(int fd, void *buf, size_t n, int flags, struct PCS_sockaddr *addr, PCS_socklen_t
      * *addr_len) */
-    void * buf = UT_Hook_GetArgValueByName(Context, "buf", void *);
+    void  *buf = UT_Hook_GetArgValueByName(Context, "buf", void *);
     size_t n   = UT_Hook_GetArgValueByName(Context, "n", size_t);
     int32  iStatus;
 

@@ -83,7 +83,7 @@
 #define PCS_S_IWUSR 0x0040
 
 #define PCS_S_IFDIR    0x0001
-#define PCS_S_ISDIR(x) (((x)&PCS_S_IFDIR) == PCS_S_IFDIR)
+#define PCS_S_ISDIR(x) (((x) & PCS_S_IFDIR) == PCS_S_IFDIR)
 
 #define PCS_O_RDONLY   0x1501
 #define PCS_O_WRONLY   0x1502

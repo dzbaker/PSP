@@ -45,7 +45,7 @@ void Test_CFE_PSP_MemCpy(void)
     /* Test Case For:
      * int32 CFE_PSP_MemCpy(void *dest, const void *src, uint32 n)
      */
-    const uint8 MySrcBuf[16] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+    const uint8 MySrcBuf[16] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
     uint8       MyDstBuf[16];
 
     UtAssert_INT32_EQ(CFE_PSP_MemCpy(NULL, MySrcBuf, sizeof(MyDstBuf)), CFE_PSP_ERROR);

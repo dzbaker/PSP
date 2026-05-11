@@ -34,7 +34,6 @@
  */
 void CFE_PSP_Main(void)
 {
-
     UT_GenStub_Execute(CFE_PSP_Main, Basic, NULL);
 }
 

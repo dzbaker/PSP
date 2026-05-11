@@ -75,8 +75,8 @@ void *GetWrsKernelTextEnd(void)
 
 void showKernelCodeAddrs(void)
 {
-    printf("&wrs_kernel_text_start = 0x%lX\n",(unsigned long)&wrs_kernel_text_start);
-    printf("&wrs_kernel_text_end = 0x%lX\n",(unsigned long)&wrs_kernel_text_end);
+    printf("&wrs_kernel_text_start = 0x%lX\n", (unsigned long)&wrs_kernel_text_start);
+    printf("&wrs_kernel_text_end = 0x%lX\n", (unsigned long)&wrs_kernel_text_end);
 }
 
 /*
@@ -90,23 +90,23 @@ int startCfeCore(char *cfepath)
     MODULE_ID   moduleID;
     SYMBOL_DESC SymDesc;
     char       *symValue;
-    void      (*cFEFuncPtr)(void);
-    char        cfeCorePath[CFE_CORE_PATH_LEN];
-    TASK_ID     cfeTaskId;
+    void (*cFEFuncPtr)(void);
+    char    cfeCorePath[CFE_CORE_PATH_LEN];
+    TASK_ID cfeTaskId;
 
     /*
      * Copy the cFE Core path that was passed in
      */
     if (cfepath != NULL)
     {
-       snprintf(cfeCorePath, CFE_CORE_PATH_LEN, "%s", cfepath);
+        snprintf(cfeCorePath, CFE_CORE_PATH_LEN, "%s", cfepath);
     }
     else
     {
-       strncpy(cfeCorePath, CFE_CORE_PATH_DEF, CFE_CORE_PATH_LEN);
+        strncpy(cfeCorePath, CFE_CORE_PATH_DEF, CFE_CORE_PATH_LEN);
     }
 
-    printf("cFE Core path to load is: %s\n",cfeCorePath);
+    printf("cFE Core path to load is: %s\n", cfeCorePath);
 
     /*
     ** Open the cFE core module
@@ -163,13 +163,11 @@ int startCfeCore(char *cfepath)
     cFEFuncPtr = (void *)symValue;
 
     /* spawn the async output helper task */
-    cfeTaskId = taskSpawn("CFS_IDLE", 200, 0, 16384,
-                                      (FUNCPTR)cFEFuncPtr,
-                                      0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    cfeTaskId = taskSpawn("CFS_IDLE", 200, 0, 16384, (FUNCPTR)cFEFuncPtr, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     if (cfeTaskId == TASK_ID_ERROR)
     {
         printf("taskSpawn() Error - vxWorks errno %d\n", errno);
-        return(-1);
+        return (-1);
     }
 
     /*

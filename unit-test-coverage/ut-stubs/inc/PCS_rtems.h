@@ -36,9 +36,10 @@ typedef uint32_t          PCS_rtems_mode;
 typedef uint32_t          PCS_rtems_attribute;
 typedef PCS_CPU_Uint32ptr PCS_rtems_task_argument;
 
-typedef struct {
+typedef struct
+{
     /* Fake Thread control  */
-    char * Name;
+    char *Name;
 } PCS_Thread_Control_S;
 
 typedef PCS_Thread_Control_S PCS_rtems_tcb;
@@ -49,9 +50,9 @@ struct PCS_rtems_bsdnet_ifconfig
     char *name;
     int (*attach)(struct PCS_rtems_bsdnet_ifconfig *conf, int attaching);
     struct PCS_rtems_bsdnet_ifconfig *next;
-    char *                            ip_address;
-    char *                            ip_netmask;
-    void *                            hardware_address;
+    char                             *ip_address;
+    char                             *ip_netmask;
+    void                             *hardware_address;
 };
 
 struct PCS_rtems_bsdnet_config

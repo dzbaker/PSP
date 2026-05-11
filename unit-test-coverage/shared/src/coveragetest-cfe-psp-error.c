@@ -45,7 +45,7 @@ void Test_CFE_PSP_StatusToString(void)
     /* Test Case for:
      * char *CFE_PSP_StatusToString(CFE_PSP_Status_t status, CFE_PSP_StatusString_t *status_string)
      */
-    CFE_PSP_StatusString_t MyString = {0};
+    CFE_PSP_StatusString_t MyString = { 0 };
 
     UtAssert_ADDRESS_EQ(CFE_PSP_StatusToString(CFE_PSP_STATUS_C(-1), &MyString), MyString);
     UtAssert_NONZERO(MyString[0]);

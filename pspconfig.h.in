@@ -19,6 +19,9 @@
  * PSP feature selection options from build config
  */
 #cmakedefine PSP_CONFIG_DEBUG_PRINTF
+#cmakedefine PSP_CONFIG_RAM_DIRECT_MODE
+#cmakedefine PSP_CONFIG_RAM_DEBUG_SCRATCHPAD
+#cmakedefine PSP_CONFIG_RAM_DIRECT_STRICT_MODE
 
 /*
  * PSP resource limits from build config

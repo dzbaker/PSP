@@ -56,7 +56,8 @@ void UT_DefaultHandler_CFE_PSP_GetTime(void *UserObj, UT_EntryKey_t FuncKey, con
     }
 }
 
-void UT_DefaultHandler_CFE_PSP_GetTimerTicksPerSecond(void *UserObj, UT_EntryKey_t FuncKey,
+void UT_DefaultHandler_CFE_PSP_GetTimerTicksPerSecond(void                   *UserObj,
+                                                      UT_EntryKey_t           FuncKey,
                                                       const UT_StubContext_t *Context)
 {
     /* uint32 CFE_PSP_GetTimerTicksPerSecond(void) */
@@ -68,7 +69,8 @@ void UT_DefaultHandler_CFE_PSP_GetTimerTicksPerSecond(void *UserObj, UT_EntryKey
     }
 }
 
-void UT_DefaultHandler_CFE_PSP_GetTimerLow32Rollover(void *UserObj, UT_EntryKey_t FuncKey,
+void UT_DefaultHandler_CFE_PSP_GetTimerLow32Rollover(void                   *UserObj,
+                                                     UT_EntryKey_t           FuncKey,
                                                      const UT_StubContext_t *Context)
 {
     /* uint32 CFE_PSP_GetTimerLow32Rollover(void) */

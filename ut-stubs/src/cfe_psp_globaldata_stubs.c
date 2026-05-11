@@ -35,7 +35,7 @@
 
 #include "target_config.h"
 
-Target_CfeConfigData GLOBAL_CFE_CONFIGDATA = {0};
+Target_CfeConfigData GLOBAL_CFE_CONFIGDATA = { 0 };
 
 /**
  * Instantiation of global system-wide configuration struct
@@ -43,13 +43,13 @@ Target_CfeConfigData GLOBAL_CFE_CONFIGDATA = {0};
  * configuration structures.  Everything will be linked together
  * in the final executable.
  */
-Target_ConfigData GLOBAL_CONFIGDATA = {.MissionVersion       = "MissionUnitTest",
-                                       .CfeVersion           = "CfeUnitTest",
-                                       .OsalVersion          = "OsalUnitTest",
-                                       .Config               = "MissionConfig",
-                                       .Date                 = "MissionBuildDate",
-                                       .User                 = "MissionBuildUser",
-                                       .Default_CpuName      = "UnitTestCpu",
-                                       .Default_CpuId        = 1,
-                                       .Default_SpacecraftId = 0x42,
-                                       .CfeConfig            = &GLOBAL_CFE_CONFIGDATA};
+Target_ConfigData GLOBAL_CONFIGDATA = { .MissionVersion       = "MissionUnitTest",
+                                        .CfeVersion           = "CfeUnitTest",
+                                        .OsalVersion          = "OsalUnitTest",
+                                        .Config               = "MissionConfig",
+                                        .Date                 = "MissionBuildDate",
+                                        .User                 = "MissionBuildUser",
+                                        .Default_CpuName      = "UnitTestCpu",
+                                        .Default_CpuId        = 1,
+                                        .Default_SpacecraftId = 0x42,
+                                        .CfeConfig            = &GLOBAL_CFE_CONFIGDATA };

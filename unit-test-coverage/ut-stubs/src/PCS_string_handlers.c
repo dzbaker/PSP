@@ -35,7 +35,7 @@
 void UT_DefaultHandler_PCS_memset(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context)
 {
     /* void *PCS_memset(void *s, int c, size_t n) */
-    void * s = UT_Hook_GetArgValueByName(Context, "s", void *);
+    void  *s = UT_Hook_GetArgValueByName(Context, "s", void *);
     int    c = UT_Hook_GetArgValueByName(Context, "c", int);
     size_t n = UT_Hook_GetArgValueByName(Context, "n", size_t);
 
@@ -52,7 +52,7 @@ void UT_DefaultHandler_PCS_memset(void *UserObj, UT_EntryKey_t FuncKey, const UT
 void UT_DefaultHandler_PCS_memcpy(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context)
 {
     /* void *PCS_memcpy(void *dest, const void *src, size_t n) */
-    void *      dest = UT_Hook_GetArgValueByName(Context, "dest", void *);
+    void       *dest = UT_Hook_GetArgValueByName(Context, "dest", void *);
     const void *src  = UT_Hook_GetArgValueByName(Context, "src", const void *);
     size_t      n    = UT_Hook_GetArgValueByName(Context, "n", size_t);
 
@@ -69,7 +69,7 @@ void UT_DefaultHandler_PCS_memcpy(void *UserObj, UT_EntryKey_t FuncKey, const UT
 void UT_DefaultHandler_PCS_memchr(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context)
 {
     /* void * PCS_memchr(const void *s, int c, size_t n) */
-    void * s = UT_Hook_GetArgValueByName(Context, "s", void *);
+    void  *s = UT_Hook_GetArgValueByName(Context, "s", void *);
     int    c = UT_Hook_GetArgValueByName(Context, "c", int);
     size_t n = UT_Hook_GetArgValueByName(Context, "n", size_t);
 
@@ -86,7 +86,7 @@ void UT_DefaultHandler_PCS_memchr(void *UserObj, UT_EntryKey_t FuncKey, const UT
 void UT_DefaultHandler_PCS_memcmp(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context)
 {
     /* int PCS_memcmp(void *dest, const void *src, size_t n) */
-    void *      dest = UT_Hook_GetArgValueByName(Context, "dest", void *);
+    void       *dest = UT_Hook_GetArgValueByName(Context, "dest", void *);
     const void *src  = UT_Hook_GetArgValueByName(Context, "src", const void *);
     size_t      n    = UT_Hook_GetArgValueByName(Context, "n", size_t);
 
@@ -150,7 +150,7 @@ void UT_DefaultHandler_PCS_strlen(void *UserObj, UT_EntryKey_t FuncKey, const UT
 void UT_DefaultHandler_PCS_strcat(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context)
 {
     /* char *PCS_strcat(char *dest, const char *src) */
-    void *      dest = UT_Hook_GetArgValueByName(Context, "dest", void *);
+    void       *dest = UT_Hook_GetArgValueByName(Context, "dest", void *);
     const void *src  = UT_Hook_GetArgValueByName(Context, "src", const void *);
 
     char *Result;
@@ -166,9 +166,9 @@ void UT_DefaultHandler_PCS_strcat(void *UserObj, UT_EntryKey_t FuncKey, const UT
 void UT_DefaultHandler_PCS_strncat(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context)
 {
     /* char *PCS_strncat(char *dest, const char *src, size_t n) */
-    void *      dest = UT_Hook_GetArgValueByName(Context, "dest", void *);
+    void       *dest = UT_Hook_GetArgValueByName(Context, "dest", void *);
     const void *src  = UT_Hook_GetArgValueByName(Context, "src", const void *);
-    size_t      n = UT_Hook_GetArgValueByName(Context, "n", size_t);
+    size_t      n    = UT_Hook_GetArgValueByName(Context, "n", size_t);
 
     char *Result;
 
@@ -216,8 +216,8 @@ void UT_DefaultHandler_PCS_strcmp(void *UserObj, UT_EntryKey_t FuncKey, const UT
 void UT_DefaultHandler_PCS_strcpy(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context)
 {
     /* char *PCS_strcpy(char *dest, const char *src) */
-    char *      dest = UT_Hook_GetArgValueByName(Context, "dest", char *);
-    const char *src = UT_Hook_GetArgValueByName(Context, "src", const char *);
+    char       *dest = UT_Hook_GetArgValueByName(Context, "dest", char *);
+    const char *src  = UT_Hook_GetArgValueByName(Context, "src", const char *);
 
     char *Result;
 
@@ -232,9 +232,9 @@ void UT_DefaultHandler_PCS_strcpy(void *UserObj, UT_EntryKey_t FuncKey, const UT
 void UT_DefaultHandler_PCS_strncpy(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context)
 {
     /* char *PCS_strncpy(char *dest, const char *src, size_t n) */
-    char *      dest = UT_Hook_GetArgValueByName(Context, "dest", char *);
+    char       *dest = UT_Hook_GetArgValueByName(Context, "dest", char *);
     const char *src  = UT_Hook_GetArgValueByName(Context, "src", const char *);
-    size_t      n = UT_Hook_GetArgValueByName(Context, "n", size_t);
+    size_t      n    = UT_Hook_GetArgValueByName(Context, "n", size_t);
 
     char *Result;
 
@@ -252,7 +252,7 @@ void UT_DefaultHandler_PCS_strerror(void *UserObj, UT_EntryKey_t FuncKey, const 
     int errnum = UT_Hook_GetArgValueByName(Context, "errnum", int);
 
     static char str[16];
-    char *      ret = str;
+    char       *ret = str;
 
     if (!UT_Stub_GetInt32StatusCode(Context, NULL))
     {

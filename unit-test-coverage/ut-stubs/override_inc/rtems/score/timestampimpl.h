@@ -21,7 +21,7 @@
 #define OVERRIDE_TIMESTAMPIMPL_H
 
 #include "PCS_timestampimpl.h"
-                    
+
 #define _Timestamp_Subtract PCS_Timestamp_Subtract
 #define _Timestamp_Divide   PCS_Timestamp_Divide
 

@@ -68,8 +68,8 @@ void ModuleTest_ResetState(void)
 int32 UTHOOK_vxTimeBaseGet(void *UserObj, int32 StubRetcode, uint32 CallCount, const UT_StubContext_t *Context)
 {
     PSP_VxWorks_TimeBaseVal_t *val = UserObj;
-    uint32 *                   u   = UT_Hook_GetArgValueByName(Context, "u", uint32 *);
-    uint32 *                   l   = UT_Hook_GetArgValueByName(Context, "l", uint32 *);
+    uint32                    *u   = UT_Hook_GetArgValueByName(Context, "u", uint32 *);
+    uint32                    *l   = UT_Hook_GetArgValueByName(Context, "l", uint32 *);
 
     *u = val->u;
     *l = val->l;
@@ -160,7 +160,8 @@ void Test_Reducible_1(void)
     CFE_PSP_GetTime(&OsTime);
 
     TestTime = OS_TimeGetTotalMicroseconds(OsTime);
-    UtAssert_True(TestTime == 10376293541461622, "CFE_PSP_GetTime() Microseconds (%lld) == 10376293541461622",
+    UtAssert_True(TestTime == 10376293541461622,
+                  "CFE_PSP_GetTime() Microseconds (%lld) == 10376293541461622",
                   (long long)TestTime);
 }
 
@@ -191,7 +192,8 @@ void Test_Reducible_2(void)
     CFE_PSP_GetTime(&OsTime);
 
     TestTime = OS_TimeGetTotalMicroseconds(OsTime);
-    UtAssert_True(TestTime == 276701161105643274, "CFE_PSP_GetTime() Microseconds(%lld) == 276701161105643274",
+    UtAssert_True(TestTime == 276701161105643274,
+                  "CFE_PSP_GetTime() Microseconds(%lld) == 276701161105643274",
                   (long long)TestTime);
 }
 

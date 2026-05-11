@@ -113,7 +113,7 @@ void OS_Application_Startup(void)
     ** Currently, the generic VxWorks 7 DKM works with a ROMFS statically
     ** built into the VIP since that is easily supportable across
     ** most platforms. However, this may need to change based on
-    ** specfic needs. 
+    ** specfic needs.
     */
     Status = OS_FileSysAddFixedMap(&fs_id, CFE_PSP_CF_ROMFS_VIRTUAL_MAPPING, "/cf");
     if (Status != OS_SUCCESS)

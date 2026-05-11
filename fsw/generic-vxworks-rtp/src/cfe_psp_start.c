@@ -101,14 +101,16 @@ static const char *optString = "R:S:C:I:N:F:h";
 /*
 ** getopts_long long form argument table
 */
-static const struct parg_option longOpts[] = {{"reset",   PARG_REQARG, NULL, 'R'},
-                                              {"subtype", PARG_REQARG, NULL, 'S'},
-                                              {"cpuid",   PARG_REQARG, NULL, 'C'},
-                                              {"scid",    PARG_REQARG, NULL, 'I'},
-                                              {"cpuname", PARG_REQARG, NULL, 'N'},
-                                              {"cfsid",   PARG_REQARG, NULL, 'F'},
-                                              {"help",    PARG_NOARG,  NULL, 'h'},
-                                              {NULL,      PARG_NOARG,  NULL, 0}};
+static const struct parg_option longOpts[] = {
+    { "reset",   PARG_REQARG, NULL, 'R' },
+    { "subtype", PARG_REQARG, NULL, 'S' },
+    { "cpuid",   PARG_REQARG, NULL, 'C' },
+    { "scid",    PARG_REQARG, NULL, 'I' },
+    { "cpuname", PARG_REQARG, NULL, 'N' },
+    { "cfsid",   PARG_REQARG, NULL, 'F' },
+    { "help",    PARG_NOARG,  NULL, 'h' },
+    { NULL,      PARG_NOARG,  NULL, 0   }
+};
 /*
 ** OS_Application_Run is called by the OSAL BSP after initialization
 */
@@ -155,8 +157,8 @@ void OS_Application_Run(void)
         /* go idle and wait for an event */
         ret = sigwait(&sigset, &sig);
 
-        if (ret == 0 && !CFE_PSP_IdleTaskState.ShutdownReq && sig == CFE_PSP_EXCEPTION_EVENT_SIGNAL &&
-            GLOBAL_CFE_CONFIGDATA.SystemNotify != NULL)
+        if (ret == 0 && !CFE_PSP_IdleTaskState.ShutdownReq && sig == CFE_PSP_EXCEPTION_EVENT_SIGNAL
+            && GLOBAL_CFE_CONFIGDATA.SystemNotify != NULL)
         {
             /* notify the CFE of the event */
             GLOBAL_CFE_CONFIGDATA.SystemNotify();
@@ -185,8 +187,8 @@ void OS_Application_Run(void)
 */
 int32 CFE_PSP_OS_EventHandler(OS_Event_t event, osal_id_t object_id, void *data)
 {
-    char      taskname[OS_MAX_API_NAME];
-    sigset_t  sigset;
+    char     taskname[OS_MAX_API_NAME];
+    sigset_t sigset;
 
     /*
     ** VxWorks RTP work todo: enable processor affinity
@@ -228,7 +230,7 @@ int32 CFE_PSP_OS_EventHandler(OS_Event_t event, osal_id_t object_id, void *data)
                 **    CPU_SET(0, &cpuset);
                 **    pthread_setaffinity_np(pthread_self(), sizeof(cpuset), &cpuset);
                 ** }
-		*/
+                */
                 /*
                  * glibc/kernel has an internal limit for this name.
                  * If the OSAL name is longer, just truncate it.
@@ -239,8 +241,8 @@ int32 CFE_PSP_OS_EventHandler(OS_Event_t event, osal_id_t object_id, void *data)
                 {
                     taskname[CFE_PSP_KERNEL_NAME_LENGTH_MAX - 1] = 0;
                 }
-		/* pthread_setname_np is not in the VxWorks SR650 SDK */
-		/* SR0650 supports pthread_attr_setname, but that would require an OSAL modification */
+                /* pthread_setname_np is not in the VxWorks SR650 SDK */
+                /* SR0650 supports pthread_attr_setname, but that would require an OSAL modification */
                 /* pthread_setname_np(pthread_self(), taskname);  */
 
                 /*
@@ -296,7 +298,7 @@ void OS_Application_Startup(void)
     argv = OS_BSP_GetArgV();
 
     parg_init(&ps);
-    opt  = parg_getopt_long(&ps, argc, argv, optString, longOpts, &longIndex);
+    opt = parg_getopt_long(&ps, argc, argv, optString, longOpts, &longIndex);
 
     while (opt != -1)
     {
@@ -306,8 +308,8 @@ void OS_Application_Startup(void)
                 strncpy(CommandData.ResetType, ps.optarg, CFE_PSP_RESET_NAME_LENGTH - 1);
                 CommandData.ResetType[CFE_PSP_RESET_NAME_LENGTH - 1] = 0;
 
-                if ((strncmp(CommandData.ResetType, "PO", CFE_PSP_RESET_NAME_LENGTH) != 0) &&
-                    (strncmp(CommandData.ResetType, "PR", CFE_PSP_RESET_NAME_LENGTH) != 0))
+                if ((strncmp(CommandData.ResetType, "PO", CFE_PSP_RESET_NAME_LENGTH) != 0)
+                    && (strncmp(CommandData.ResetType, "PR", CFE_PSP_RESET_NAME_LENGTH) != 0))
                 {
                     printf("\nERROR: Invalid Reset Type: %s\n\n", CommandData.ResetType);
                     CommandData.GotResetType = 0;
@@ -455,8 +457,8 @@ void OS_Application_Startup(void)
     if (!CommandData.GotResetType)
     {
         reset_type = CFE_PSP_RST_TYPE_POWERON;
-        if (CFE_PSP_ReservedMemoryMap.BootPtr->ValidityFlag == CFE_PSP_BOOTRECORD_VALID ||
-            CFE_PSP_ReservedMemoryMap.BootPtr->ValidityFlag == CFE_PSP_BOOTRECORD_INVALID)
+        if (CFE_PSP_ReservedMemoryMap.BootPtr->ValidityFlag == CFE_PSP_BOOTRECORD_VALID
+            || CFE_PSP_ReservedMemoryMap.BootPtr->ValidityFlag == CFE_PSP_BOOTRECORD_INVALID)
         {
             reset_type = CFE_PSP_ReservedMemoryMap.BootPtr->NextResetType;
         }
@@ -597,4 +599,3 @@ void CFE_PSP_ProcessArgumentDefaults(CFE_PSP_CommandData_t *CommandDataDefault)
         CommandDataDefault->GotCfsId = 1;
     }
 }
-

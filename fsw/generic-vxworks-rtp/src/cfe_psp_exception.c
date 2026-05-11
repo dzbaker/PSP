@@ -164,7 +164,7 @@ void CFE_PSP_ExceptionSigHandlerKill(int signo, siginfo_t *si, void *ctxt)
      */
     CFE_PSP_ExceptionSigHandler(signo, si, ctxt);
 
-    printf("CFE_PSP: Exception handler exiting thread: %d\n",pthread_self());
+    printf("CFE_PSP: Exception handler exiting thread: %d\n", pthread_self());
 
     /*
      * Call pthread_exit to stop this thread
@@ -189,9 +189,9 @@ void CFE_PSP_AttachSigHandler(int signo)
          * synchronous events, use the CFE_PSP_ExceptionSigHandlerKill variant.
          *
          * This exits the calling thread.
-	 *
-	 * For debugging, this could be changed to CFE_PSP_ExceptionSigHandlerSuspend
-	 * which will suspend the calling thread so it can be examined.
+         *
+         * For debugging, this could be changed to CFE_PSP_ExceptionSigHandlerSuspend
+         * which will suspend the calling thread so it can be examined.
          */
         sa.sa_sigaction = CFE_PSP_ExceptionSigHandlerKill;
 
@@ -346,7 +346,10 @@ int32 CFE_PSP_ExceptionGetSummary_Impl(const CFE_PSP_Exception_LogData_t *Buffer
             default:
                 ComputedReason = "Unknown SIGFPE";
         }
-        (void)snprintf(ReasonBuf, ReasonSize, "%s at ip 0x%lx", ComputedReason,
+        (void)snprintf(ReasonBuf,
+                       ReasonSize,
+                       "%s at ip 0x%lx",
+                       ComputedReason,
                        (unsigned long)Buffer->context_info.si.si_addr);
     }
     else if (Buffer->context_info.si.si_signo == SIGINT)

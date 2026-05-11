@@ -37,7 +37,7 @@
  * in nanoseconds, and then further dividing by the OSAL OS_time_t tick
  * resolution will convert to an OS_time_t compatible value.
  *
- * This needs to be set to the correct timebase for the BSP 
+ * This needs to be set to the correct timebase for the BSP
  *
  * Note this is distinct from the VxWorks system timer tick which runs,
  * confusingly, at 60Hz or a ~16.67ms period.
@@ -70,7 +70,6 @@
  */
 #define CFE_PSP_SOFT_TIMEBASE_PERIOD 16666
 
-
 /*
  * A random 32-bit value that is used as the "validity flag"
  * of the PC-Linux boot record structure.  This is simply
@@ -90,14 +89,12 @@
 /* use the "USR1" signal to wake the idle thread when an exception occurs */
 #define CFE_PSP_EXCEPTION_EVENT_SIGNAL SIGUSR1
 
+#define CFE_PSP_SHM_NAME_LENGTH   32
+#define CFE_PSP_CPU_NAME_LENGTH   32
+#define CFE_PSP_RESET_NAME_LENGTH 10
+#define CFE_PSP_CFS_ID_LENGTH     16
 
-
-#define CFE_PSP_SHM_NAME_LENGTH        32
-#define CFE_PSP_CPU_NAME_LENGTH        32
-#define CFE_PSP_RESET_NAME_LENGTH      10
-#define CFE_PSP_CFS_ID_LENGTH          16
-
-#define CFE_PSP_CFS_ID                 "cfs1"
+#define CFE_PSP_CFS_ID "cfs1"
 
 /*
 ** Typedef for the layout of the vxWorks boot record structure
@@ -128,7 +125,6 @@ typedef struct
     volatile bool ShutdownReq;
 } CFE_PSP_IdleTaskState_t;
 
-
 /*
 ** Structure for the Command line parameters
 */
@@ -143,8 +139,8 @@ typedef struct
     char   CpuName[CFE_PSP_CPU_NAME_LENGTH]; /* CPU Name */
     uint32 GotCpuName;                       /* Did we get a CPU Name ? */
 
-    char   CfsId[CFE_PSP_CFS_ID_LENGTH];      /* CFS ID */
-    uint32 GotCfsId;                          /* Did we get a cFS Id? */
+    char   CfsId[CFE_PSP_CFS_ID_LENGTH]; /* CFS ID */
+    uint32 GotCfsId;                     /* Did we get a cFS Id? */
 
     uint32 CpuId;    /* CPU ID */
     uint32 GotCpuId; /* Did we get a CPU Id ?*/
@@ -152,7 +148,6 @@ typedef struct
     uint32 SpacecraftId;    /* Spacecraft ID */
     uint32 GotSpacecraftId; /* Did we get a Spacecraft ID */
 } CFE_PSP_CommandData_t;
-
 
 /**
  * \brief The data type used by the underlying OS to represent a thread ID.
@@ -174,7 +169,6 @@ typedef struct
      */
     void *bt_addrs[CFE_PSP_MAX_EXCEPTION_BACKTRACE_SIZE];
 } CFE_PSP_Exception_ContextDataEntry_t;
-
 
 /*
 ** Watchdog minimum and maximum values ( in milliseconds )

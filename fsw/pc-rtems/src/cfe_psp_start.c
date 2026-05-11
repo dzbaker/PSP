@@ -33,7 +33,6 @@
 #include <errno.h>
 #include <rtems.h>
 
-
 /*
 ** cFE includes
 */
@@ -58,7 +57,6 @@
 */
 
 rtems_id RtemsTimerId;
-
 
 /*
 ** 1 HZ Timer "ISR"

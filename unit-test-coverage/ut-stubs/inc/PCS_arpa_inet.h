@@ -63,6 +63,6 @@
 /* prototypes normally declared in arpa/inet.h */
 /* ------------------------------------------- */
 extern uint32_t PCS_inet_addr(const char *cp);
-extern char *   PCS_inet_ntoa(struct PCS_in_addr in);
+extern char    *PCS_inet_ntoa(struct PCS_in_addr in);
 
 #endif

@@ -185,8 +185,12 @@ uint32 CFE_PSP_MemRanges(void);
  * @retval OP_INVALID_MEM_SIZE          The Memory range associated with the address is not large enough to contain
  *                                      Address + Size.
  */
-int32 CFE_PSP_MemRangeSet(uint32 RangeNum, uint32 MemoryType, cpuaddr StartAddr, size_t Size, size_t WordSize,
-                          uint32 Attributes);
+int32 CFE_PSP_MemRangeSet(uint32  RangeNum,
+                          uint32  MemoryType,
+                          cpuaddr StartAddr,
+                          size_t  Size,
+                          size_t  WordSize,
+                          uint32  Attributes);
 
 /*--------------------------------------------------------------------------------------*/
 /**
@@ -208,7 +212,11 @@ int32 CFE_PSP_MemRangeSet(uint32 RangeNum, uint32 MemoryType, cpuaddr StartAddr,
  * @retval CFE_PSP_INVALID_POINTER   Parameter error
  * @retval CFE_PSP_INVALID_MEM_RANGE The index into the table is invalid
  */
-int32 CFE_PSP_MemRangeGet(uint32 RangeNum, uint32 *MemoryType, cpuaddr *StartAddr, size_t *Size, size_t *WordSize,
-                          uint32 *Attributes);
+int32 CFE_PSP_MemRangeGet(uint32   RangeNum,
+                          uint32  *MemoryType,
+                          cpuaddr *StartAddr,
+                          size_t  *Size,
+                          size_t  *WordSize,
+                          uint32  *Attributes);
 
 #endif

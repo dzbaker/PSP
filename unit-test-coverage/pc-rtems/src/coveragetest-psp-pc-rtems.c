@@ -23,7 +23,9 @@ void Psp_Test_Setup(void)
     UT_ResetState(0);
 }
 
-void Psp_Test_Teardown(void) {}
+void Psp_Test_Teardown(void)
+{
+}
 
 void UtTest_Setup(void)
 {

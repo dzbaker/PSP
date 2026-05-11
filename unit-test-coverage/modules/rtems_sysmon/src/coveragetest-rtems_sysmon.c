@@ -45,9 +45,8 @@
 /*
  * Reference to the API entry point for the module
  */
-const CFE_PSP_ModuleApi_t *   TgtAPI = &CFE_PSP_rtems_sysmon_API;
-PCS_Timestamp_Control  PCS_CPU_usage_Uptime_at_last_reset;
-
+const CFE_PSP_ModuleApi_t *TgtAPI = &CFE_PSP_rtems_sysmon_API;
+PCS_Timestamp_Control      PCS_CPU_usage_Uptime_at_last_reset;
 
 void Test_Init_Nominal(void)
 {
@@ -64,9 +63,10 @@ void Test_Task_Nominal(void)
     /* Nominal Case: rtems sysmon task */
     rtems_sysmon_global.cpu_load.should_run = true;
     UT_SetHookFunction(UT_KEY(OS_TaskDelay), (UT_HookFunc_t)UT_TaskDelay_Hook, &DelayCounter);
-    rtems_sysmon_Task((rtems_task_argument) &rtems_sysmon_global.cpu_load);
+    rtems_sysmon_Task((rtems_task_argument)&rtems_sysmon_global.cpu_load);
 
-    UtAssert_True(rtems_sysmon_global.cpu_load.should_run == false && DelayCounter == 1, "Nominal Case: RTEMS Sysmon Task");
+    UtAssert_True(rtems_sysmon_global.cpu_load.should_run == false && DelayCounter == 1,
+                  "Nominal Case: RTEMS Sysmon Task");
 }
 
 void Test_Entry_Nominal(void)
@@ -93,10 +93,10 @@ void Test_Aggregate_Nominal(void)
     int32 IsRunningStatus;
 
     CFE_PSP_IODriver_AdcCode_t    Sample;
-    CFE_PSP_IODriver_AnalogRdWr_t RdWr = {.NumChannels = 1, .Samples = &Sample};
-    
+    CFE_PSP_IODriver_AnalogRdWr_t RdWr = { .NumChannels = 1, .Samples = &Sample };
+
     CFE_PSP_IODriver_Direction_t QueryDirArg;
-    CFE_PSP_IODriver_API_t *     EntryAPI = TgtAPI->ExtendedApi;
+    CFE_PSP_IODriver_API_t      *EntryAPI = TgtAPI->ExtendedApi;
 
     /* Nominal Case: Aggregate Dispatch Noop CMD (Not Impl) */
     StatusCode = EntryAPI->DeviceCommand(CFE_PSP_IODriver_NOOP, 0, 0, CFE_PSP_IODriver_U32ARG(0)); /* Entry Point */
@@ -169,11 +169,11 @@ void Test_Aggregate_Nominal(void)
 
 void Test_Aggregate_Error(void)
 {
-    CFE_PSP_IODriver_API_t *      EntryAPI = TgtAPI->ExtendedApi;
+    CFE_PSP_IODriver_API_t       *EntryAPI = TgtAPI->ExtendedApi;
     int32                         StatusCode;
     int32                         IsRunningStatus;
     CFE_PSP_IODriver_AdcCode_t    Sample;
-    CFE_PSP_IODriver_AnalogRdWr_t RdWr = {.NumChannels = 1, .Samples = &Sample};
+    CFE_PSP_IODriver_AnalogRdWr_t RdWr = { .NumChannels = 1, .Samples = &Sample };
 
     /* Error Case: Look Up Subsystem Not Found */
     StatusCode = EntryAPI->DeviceCommand(CFE_PSP_IODriver_LOOKUP_SUBSYSTEM, 0, 0, CFE_PSP_IODriver_CONST_STR("Empty"));
@@ -221,9 +221,9 @@ void Test_Aggregate_Error(void)
 
 void Test_Dispatch_Cpuload_Nominal(void)
 {
-    CFE_PSP_IODriver_API_t *      EntryAPI = TgtAPI->ExtendedApi;
+    CFE_PSP_IODriver_API_t       *EntryAPI = TgtAPI->ExtendedApi;
     CFE_PSP_IODriver_AdcCode_t    Sample[2];
-    CFE_PSP_IODriver_AnalogRdWr_t RdWr = {.NumChannels = 1, .Samples = Sample};
+    CFE_PSP_IODriver_AnalogRdWr_t RdWr = { .NumChannels = 1, .Samples = Sample };
     int32                         StatusCode;
 
     /* Nominal Case: Dispatch IO Driver NOOP */
@@ -243,9 +243,9 @@ void Test_Dispatch_Cpuload_Nominal(void)
 
 void Test_Dispatch_Cpuload_Error(void)
 {
-    CFE_PSP_IODriver_API_t *      EntryAPI = TgtAPI->ExtendedApi;
+    CFE_PSP_IODriver_API_t       *EntryAPI = TgtAPI->ExtendedApi;
     CFE_PSP_IODriver_AdcCode_t    Sample[2];
-    CFE_PSP_IODriver_AnalogRdWr_t RdWr = {.NumChannels = 1, .Samples = Sample};
+    CFE_PSP_IODriver_AnalogRdWr_t RdWr = { .NumChannels = 1, .Samples = Sample };
     int                           StatusCode;
 
     /* Error Case: Dispatch Analog Read Channels, Subchannel >= Max Cpu */
@@ -269,11 +269,11 @@ void Test_Dispatch_Cpuload_Error(void)
 
 void Test_Cpu_Visitor_Nominal(void)
 {
-    PCS_Thread_Control Thread;
-    UT_ThreadGetNameData_t UT_ThreadGetNameData;
+    PCS_Thread_Control           Thread;
+    UT_ThreadGetNameData_t       UT_ThreadGetNameData;
     rtems_sysmon_cpuload_state_t Arg;
-    UT_TimeDivideData_t UT_TimeDivideData;
-    int32 AverageLoadCalc;
+    UT_TimeDivideData_t          UT_TimeDivideData;
+    int32                        AverageLoadCalc;
 
     UT_SetHookFunction(UT_KEY(PCS_Thread_Get_name), (UT_HookFunc_t)UT_ThreadGetName_Hook, &UT_ThreadGetNameData);
     UT_SetHookFunction(UT_KEY(PCS_Timestamp_Divide), (UT_HookFunc_t)UT_TimestampDivide_Hook, &UT_TimeDivideData);
@@ -312,14 +312,14 @@ void Test_Cpu_Visitor_Nominal(void)
     strncpy(UT_ThreadGetNameData.Name, "IDLE", 4);
     UT_ThreadGetNameData.Size = 4;
 
-    UT_TimeDivideData.IntValue = 50;
-    UT_TimeDivideData.FraValue = 0;
-    UT_TimeDivideData.TotalElapsed = 10;
+    UT_TimeDivideData.IntValue          = 50;
+    UT_TimeDivideData.FraValue          = 0;
+    UT_TimeDivideData.TotalElapsed      = 10;
     UT_TimeDivideData.IdleUptimeElapsed = 5;
 
-    UtAssert_BOOL_FALSE(rtems_cpu_usage_visitor(&Thread, &Arg)); 
+    UtAssert_BOOL_FALSE(rtems_cpu_usage_visitor(&Thread, &Arg));
 
-    AverageLoadCalc = 0x1000 * UT_TimeDivideData.IntValue / 100;
+    AverageLoadCalc  = 0x1000 * UT_TimeDivideData.IntValue / 100;
     AverageLoadCalc |= (AverageLoadCalc << 12);
     UtAssert_True(Arg.per_core[0].avg_load == AverageLoadCalc, "Nominal Case: 50 percents cpu utilization");
 
@@ -332,18 +332,19 @@ void Test_Cpu_Visitor_Nominal(void)
     strncpy(UT_ThreadGetNameData.Name, "IDLE", 4);
     UT_ThreadGetNameData.Size = 4;
 
-    UT_TimeDivideData.IntValue = 50;
-    UT_TimeDivideData.FraValue = 9990;
-    UT_TimeDivideData.TotalElapsed = 10; /* placeholder */
-    UT_TimeDivideData.IdleUptimeElapsed = 5; /* placeholder*/
+    UT_TimeDivideData.IntValue          = 50;
+    UT_TimeDivideData.FraValue          = 9990;
+    UT_TimeDivideData.TotalElapsed      = 10; /* placeholder */
+    UT_TimeDivideData.IdleUptimeElapsed = 5;  /* placeholder*/
 
-    UtAssert_BOOL_FALSE(rtems_cpu_usage_visitor(&Thread, &Arg)); 
+    UtAssert_BOOL_FALSE(rtems_cpu_usage_visitor(&Thread, &Arg));
 
-    /* convert int and fra part of percentages into integer. 
-    ** Then convert into an percentages and normalizes out of 0x1000 
+    /* convert int and fra part of percentages into integer.
+    ** Then convert into an percentages and normalizes out of 0x1000
     */
-    AverageLoadCalc =  (UT_TimeDivideData.IntValue * 1000) + (UT_TimeDivideData.FraValue / 10); /* Combine fraction and int to one number */
-    AverageLoadCalc = (0x1000 * (100000 - AverageLoadCalc)) / 100000;
+    AverageLoadCalc = (UT_TimeDivideData.IntValue * 1000)
+                      + (UT_TimeDivideData.FraValue / 10); /* Combine fraction and int to one number */
+    AverageLoadCalc  = (0x1000 * (100000 - AverageLoadCalc)) / 100000;
     AverageLoadCalc |= (AverageLoadCalc << 12);
     UtAssert_True(Arg.per_core[0].avg_load == AverageLoadCalc, "Nominal Case: 49.001 percents cpu utilization");
 
@@ -356,12 +357,12 @@ void Test_Cpu_Visitor_Nominal(void)
     strncpy(UT_ThreadGetNameData.Name, "IDLE", 4);
     UT_ThreadGetNameData.Size = 4;
 
-    UT_TimeDivideData.IntValue = 0;
-    UT_TimeDivideData.FraValue = 0;
-    UT_TimeDivideData.TotalElapsed = 0;
+    UT_TimeDivideData.IntValue          = 0;
+    UT_TimeDivideData.FraValue          = 0;
+    UT_TimeDivideData.TotalElapsed      = 0;
     UT_TimeDivideData.IdleUptimeElapsed = 0;
 
-    UtAssert_BOOL_FALSE(rtems_cpu_usage_visitor(&Thread, &Arg)); 
+    UtAssert_BOOL_FALSE(rtems_cpu_usage_visitor(&Thread, &Arg));
     UtAssert_True(Arg.per_core[0].avg_load == 0, "Nominal Case: 0 percents cpu utilization");
 
     /* Nominal Case: polling cpu reaches RTEMS_SYSMON_MAX_CPUS */
@@ -371,9 +372,8 @@ void Test_Cpu_Visitor_Nominal(void)
 
     strncpy(UT_ThreadGetNameData.Name, "IDLE", 4);
     Arg.poll_core_no = RTEMS_SYSMON_MAX_CPUS;
-    UtAssert_BOOL_TRUE(rtems_cpu_usage_visitor(&Thread, &Arg)); 
+    UtAssert_BOOL_TRUE(rtems_cpu_usage_visitor(&Thread, &Arg));
     UtAssert_True(Arg.poll_core_no == 0, "Nominal Case: cpu number reseted");
-
 }
 
 /*
@@ -389,5 +389,4 @@ void UtTest_Setup(void)
     ADD_TEST(Test_Dispatch_Cpuload_Error);
     ADD_TEST(Test_Cpu_Visitor_Nominal);
     ADD_TEST(Test_Task_Nominal);
-
 }

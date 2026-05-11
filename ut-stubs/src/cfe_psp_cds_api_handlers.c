@@ -98,7 +98,7 @@ void UT_DefaultHandler_CFE_PSP_WriteToCDS(void *UserObj, UT_EntryKey_t FuncKey, 
 void UT_DefaultHandler_CFE_PSP_ReadFromCDS(void *UserObj, UT_EntryKey_t FuncKey, const UT_StubContext_t *Context)
 {
     /* int32 CFE_PSP_ReadFromCDS(void *PtrToDataFromRead, uint32 CDSOffset, uint32 NumBytes) */
-    void * PtrToDataFromRead = UT_Hook_GetArgValueByName(Context, "PtrToDataFromRead", void *);
+    void  *PtrToDataFromRead = UT_Hook_GetArgValueByName(Context, "PtrToDataFromRead", void *);
     uint32 CDSOffset         = UT_Hook_GetArgValueByName(Context, "CDSOffset", uint32);
     uint32 NumBytes          = UT_Hook_GetArgValueByName(Context, "NumBytes", uint32);
 

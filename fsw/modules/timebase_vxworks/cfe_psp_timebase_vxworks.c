@@ -98,7 +98,7 @@ void timebase_vxworks_Init(uint32 PspModuleId)
      * Note this may not be an exact value.  The API is limited
      * in this regard.
      */
-    TicksPerSec = 1000000000;
+    TicksPerSec  = 1000000000;
     TicksPerSec *= CFE_PSP_VX_TIMEBASE_PERIOD_DENOMINATOR;
     TicksPerSec /= CFE_PSP_VX_TIMEBASE_PERIOD_NUMERATOR;
 
@@ -108,8 +108,8 @@ void timebase_vxworks_Init(uint32 PspModuleId)
      * This is the timebase period divided by OS_TIME_TICK_RESOLUTION_NS,
      * which may not be a whole number.
      */
-    RatioN = CFE_PSP_VX_TIMEBASE_PERIOD_NUMERATOR;
-    RatioD = CFE_PSP_VX_TIMEBASE_PERIOD_DENOMINATOR;
+    RatioN  = CFE_PSP_VX_TIMEBASE_PERIOD_NUMERATOR;
+    RatioD  = CFE_PSP_VX_TIMEBASE_PERIOD_DENOMINATOR;
     RatioD *= OS_TIME_TICK_RESOLUTION_NS;
 
     /*
@@ -145,8 +145,10 @@ void timebase_vxworks_Init(uint32 PspModuleId)
     }
 
     /* Inform the user that this module is in use */
-    printf("CFE_PSP: Set up VxWorks timebase, %lu ticks/sec, OS_time_t ratio=%lu/%lu\n", (unsigned long)TicksPerSec,
-           (unsigned long)RatioN, (unsigned long)RatioD);
+    printf("CFE_PSP: Set up VxWorks timebase, %lu ticks/sec, OS_time_t ratio=%lu/%lu\n",
+           (unsigned long)TicksPerSec,
+           (unsigned long)RatioN,
+           (unsigned long)RatioD);
 
     /* Save the final reduced fraction for use in CFE_PSP_GetTime() */
     PSP_VxWorks_Timebase_Global.OSTimeConvNumerator   = RatioN;
@@ -218,9 +220,9 @@ void CFE_PSP_GetTime(OS_time_t *LocalTime)
          * cycle or reset) for over 2000 years to reach that point, so
          * for all practical purposes it does not roll over.
          */
-        NormalizedTicks = RegUpper;
+        NormalizedTicks   = RegUpper;
         NormalizedTicks <<= 32;
-        NormalizedTicks |= RegLower;
+        NormalizedTicks  |= RegLower;
 
         /*
          * Apply the pre-computed conversion to OS_time_t.
@@ -232,6 +234,6 @@ void CFE_PSP_GetTime(OS_time_t *LocalTime)
         NormalizedTicks /= PSP_VxWorks_Timebase_Global.OSTimeConvDenominator;
 
         /* Output the value as an OS_time_t */
-        *LocalTime = (OS_time_t) {NormalizedTicks};
+        *LocalTime = (OS_time_t) { NormalizedTicks };
     }
 }

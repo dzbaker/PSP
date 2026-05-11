@@ -84,4 +84,6 @@ int32 CFE_PSP_ExceptionGetSummary_Impl(const CFE_PSP_Exception_LogData_t *Buffer
  * See description in header file for argument/return detail
  *
  *-----------------------------------------------------------------*/
-void CFE_PSP_SetDefaultExceptionEnvironment(void) {}
+void CFE_PSP_SetDefaultExceptionEnvironment(void)
+{
+}

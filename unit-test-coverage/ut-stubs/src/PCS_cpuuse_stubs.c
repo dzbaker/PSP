@@ -33,6 +33,5 @@
  */
 void PCS_rtems_cpu_usage_reset(void)
 {
-
     UT_GenStub_Execute(PCS_rtems_cpu_usage_reset, Basic, NULL);
 }

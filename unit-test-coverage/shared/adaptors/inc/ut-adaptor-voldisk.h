@@ -43,7 +43,7 @@
 void   UT_VolDiskAdaptor_Init(void *mem_ptr, size_t mem_size);
 void   UT_VolDiskAdaptor_CopyOut(void *dst, size_t num_bytes);
 void   UT_VolDiskAdaptor_SetOffset(size_t offset, uint8 val);
-void * UT_VolDiskAdaptor_GetAddress(void);
+void  *UT_VolDiskAdaptor_GetAddress(void);
 size_t UT_VolDiskAdaptor_GetSize(void);
 
 #endif

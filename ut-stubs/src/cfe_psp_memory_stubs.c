@@ -32,7 +32,6 @@
  */
 void CFE_PSP_DeleteProcessorReservedMemory(void)
 {
-
     UT_GenStub_Execute(CFE_PSP_DeleteProcessorReservedMemory, Basic, NULL);
 }
 
@@ -59,6 +58,5 @@ int32 CFE_PSP_InitProcessorReservedMemory(uint32 RestartType)
  */
 void CFE_PSP_SetupReservedMemoryMap(void)
 {
-
     UT_GenStub_Execute(CFE_PSP_SetupReservedMemoryMap, Basic, NULL);
 }

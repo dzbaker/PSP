@@ -53,7 +53,7 @@
  */
 extern CFE_PSP_ModuleApi_t    CFE_PSP_vxworks_sysmon_API;
 extern vxworks_sysmon_state_t vxworks_sysmon_global;
-const CFE_PSP_ModuleApi_t *   TgtAPI = &CFE_PSP_vxworks_sysmon_API;
+const CFE_PSP_ModuleApi_t    *TgtAPI = &CFE_PSP_vxworks_sysmon_API;
 
 /* Hook */
 void UT_TaskDelay_Hook(void *UserObj)
@@ -99,10 +99,10 @@ void Test_Aggregate_Nominal(void)
     int32 IsRunningStatus;
 
     CFE_PSP_IODriver_AdcCode_t    Sample;
-    CFE_PSP_IODriver_AnalogRdWr_t RdWr = {.NumChannels = 1, .Samples = &Sample};
+    CFE_PSP_IODriver_AnalogRdWr_t RdWr = { .NumChannels = 1, .Samples = &Sample };
 
     CFE_PSP_IODriver_Direction_t QueryDirArg;
-    CFE_PSP_IODriver_API_t *     EntryAPI = TgtAPI->ExtendedApi;
+    CFE_PSP_IODriver_API_t      *EntryAPI = TgtAPI->ExtendedApi;
 
     /* Nominal Case: Aggregate Dispatch Noop CMD (Not Impl) */
     StatusCode = EntryAPI->DeviceCommand(CFE_PSP_IODriver_NOOP, 0, 0, CFE_PSP_IODriver_U32ARG(0)); /* Entry Point */
@@ -175,12 +175,11 @@ void Test_Aggregate_Nominal(void)
 
 void Test_Aggregate_Error(void)
 {
-    CFE_PSP_IODriver_API_t *      EntryAPI = TgtAPI->ExtendedApi;
+    CFE_PSP_IODriver_API_t       *EntryAPI = TgtAPI->ExtendedApi;
     int32                         StatusCode;
     int32                         IsRunningStatus;
     CFE_PSP_IODriver_AdcCode_t    Sample;
-    CFE_PSP_IODriver_AnalogRdWr_t RdWr = {.NumChannels = 1, .Samples = &Sample};
-
+    CFE_PSP_IODriver_AnalogRdWr_t RdWr = { .NumChannels = 1, .Samples = &Sample };
 
     /* Error Case: Look Up Subsystem Not Found */
     StatusCode = EntryAPI->DeviceCommand(CFE_PSP_IODriver_LOOKUP_SUBSYSTEM, 0, 0, CFE_PSP_IODriver_CONST_STR("Empty"));
@@ -220,9 +219,9 @@ void Test_Aggregate_Error(void)
 
 void Test_Dispatch_Nominal(void)
 {
-    CFE_PSP_IODriver_API_t *      EntryAPI = TgtAPI->ExtendedApi;
+    CFE_PSP_IODriver_API_t       *EntryAPI = TgtAPI->ExtendedApi;
     CFE_PSP_IODriver_AdcCode_t    Sample[2];
-    CFE_PSP_IODriver_AnalogRdWr_t RdWr = {.NumChannels = 1, .Samples = Sample};
+    CFE_PSP_IODriver_AnalogRdWr_t RdWr = { .NumChannels = 1, .Samples = Sample };
     int32                         StatusCode;
 
     /* Nominal Case: Dispatch IO Driver NOOP */
@@ -242,9 +241,9 @@ void Test_Dispatch_Nominal(void)
 
 void Test_Dispatch_Error(void)
 {
-    CFE_PSP_IODriver_API_t *      EntryAPI = TgtAPI->ExtendedApi;
+    CFE_PSP_IODriver_API_t       *EntryAPI = TgtAPI->ExtendedApi;
     CFE_PSP_IODriver_AdcCode_t    Sample[2];
-    CFE_PSP_IODriver_AnalogRdWr_t RdWr = {.NumChannels = 1, .Samples = Sample};
+    CFE_PSP_IODriver_AnalogRdWr_t RdWr = { .NumChannels = 1, .Samples = Sample };
     int                           StatusCode;
 
     /* Error Case: Dispatch Analog Read Channels, Subchannel >= Max Cpu */
@@ -276,7 +275,7 @@ void Test_UpdateStat_Nominal(void)
     IdleTaskLoad = 97;
     vxworks_sysmon_update_stat(fmt, "IDLE", "", "", "", 95, 7990, IdleTaskLoad, 1998); /* Function under test */
 
-    AvgLoad = ((0x1000 * (100 - IdleTaskLoad)) / 100);
+    AvgLoad  = ((0x1000 * (100 - IdleTaskLoad)) / 100);
     AvgLoad |= (AvgLoad << 12);
     UtAssert_True(vxworks_sysmon_global.cpu_load.per_core[0].avg_load == AvgLoad, "Nominal Case: 3 percents cpuload");
 
@@ -297,7 +296,7 @@ void Test_UpdateStat_Nominal(void)
     UtAssert_True(vxworks_sysmon_global.cpu_load.per_core[0].avg_load == AvgLoad, "Nominal Case: 100 percents cpuload");
 
     /* Nominal Case: Max Cpu Num */
-    IdleTaskLoad                            = 0;
+    IdleTaskLoad                                = 0;
     vxworks_sysmon_global.cpu_load.poll_core_no = 1 + VXWORKS_SYSMON_MAX_CPUS;
     vxworks_sysmon_update_stat(fmt, "IDLE", "", "", "", 95, 7990, IdleTaskLoad, 1998); /* Function under test */
     UtAssert_UINT8_EQ(vxworks_sysmon_global.cpu_load.poll_core_no, 1);

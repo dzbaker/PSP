@@ -46,18 +46,22 @@ static void InitStub(uint32 PspModuleId)
     UT_DEFAULT_IMPL(InitStub);
 }
 
-CFE_PSP_ModuleApi_t UT_API_INVALID         = {.ModuleType = CFE_PSP_MODULE_TYPE_INVALID};
-CFE_PSP_ModuleApi_t UT_API_SIMPLE_NO_INIT  = {.ModuleType = CFE_PSP_MODULE_TYPE_SIMPLE};
-CFE_PSP_ModuleApi_t UT_API_SIMPLE_COMPLETE = {.ModuleType = CFE_PSP_MODULE_TYPE_SIMPLE, .Init = InitStub};
+CFE_PSP_ModuleApi_t UT_API_INVALID         = { .ModuleType = CFE_PSP_MODULE_TYPE_INVALID };
+CFE_PSP_ModuleApi_t UT_API_SIMPLE_NO_INIT  = { .ModuleType = CFE_PSP_MODULE_TYPE_SIMPLE };
+CFE_PSP_ModuleApi_t UT_API_SIMPLE_COMPLETE = { .ModuleType = CFE_PSP_MODULE_TYPE_SIMPLE, .Init = InitStub };
 
-static CFE_StaticModuleLoadEntry_t UT_STATIC_MODULE_LIST1[] = {{.Name = "UT1", .Api = &UT_API_INVALID},
-                                                               {.Name = "UT2", .Api = &UT_API_SIMPLE_NO_INIT},
-                                                               {.Name = "UT3", .Api = &UT_API_SIMPLE_COMPLETE},
-                                                               {.Name = NULL, .Api = NULL}};
+static CFE_StaticModuleLoadEntry_t UT_STATIC_MODULE_LIST1[] = {
+    { .Name = "UT1", .Api = &UT_API_INVALID         },
+    { .Name = "UT2", .Api = &UT_API_SIMPLE_NO_INIT  },
+    { .Name = "UT3", .Api = &UT_API_SIMPLE_COMPLETE },
+    { .Name = NULL,  .Api = NULL                    }
+};
 
-static CFE_StaticModuleLoadEntry_t UT_STATIC_MODULE_LIST2[] = {{.Name = "UT4", .Api = &UT_API_SIMPLE_COMPLETE},
-                                                               {.Name = "UT5", .Api = &UT_API_SIMPLE_NO_INIT},
-                                                               {.Name = NULL, .Api = NULL}};
+static CFE_StaticModuleLoadEntry_t UT_STATIC_MODULE_LIST2[] = {
+    { .Name = "UT4", .Api = &UT_API_SIMPLE_COMPLETE },
+    { .Name = "UT5", .Api = &UT_API_SIMPLE_NO_INIT  },
+    { .Name = NULL,  .Api = NULL                    }
+};
 
 void Test_CFE_PSP_ModuleInitList(void)
 {
@@ -93,9 +97,9 @@ void Test_CFE_PSP_Module_GetAPIEntry(void)
     CFE_PSP_ModuleApi_t *API;
 
     CFE_PSP_MODULE_LIST_GLOBAL.Std =
-        (CFE_PSP_ModuleListWrapper_t) {.BasePtr = UT_STATIC_MODULE_LIST1, .ListLen = 3, .BaseId = 0xAFF00};
+        (CFE_PSP_ModuleListWrapper_t) { .BasePtr = UT_STATIC_MODULE_LIST1, .ListLen = 3, .BaseId = 0xAFF00 };
     CFE_PSP_MODULE_LIST_GLOBAL.Ext =
-        (CFE_PSP_ModuleListWrapper_t) {.BasePtr = UT_STATIC_MODULE_LIST2, .ListLen = 2, .BaseId = 0xA0000};
+        (CFE_PSP_ModuleListWrapper_t) { .BasePtr = UT_STATIC_MODULE_LIST2, .ListLen = 2, .BaseId = 0xA0000 };
 
     UtAssert_INT32_EQ(CFE_PSP_Module_GetAPIEntry(0, &API), CFE_PSP_INVALID_MODULE_ID);
     UtAssert_NULL(API);
@@ -120,7 +124,7 @@ void Test_CFE_PSP_Module_SearchNameInList(void)
      * const char *ModuleName);
      */
     uint32                      Id;
-    CFE_PSP_ModuleListWrapper_t ModList = {.BasePtr = UT_STATIC_MODULE_LIST1, .ListLen = 3, .BaseId = 0xC0000};
+    CFE_PSP_ModuleListWrapper_t ModList = { .BasePtr = UT_STATIC_MODULE_LIST1, .ListLen = 3, .BaseId = 0xC0000 };
 
     UtAssert_ZERO(CFE_PSP_Module_SearchNameInList(&ModList, "DoesNotExist"));
     UtAssert_NONZERO(Id = CFE_PSP_Module_SearchNameInList(&ModList, "UT2"));
@@ -137,9 +141,9 @@ void Test_CFE_PSP_Module_FindByName(void)
     uint32 ModuleId;
 
     CFE_PSP_MODULE_LIST_GLOBAL.Std =
-        (CFE_PSP_ModuleListWrapper_t) {.BasePtr = UT_STATIC_MODULE_LIST1, .ListLen = 3, .BaseId = 0xDFF00};
+        (CFE_PSP_ModuleListWrapper_t) { .BasePtr = UT_STATIC_MODULE_LIST1, .ListLen = 3, .BaseId = 0xDFF00 };
     CFE_PSP_MODULE_LIST_GLOBAL.Ext =
-        (CFE_PSP_ModuleListWrapper_t) {.BasePtr = UT_STATIC_MODULE_LIST2, .ListLen = 2, .BaseId = 0xD0000};
+        (CFE_PSP_ModuleListWrapper_t) { .BasePtr = UT_STATIC_MODULE_LIST2, .ListLen = 2, .BaseId = 0xD0000 };
 
     UtAssert_INT32_EQ(CFE_PSP_Module_FindByName("NameDoesNotExist", &ModuleId), CFE_PSP_INVALID_MODULE_NAME);
 

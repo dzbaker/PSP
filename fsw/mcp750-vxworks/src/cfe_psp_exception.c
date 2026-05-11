@@ -193,8 +193,12 @@ int32 CFE_PSP_ExceptionGetSummary_Impl(const CFE_PSP_Exception_LogData_t *Buffer
         TaskName = "NULL";
     }
 
-    snprintf(ReasonBuf, ReasonSize, "Vector=0x%06X, vxWorks Task Name=%s, Task ID=0x%08X", Buffer->context_info.vector,
-             TaskName, Buffer->sys_task_id);
+    snprintf(ReasonBuf,
+             ReasonSize,
+             "Vector=0x%06X, vxWorks Task Name=%s, Task ID=0x%08X",
+             Buffer->context_info.vector,
+             TaskName,
+             Buffer->sys_task_id);
 
     return CFE_PSP_SUCCESS;
 }

@@ -42,7 +42,7 @@
 
 void   UT_ResetMemAdaptor_Init(void *mem_ptr, size_t mem_size);
 void   UT_ResetMemAdaptor_SetOffset(size_t offset, uint8 val);
-void * UT_ResetMemAdaptor_GetAddress(void);
+void  *UT_ResetMemAdaptor_GetAddress(void);
 size_t UT_ResetMemAdaptor_GetSize(void);
 
 #endif

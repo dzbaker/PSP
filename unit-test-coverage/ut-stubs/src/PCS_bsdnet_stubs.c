@@ -34,7 +34,6 @@ void UT_DefaultHandler_PCS_rtems_status_text(void *, UT_EntryKey_t, const UT_Stu
  */
 void PCS_rtems_bsdnet_do_dhcp_failsafe(void)
 {
-
     UT_GenStub_Execute(PCS_rtems_bsdnet_do_dhcp_failsafe, Basic, NULL);
 }
 

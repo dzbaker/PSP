@@ -131,8 +131,8 @@ void CFE_PSP_Exception_WriteComplete(void)
  *-----------------------------------------------------------------*/
 uint32 CFE_PSP_Exception_GetCount(void)
 {
-    return (CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr->NumWritten -
-            CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr->NumRead);
+    return (CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr->NumWritten
+            - CFE_PSP_ReservedMemoryMap.ExceptionStoragePtr->NumRead);
 }
 
 /*----------------------------------------------------------------
@@ -248,7 +248,8 @@ int32 CFE_PSP_Exception_CopyContext(uint32 ContextLogId, void *ContextBuf, uint3
          * where the CFE platform configuration has not allocated enough space for context logs.
          * Generate a warning message to raise awareness. */
         OS_printf("CFE_PSP: Insufficient buffer for exception context, total=%lu bytes, saved=%lu\n",
-                  (unsigned long)Buffer->context_size, (unsigned long)ContextSize);
+                  (unsigned long)Buffer->context_size,
+                  (unsigned long)ContextSize);
         ActualSize = ContextSize;
     }
 

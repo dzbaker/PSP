@@ -40,7 +40,7 @@
 #include "cfe_psp.h"
 #include "osapi.h"
 
-#define PSP_DEBUG_MAX_LINE_LEN  132
+#define PSP_DEBUG_MAX_LINE_LEN 132
 
 uint8 CFE_PSP_DebugLevel = CFE_PSP_DEBUG_LEVEL;
 
@@ -74,7 +74,7 @@ void PSP_DebugPrintf(uint32 Level, const char *Func, uint32 Line, const char *Fo
         va_start(va, Format);
         actualsz = vsnprintf(buffer, sizeof(buffer), Format, va);
         va_end(va);
-        
+
         if (actualsz < 0)
         {
             actualsz = 0;
@@ -84,9 +84,8 @@ void PSP_DebugPrintf(uint32 Level, const char *Func, uint32 Line, const char *Fo
             actualsz = PSP_DEBUG_MAX_LINE_LEN - 1;
         }
         buffer[actualsz] = 0;
-        
+
         /* output message strings */
         OS_printf("%s%s", prefix, buffer);
     }
 }
-

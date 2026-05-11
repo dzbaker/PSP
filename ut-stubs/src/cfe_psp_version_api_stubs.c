@@ -63,7 +63,6 @@ const char *CFE_PSP_GetVersionCodeName(void)
  */
 void CFE_PSP_GetVersionNumber(uint8 VersionNumbers[4])
 {
-
     UT_GenStub_Execute(CFE_PSP_GetVersionNumber, Basic, NULL);
 }
 

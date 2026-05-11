@@ -26,6 +26,9 @@
 #include "cfe_psp.h"
 #include "cfe_psp_module.h"
 
+/*
+** global memory
+*/
 CFE_PSP_MODULE_DECLARE_SIMPLE(ram_direct);
 
 void ram_direct_Init(uint32 PspModuleId)
@@ -33,10 +36,6 @@ void ram_direct_Init(uint32 PspModuleId)
     /* Inform the user that this module is in use */
     printf("CFE_PSP: Using DIRECT memory mapped RAM implementation\n");
 }
-
-/*
-** global memory
-*/
 
 /*----------------------------------------------------------------
  *

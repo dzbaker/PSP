@@ -46,7 +46,7 @@
 #include "iodriver_base.h"
 #include "iodriver_impl.h"
 
-CFE_PSP_IODriver_API_t Ut_NoopAPI = {NULL, NULL};
+CFE_PSP_IODriver_API_t Ut_NoopAPI = { NULL, NULL };
 
 extern void                    iodriver_Init(uint32 PspModuleId);
 extern CFE_PSP_IODriver_API_t *CFE_PSP_IODriver_GetAPI(uint32 PspModuleId);
@@ -71,7 +71,8 @@ static void StubNoMut_Init(uint32 ModuleID)
     UT_DEFAULT_IMPL(StubNoMut_Init);
 }
 
-static CFE_PSP_IODriver_API_t StubNoMut_DevApi = {.DeviceCommand = Stub_DeviceCommand};
+static CFE_PSP_IODriver_API_t StubNoMut_DevApi = { .DeviceCommand = Stub_DeviceCommand };
+static CFE_PSP_IODriver_API_t Invalid_DevApi   = { .DeviceCommand = NULL };
 
 CFE_PSP_MODULE_DECLARE_IODEVICEDRIVER(StubNoMut);
 
@@ -85,8 +86,8 @@ static void StubWithMut_Init(uint32 ModuleID)
     UT_DEFAULT_IMPL(StubWithMut_Init);
 }
 
-static CFE_PSP_IODriver_API_t StubWithMut_DevApi = {.DeviceCommand = Stub_DeviceCommand,
-                                                    .DeviceMutex   = Stub_DeviceMutex};
+static CFE_PSP_IODriver_API_t StubWithMut_DevApi = { .DeviceCommand = Stub_DeviceCommand,
+                                                     .DeviceMutex   = Stub_DeviceMutex };
 
 CFE_PSP_MODULE_DECLARE_IODEVICEDRIVER(StubWithMut);
 
@@ -158,6 +159,10 @@ void Test_CFE_PSP_IODriver_GetAPI(void)
      */
     CFE_PSP_IODriver_API_t *ApiPtr;
 
+    UT_SetHandlerFunction(UT_KEY(CFE_PSP_Module_GetAPIEntry),
+                          UtHandler_CFE_PSP_Module_GetAPIEntry,
+                          (void *)&Invalid_DevApi);
+
     /* Requesting a nonexistent module should return a default API */
     UtAssert_NOT_NULL(ApiPtr = CFE_PSP_IODriver_GetAPI(0));
     UtAssert_BOOL_TRUE(ApiPtr->DeviceCommand == NULL);
@@ -169,7 +174,8 @@ void Test_CFE_PSP_IODriver_GetAPI(void)
     UtAssert_BOOL_TRUE(ApiPtr->DeviceMutex == NULL);
 
     UT_ResetState(UT_KEY(CFE_PSP_Module_GetAPIEntry));
-    UT_SetHandlerFunction(UT_KEY(CFE_PSP_Module_GetAPIEntry), UtHandler_CFE_PSP_Module_GetAPIEntry,
+    UT_SetHandlerFunction(UT_KEY(CFE_PSP_Module_GetAPIEntry),
+                          UtHandler_CFE_PSP_Module_GetAPIEntry,
                           (void *)&CFE_PSP_StubNoMut_API);
     UtAssert_NOT_NULL(ApiPtr = CFE_PSP_IODriver_GetAPI(0));
     UtAssert_BOOL_TRUE(ApiPtr->DeviceCommand == Stub_DeviceCommand);
@@ -209,20 +215,23 @@ void Test_CFE_PSP_IODriver_Command(void)
      * int32 CFE_PSP_IODriver_Command(const CFE_PSP_IODriver_Location_t *Location, uint32 CommandCode,
      * CFE_PSP_IODriver_Arg_t Arg)
      */
-    const CFE_PSP_IODriver_Location_t UtLocation = {1, 1, 1};
+    const CFE_PSP_IODriver_Location_t UtLocation = { 1, 1, 1 };
 
-    UT_SetHandlerFunction(UT_KEY(CFE_PSP_Module_GetAPIEntry), UtHandler_CFE_PSP_Module_GetAPIEntry,
+    UT_SetHandlerFunction(UT_KEY(CFE_PSP_Module_GetAPIEntry),
+                          UtHandler_CFE_PSP_Module_GetAPIEntry,
                           (void *)&Ut_NoopAPI);
     UtAssert_INT32_EQ(CFE_PSP_IODriver_Command(&UtLocation, 1, CFE_PSP_IODriver_U32ARG(0)),
                       CFE_PSP_ERROR_NOT_IMPLEMENTED);
 
-    UT_SetHandlerFunction(UT_KEY(CFE_PSP_Module_GetAPIEntry), UtHandler_CFE_PSP_Module_GetAPIEntry,
+    UT_SetHandlerFunction(UT_KEY(CFE_PSP_Module_GetAPIEntry),
+                          UtHandler_CFE_PSP_Module_GetAPIEntry,
                           (void *)&CFE_PSP_StubNoMut_API);
     UtAssert_INT32_EQ(CFE_PSP_IODriver_Command(&UtLocation, 1, CFE_PSP_IODriver_U32ARG(0)), CFE_PSP_SUCCESS);
     UtAssert_STUB_COUNT(Stub_DeviceCommand, 1);
     UtAssert_STUB_COUNT(Stub_DeviceMutex, 0);
 
-    UT_SetHandlerFunction(UT_KEY(CFE_PSP_Module_GetAPIEntry), UtHandler_CFE_PSP_Module_GetAPIEntry,
+    UT_SetHandlerFunction(UT_KEY(CFE_PSP_Module_GetAPIEntry),
+                          UtHandler_CFE_PSP_Module_GetAPIEntry,
                           (void *)&CFE_PSP_StubWithMut_API);
     UtAssert_INT32_EQ(CFE_PSP_IODriver_Command(&UtLocation, 1, CFE_PSP_IODriver_U32ARG(0)), CFE_PSP_SUCCESS);
     UtAssert_STUB_COUNT(Stub_DeviceCommand, 2);
@@ -242,11 +251,13 @@ void Test_CFE_PSP_IODriver_FindByName(void)
     UT_ResetState(UT_KEY(CFE_PSP_Module_FindByName));
 
     UT_SetHandlerFunction(UT_KEY(CFE_PSP_Module_FindByName), UtHandler_CFE_PSP_Module_FindByName, &CheckID);
-    UT_SetHandlerFunction(UT_KEY(CFE_PSP_Module_GetAPIEntry), UtHandler_CFE_PSP_Module_GetAPIEntry,
+    UT_SetHandlerFunction(UT_KEY(CFE_PSP_Module_GetAPIEntry),
+                          UtHandler_CFE_PSP_Module_GetAPIEntry,
                           (void *)&Ut_NoopAPI);
     UtAssert_INT32_EQ(CFE_PSP_IODriver_FindByName("UT", &ModuleID), CFE_PSP_INVALID_MODULE_NAME);
 
-    UT_SetHandlerFunction(UT_KEY(CFE_PSP_Module_GetAPIEntry), UtHandler_CFE_PSP_Module_GetAPIEntry,
+    UT_SetHandlerFunction(UT_KEY(CFE_PSP_Module_GetAPIEntry),
+                          UtHandler_CFE_PSP_Module_GetAPIEntry,
                           (void *)&CFE_PSP_StubWithMut_API);
     UtAssert_INT32_EQ(CFE_PSP_IODriver_FindByName("UT", &ModuleID), CFE_PSP_SUCCESS);
     UtAssert_INT32_EQ(ModuleID, CheckID);

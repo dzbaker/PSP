@@ -51,7 +51,6 @@ extern uint32 CFE_PSP_SpacecraftId;
 extern uint32 CFE_PSP_CpuId;
 extern char   CFE_PSP_CpuName[];
 
-
 /*----------------------------------------------------------------
  *
  * Implemented per public API
