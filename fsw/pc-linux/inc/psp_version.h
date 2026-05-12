@@ -28,8 +28,8 @@
  * Development Build Macro Definitions
  */
 #define CFE_PSP_IMPL_BUILD_NUMBER   0
-#define CFE_PSP_IMPL_BUILD_BASELINE "v7.0.0"
-#define CFE_PSP_BUILD_DEV_CYCLE     "v7.0.0" /**< @brief Development: Release name for current development cycle */
+#define CFE_PSP_IMPL_BUILD_BASELINE "v7.0.1"
+#define CFE_PSP_BUILD_DEV_CYCLE     "v7.0.1" /**< @brief Development: Release name for current development cycle */
 #define CFE_PSP_BUILD_CODENAME      "Draco"  /**< @brief: Development: Code name for the current build */
 
 /*
@@ -37,12 +37,12 @@
  */
 #define CFE_PSP_IMPL_MAJOR_VERSION 7 /*!< @brief Major version number */
 #define CFE_PSP_IMPL_MINOR_VERSION 0 /*!< @brief Minor version number */
-#define CFE_PSP_IMPL_REVISION      0 /*!< @brief Revision version number. Value of 0 indicates a development version.*/
+#define CFE_PSP_IMPL_REVISION      1 /*!< @brief Revision version number. Value of 0 indicates a development version.*/
 
 /**
  * @brief Last official release.
  */
-#define CFE_PSP_LAST_OFFICIAL "v7.0.0"
+#define CFE_PSP_LAST_OFFICIAL "v7.0.1"
 
 /*!
  * @brief Mission revision.
