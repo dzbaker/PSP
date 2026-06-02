@@ -206,7 +206,8 @@ void CFE_PSP_AttachExceptions(void)
      * by calling it once we ensure that it is loaded and therefore
      * it is safe to use in a signal handler.
      */
-    backtrace(Addr, 1);
+    int bt_retvalue = backtrace(Addr, 1);
+    OS_printf("Number of addresses returned by backtrace = %d\n", bt_retvalue);
 
     OS_printf("CFE_PSP: %s called\n", __func__);
 
