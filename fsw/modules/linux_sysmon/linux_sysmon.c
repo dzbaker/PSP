@@ -165,6 +165,7 @@ void linux_sysmon_update_schedstat(linux_sysmon_cpuload_state_t *state, int elap
     size_t        line_size;
     ssize_t       line_rdsz;
     char         *eol_p;
+    off_t         lseek_ret;
 
     linux_sysmon_cpuload_core_t *core_p;
 
@@ -172,7 +173,12 @@ void linux_sysmon_update_schedstat(linux_sysmon_cpuload_state_t *state, int elap
     highest_cpu_num = 0;
 
     /* Reset to beginning of file to re-read it */
-    lseek(state->dev_fd, 0, SEEK_SET);
+    lseek_ret = lseek(state->dev_fd, 0, SEEK_SET);
+
+    if (lseek_ret == -1)
+    {
+        OS_printf("CFE_PSP(linux_sysmon): lseek error: %s\n", strerror(errno));
+    }
 
     while (true)
     {
