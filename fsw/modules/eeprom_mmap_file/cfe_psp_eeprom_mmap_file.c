@@ -38,7 +38,7 @@
 /*
 ** Defines
 */
-#define EEPROM_FILE "EEPROM.DAT"
+#define EEPROM_FILE "/cf/EEPROM.DAT"
 
 CFE_PSP_MODULE_DECLARE_SIMPLE(eeprom_mmap_file);
 
@@ -50,39 +50,51 @@ int32 CFE_PSP_SetupEEPROM(uint32 EEPROMSize, cpuaddr *EEPROMAddress)
     int   FileDescriptor;
     int   ReturnStatus;
     void *DataBuffer;
+    int32 Status;
+    char  LocalFilePath[OS_MAX_PATH_LEN];
 
-    DataBuffer     = NULL;
-    FileDescriptor = open(EEPROM_FILE, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-    if (FileDescriptor < 0)
+    DataBuffer = NULL;
+    Status     = OS_TranslatePath(EEPROM_FILE, LocalFilePath);
+    
+    if (Status != OS_SUCCESS)
     {
-        OS_printf("CFE_PSP: Cannot open EEPROM File: %s\n", EEPROM_FILE);
-        perror("CFE_PSP: open");
-        ReturnStatus = CFE_PSP_ERROR;
-    }
-    else if (ftruncate(FileDescriptor, EEPROMSize) < 0)
-    {
-        OS_printf("CFE_PSP: ftruncate(%s) error: %s\n", EEPROM_FILE, strerror(errno));
+        OS_printf("CFE_PSP: Cannot translate EEPROM File path: %s\n", EEPROM_FILE);
         ReturnStatus = CFE_PSP_ERROR;
     }
     else
     {
-        DataBuffer = mmap(NULL, EEPROMSize, PROT_READ | PROT_WRITE, MAP_SHARED, FileDescriptor, 0);
-        if (DataBuffer == (void *)(-1))
+        FileDescriptor = open(LocalFilePath, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+        if (FileDescriptor < 0)
         {
-            OS_printf("CFE_PSP: mmap to EEPROM File failed: %s\n", strerror(errno));
+            OS_printf("CFE_PSP: Cannot open EEPROM File: %s\n", LocalFilePath);
+            perror("CFE_PSP: open");
+            ReturnStatus = CFE_PSP_ERROR;
+        }
+        else if (ftruncate(FileDescriptor, EEPROMSize) < 0)
+        {
+            OS_printf("CFE_PSP: ftruncate(%s) error: %s\n", LocalFilePath, strerror(errno));
             ReturnStatus = CFE_PSP_ERROR;
         }
         else
         {
-            ReturnStatus = CFE_PSP_SUCCESS;
+            DataBuffer = mmap(NULL, EEPROMSize, PROT_READ | PROT_WRITE, MAP_SHARED, FileDescriptor, 0);
+            if (DataBuffer == (void *)(-1))
+            {
+                OS_printf("CFE_PSP: mmap to EEPROM File failed: %s\n", strerror(errno));
+                ReturnStatus = CFE_PSP_ERROR;
+            }
+            else
+            {
+                ReturnStatus = CFE_PSP_SUCCESS;
+            }
         }
-    }
 
-    /* POSIX says that a mapped pointer counts as a file ref, so the FD
-     * can be safely closed in all cases, success or failure */
-    if (FileDescriptor >= 0)
-    {
-        close(FileDescriptor);
+        /* POSIX says that a mapped pointer counts as a file ref, so the FD
+         * can be safely closed in all cases, success or failure */
+        if (FileDescriptor >= 0)
+        {
+            close(FileDescriptor);
+        }
     }
 
     /*
