@@ -55,7 +55,7 @@ int32 CFE_PSP_SetupEEPROM(uint32 EEPROMSize, cpuaddr *EEPROMAddress)
 
     DataBuffer = NULL;
     Status     = OS_TranslatePath(EEPROM_FILE, LocalFilePath);
-    
+
     if (Status != OS_SUCCESS)
     {
         OS_printf("CFE_PSP: Cannot translate EEPROM File path: %s\n", EEPROM_FILE);

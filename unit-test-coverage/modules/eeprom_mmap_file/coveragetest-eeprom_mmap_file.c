@@ -87,7 +87,7 @@ void Test_eeprom_mmap_file_Init(void)
     /* fail to resize file */
     UT_SetDeferredRetcode(UT_KEY(PCS_ftruncate), 1, -1);
     UtAssert_VOIDCALL(eeprom_mmap_file_Init(1));
-    
+
     /* fail to translate file path */
     UT_SetDefaultReturnValue(UT_KEY(OS_TranslatePath), OS_ERROR);
     UtAssert_VOIDCALL(eeprom_mmap_file_Init(1));
