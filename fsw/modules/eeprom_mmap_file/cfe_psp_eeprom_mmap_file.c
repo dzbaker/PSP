@@ -38,7 +38,7 @@
 /*
 ** Defines
 */
-#define EEPROM_FILE "/cf/EEPROM.DAT"
+#define EEPROM_FILE "EEPROM.DAT"
 
 CFE_PSP_MODULE_DECLARE_SIMPLE(eeprom_mmap_file);
 
@@ -50,15 +50,15 @@ int32 CFE_PSP_SetupEEPROM(uint32 EEPROMSize, cpuaddr *EEPROMAddress)
     int   FileDescriptor;
     int   ReturnStatus;
     void *DataBuffer;
-    int32 Status;
+    int   Status;
     char  LocalFilePath[OS_MAX_PATH_LEN];
 
     DataBuffer = NULL;
-    Status     = OS_TranslatePath(EEPROM_FILE, LocalFilePath);
+    Status     = snprintf(LocalFilePath, sizeof(LocalFilePath), "%s/%s", CFE_PSP_SIMULATED_EEPROM_FILE_PATH, EEPROM_FILE);
 
-    if (Status != OS_SUCCESS)
+    if (Status <= 0)
     {
-        OS_printf("CFE_PSP: Cannot translate EEPROM File path: %s\n", EEPROM_FILE);
+        OS_printf("CFE_PSP: Cannot build EEPROM File path: %s/%s\n", CFE_PSP_SIMULATED_EEPROM_FILE_PATH, EEPROM_FILE);
         ReturnStatus = CFE_PSP_ERROR;
     }
     else
