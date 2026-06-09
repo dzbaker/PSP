@@ -54,7 +54,7 @@ int32 CFE_PSP_SetupEEPROM(uint32 EEPROMSize, cpuaddr *EEPROMAddress)
     char  LocalFilePath[OS_MAX_PATH_LEN];
 
     DataBuffer = NULL;
-    Status     = snprintf(LocalFilePath, sizeof(LocalFilePath), "%s/%s", CFE_PSP_SIMULATED_EEPROM_FILE_PATH, EEPROM_FILE);
+    Status = snprintf(LocalFilePath, sizeof(LocalFilePath), "%s/%s", CFE_PSP_SIMULATED_EEPROM_FILE_PATH, EEPROM_FILE);
 
     if (Status <= 0)
     {
