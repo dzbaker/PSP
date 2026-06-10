@@ -63,6 +63,9 @@ int32 CFE_PSP_SetupEEPROM(uint32 EEPROMSize, cpuaddr *EEPROMAddress)
     }
     else
     {
+        /* Null terminate path */
+        LocalFilePath[OS_MAX_PATH_LEN - 1] = '\0';
+
         FileDescriptor = open(LocalFilePath, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
         if (FileDescriptor < 0)
         {
